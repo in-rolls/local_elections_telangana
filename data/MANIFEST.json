@@ -1,0 +1,1597 @@
+{
+ "format_version": 1,
+ "outputs": [
+  {
+   "file": "2019/sarpanch_results.parquet",
+   "sha256": "5f3feeb7f61a0dccc1203ef4295de9d2567163339648e702c592ca022328d720",
+   "rows": 12018,
+   "schema": [
+    {
+     "name": "state",
+     "type": "large_string"
+    },
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "district",
+     "type": "large_string"
+    },
+    {
+     "name": "block",
+     "type": "large_string"
+    },
+    {
+     "name": "gram_panchayat",
+     "type": "large_string"
+    },
+    {
+     "name": "tier",
+     "type": "large_string"
+    },
+    {
+     "name": "tier_local",
+     "type": "large_string"
+    },
+    {
+     "name": "reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "caste_reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "woman_reserved",
+     "type": "int8"
+    },
+    {
+     "name": "reservation_raw",
+     "type": "large_string"
+    },
+    {
+     "name": "winner",
+     "type": "large_string"
+    },
+    {
+     "name": "winner_basis",
+     "type": "large_string"
+    },
+    {
+     "name": "party",
+     "type": "large_string"
+    },
+    {
+     "name": "unopposed",
+     "type": "int8"
+    },
+    {
+     "name": "script",
+     "type": "large_string"
+    },
+    {
+     "name": "source_path",
+     "type": "large_string"
+    },
+    {
+     "name": "source_url",
+     "type": "large_string"
+    },
+    {
+     "name": "source_locator",
+     "type": "large_string"
+    }
+   ]
+  },
+  {
+   "file": "2019/sarpanch_candidates.parquet",
+   "sha256": "0b0039135a3fc586365857114c16940721290718f66bc1f4b2d8611882eb7659",
+   "rows": 35121,
+   "schema": [
+    {
+     "name": "state",
+     "type": "large_string"
+    },
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "district_id",
+     "type": "large_string"
+    },
+    {
+     "name": "district",
+     "type": "large_string"
+    },
+    {
+     "name": "mandal_id",
+     "type": "large_string"
+    },
+    {
+     "name": "block",
+     "type": "large_string"
+    },
+    {
+     "name": "gp_code",
+     "type": "large_string"
+    },
+    {
+     "name": "gram_panchayat",
+     "type": "large_string"
+    },
+    {
+     "name": "candidate",
+     "type": "large_string"
+    },
+    {
+     "name": "candidate_votes",
+     "type": "int32"
+    },
+    {
+     "name": "reservation_raw",
+     "type": "large_string"
+    },
+    {
+     "name": "total_valid_votes",
+     "type": "int32"
+    },
+    {
+     "name": "rejected_votes",
+     "type": "int32"
+    },
+    {
+     "name": "tendered_votes",
+     "type": "int32"
+    },
+    {
+     "name": "nota_votes",
+     "type": "int32"
+    },
+    {
+     "name": "caste_reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "woman_reserved",
+     "type": "int8"
+    },
+    {
+     "name": "source_path",
+     "type": "large_string"
+    },
+    {
+     "name": "source_url",
+     "type": "large_string"
+    },
+    {
+     "name": "source_locator",
+     "type": "large_string"
+    }
+   ]
+  },
+  {
+   "file": "2025/sarpanch_results.parquet",
+   "sha256": "ea39e9f18f3fa8e0530b2bbccbb5e2cba0e0b5d5f780a2d084910793cdea0852",
+   "rows": 12727,
+   "schema": [
+    {
+     "name": "state",
+     "type": "large_string"
+    },
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "district",
+     "type": "large_string"
+    },
+    {
+     "name": "block",
+     "type": "large_string"
+    },
+    {
+     "name": "gram_panchayat",
+     "type": "large_string"
+    },
+    {
+     "name": "tier",
+     "type": "large_string"
+    },
+    {
+     "name": "tier_local",
+     "type": "large_string"
+    },
+    {
+     "name": "reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "caste_reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "woman_reserved",
+     "type": "int8"
+    },
+    {
+     "name": "reservation_raw",
+     "type": "large_string"
+    },
+    {
+     "name": "winner",
+     "type": "large_string"
+    },
+    {
+     "name": "winner_basis",
+     "type": "large_string"
+    },
+    {
+     "name": "party",
+     "type": "large_string"
+    },
+    {
+     "name": "unopposed",
+     "type": "int8"
+    },
+    {
+     "name": "script",
+     "type": "large_string"
+    },
+    {
+     "name": "district_printed",
+     "type": "large_string"
+    },
+    {
+     "name": "phase",
+     "type": "int8"
+    },
+    {
+     "name": "result_declared",
+     "type": "bool"
+    },
+    {
+     "name": "backing_party",
+     "type": "large_string"
+    },
+    {
+     "name": "backing_party_printed",
+     "type": "large_string"
+    },
+    {
+     "name": "source_path",
+     "type": "large_string"
+    },
+    {
+     "name": "source_url",
+     "type": "large_string"
+    },
+    {
+     "name": "source_locator",
+     "type": "large_string"
+    }
+   ]
+  },
+  {
+   "file": "2025/eenadu_mandal_counts.parquet",
+   "sha256": "25ed5f0911baa806f85251056d395358bbf0737dd19c11ef40612dd6555cc8e2",
+   "rows": 563,
+   "schema": [
+    {
+     "name": "district",
+     "type": "large_string"
+    },
+    {
+     "name": "phase",
+     "type": "int64"
+    },
+    {
+     "name": "block",
+     "type": "large_string"
+    },
+    {
+     "name": "declared",
+     "type": "int64"
+    },
+    {
+     "name": "total",
+     "type": "int64"
+    },
+    {
+     "name": "source_path",
+     "type": "large_string"
+    }
+   ]
+  },
+  {
+   "file": "2025/eenadu_page_counts.parquet",
+   "sha256": "1c21878bb818460b95d542a8b485a75ce55f7c095b053a297a1bf42e8ee71ca1",
+   "rows": 93,
+   "schema": [
+    {
+     "name": "district",
+     "type": "large_string"
+    },
+    {
+     "name": "phase",
+     "type": "int64"
+    },
+    {
+     "name": "declared",
+     "type": "int64"
+    },
+    {
+     "name": "total",
+     "type": "int64"
+    },
+    {
+     "name": "rows",
+     "type": "int64"
+    },
+    {
+     "name": "source_path",
+     "type": "large_string"
+    }
+   ]
+  }
+ ],
+ "raw_fetched": [
+  {
+   "path": "data/raw/2025/sec/sec_notification_1085_2025-11-25_english.pdf",
+   "url": "https://web.archive.org/web/20251212175131id_/https://tsec.gov.in/preview.do?fileName=L1VwbG9hZHMvVFNFQy9wZGYvZW5nbGlzaF9ub3RpZmljYXRpb25fbm8uMTA4NSxfZHQuMjUuMTEuMjAyNV81MDcucGRm",
+   "source": "tsec.gov.in via web.archive.org",
+   "sha256": "6757b3673b78332914bfe5e46d9d9fba341e55c14522032c8bdb619515d400ff",
+   "bytes": "1036085",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:06:32Z"
+  },
+  {
+   "path": "data/raw/2025/sec/sec_notification_1085_2025-11-25_telugu.pdf",
+   "url": "https://web.archive.org/web/20251212200028id_/https://tsec.gov.in/preview.do?fileName=L1VwbG9hZHMvVFNFQy9wZGYvdGVsdWd1X25vdGlmaWNhdGlvbl9uby4xMDg1LF9kdC4yNS4xMS4yMDI1XzUwOC5wZGY=",
+   "source": "tsec.gov.in via web.archive.org",
+   "sha256": "ce153718afecf1c2bc28be69b5515d22ca7f6f2c24ef7366f413b0f4669a565a",
+   "bytes": "1132786",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:06:39Z"
+  },
+  {
+   "path": "data/raw/2025/sec/sec_phasewise_gp_elections_2025.pdf",
+   "url": "https://web.archive.org/web/20251117091747id_/https://tsec.gov.in/preview.do?fileName=L1VwbG9hZHMvVFNFQy9wZGYvcGhhc2V3aXNlX2dwX2VsZWN0aW9ucy0yMDI1XzUwNS5wZGY=",
+   "source": "tsec.gov.in via web.archive.org",
+   "sha256": "d7da18f4c51cd8764e637ebd6059cb9c86ed11230d70900e5d0f323dfe588628",
+   "bytes": "544971",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:06:43Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/adilabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/adilabad",
+   "source": "eenadu.net",
+   "sha256": "56a30df4f1cb00151e9b5043bc616792804a5f375efc13bc2281e6696fe0a4aa",
+   "bytes": "161802",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:06:48Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/bhadradri-kothagudem.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/bhadradri-kothagudem",
+   "source": "eenadu.net",
+   "sha256": "ef5a84d1fc542d5f29dc14a5061f4daea3e9276dee5accc9af53be64fa255bf2",
+   "bytes": "161026",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:06:51Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/hanumakonda.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/hanumakonda",
+   "source": "eenadu.net",
+   "sha256": "19ab89d400c2a496b0682a75b55def303b5ecfc39bb8b60abe09801fd317a971",
+   "bytes": "109497",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:04Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/jagtial.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/jagtial",
+   "source": "eenadu.net",
+   "sha256": "5e9b5646f5cda42d717bf15654e4dce52684f0f37bff4d4c1bf16a36717ed87b",
+   "bytes": "140754",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:07Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/jayashankar-bhupalpally.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/jayashankar-bhupalpally",
+   "source": "eenadu.net",
+   "sha256": "16d3ade66171d49fed66989cc1806f0a93a1ebaa23ad95724174e4406d3b2422",
+   "bytes": "117434",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:10Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/jangaon.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/jangaon",
+   "source": "eenadu.net",
+   "sha256": "e2ed8204fa41bce629670ce5ac7fad128ef8862b4e2f781a655f49a52f933ff1",
+   "bytes": "132814",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:13Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/rajanna-sircilla.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/rajanna-sircilla",
+   "source": "eenadu.net",
+   "sha256": "cab322151ead62ed9431f69f7129ab8dd1af2000eac36d1a00a46292f1e20a59",
+   "bytes": "120534",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:16Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/mahabubabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/mahabubabad",
+   "source": "eenadu.net",
+   "sha256": "3a31edf5cb7b321dab864d94b6c741891b9ee2f7cca2eb66b6af59fc390bc2b6",
+   "bytes": "156376",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:18Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/mahabubnagar.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/mahabubnagar",
+   "source": "eenadu.net",
+   "sha256": "c5b44a51ce74f651c8889a8a30133664c6ea3fa257ccc6b8e0ed0ec783efc024",
+   "bytes": "150264",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:21Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/mancherial.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/mancherial",
+   "source": "eenadu.net",
+   "sha256": "1430ea51b068f0ce27fe2aa5504b7cc54d2c8e9a584b03973bd71602a19c94de",
+   "bytes": "121968",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:24Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/medak.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/medak",
+   "source": "eenadu.net",
+   "sha256": "0028b8cb494daa2cc2c7f9ef59a759eda9cb403355547e9caf5b365aff49f347",
+   "bytes": "160135",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:27Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/mulugu.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/mulugu",
+   "source": "eenadu.net",
+   "sha256": "a08f4c89a1f4b30d942a77d0709c15506a5b5120a30e42746826ac7772b82164",
+   "bytes": "98489",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:30Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/nagarkurnool.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/nagarkurnool",
+   "source": "eenadu.net",
+   "sha256": "f4ef0c785f8bdab3a245c30db0dcb08b0b8e7e2d7f99dddeb9743e64e9e596a6",
+   "bytes": "156557",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:33Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/nalgonda.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/nalgonda",
+   "source": "eenadu.net",
+   "sha256": "90e3a3594d74288f394ba11f46eeffad2218ee8617cbdbec575a5f2d4a4bf0c4",
+   "bytes": "249593",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:35Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/narayanpet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/narayanpet",
+   "source": "eenadu.net",
+   "sha256": "a6091f15510b34f47c4e59f125cb044686f9e09863ed193e5fb0797224032fec",
+   "bytes": "110013",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:38Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/nirmal.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/nirmal",
+   "source": "eenadu.net",
+   "sha256": "38daf4febc5cc32d1901e34a76fb150a61887c4149592f3a9445de7a589dec3f",
+   "bytes": "148722",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:41Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/nizamabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/nizamabad",
+   "source": "eenadu.net",
+   "sha256": "0b08bd32337974b46827fb727464fc9c16bbcad5424a08563536112c1fcaecc9",
+   "bytes": "176452",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:44Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/peddapally.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/peddapally",
+   "source": "eenadu.net",
+   "sha256": "26452fbc02c410779f57c17c3042726b331e538ab60d99bd284f479cb963b6d2",
+   "bytes": "126832",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:47Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/rangareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/rangareddy",
+   "source": "eenadu.net",
+   "sha256": "c6cce9cfbdff1eae2139c5caf84d29fb9e6d227d1504ed0b8e456a537442b4f9",
+   "bytes": "171566",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:49Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/sangareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/sangareddy",
+   "source": "eenadu.net",
+   "sha256": "193e09793029682d225de1b814ee6b91dfe69690033d2008e3f171b6c007af37",
+   "bytes": "148281",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:52Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/wanaparthy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/wanaparthy",
+   "source": "eenadu.net",
+   "sha256": "12351f042eb044cd937641428d1849695d9f5f00e25f82835529b444aa60e20a",
+   "bytes": "121342",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:55Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/siddipet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/siddipet",
+   "source": "eenadu.net",
+   "sha256": "ee7edc9a241f327c32bb6826908e1636678584643b00fc727dd15d6521a8eb8b",
+   "bytes": "162512",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:07:58Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/suryapet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/suryapet",
+   "source": "eenadu.net",
+   "sha256": "e5f21f938b7ea3a54728cbbf1961f8d777007d2604c6e89be470237bca29ec58",
+   "bytes": "161627",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:00Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/vikarabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/vikarabad",
+   "source": "eenadu.net",
+   "sha256": "1e8685ee00342e1f39b8ea2baaedbe2ff90207145f73b4baa24161417bcd03b3",
+   "bytes": "216632",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:03Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/jogulamba-gadwala.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/jogulamba-gadwala",
+   "source": "eenadu.net",
+   "sha256": "45003600c888e5fd3bbfedf9a7adc0a1a13e6fdf480aeccf8f32cc28171d2734",
+   "bytes": "120719",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:05Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/kamareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/kamareddy",
+   "source": "eenadu.net",
+   "sha256": "bb2385eec448ab524398f4dc86863dea0a8123d206719f776ad5ed967b5b0bb3",
+   "bytes": "166775",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:08Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/karimnagar.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/karimnagar",
+   "source": "eenadu.net",
+   "sha256": "98ceefc8dd2f36f9aef8d32acf62fe9ca7685167da480347cff2c93b344158b6",
+   "bytes": "123231",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:10Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/khammam.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/khammam",
+   "source": "eenadu.net",
+   "sha256": "baa348987dc97ca8491264f8312e8bf128ae600aa12ea37e38284eedd546b20b",
+   "bytes": "177970",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:13Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/kumurambheem-asifabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/kumurambheem-asifabad",
+   "source": "eenadu.net",
+   "sha256": "b0f54a7bb6fab1df5024eac054c7e771adaba585b97c75bcd1f446133e5e03ec",
+   "bytes": "135497",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:15Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/warangal.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/warangal",
+   "source": "eenadu.net",
+   "sha256": "d93291310b7e075ccc5fecae894545d3b1653c0750140db30d145a0ca0e518cc",
+   "bytes": "120888",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:17Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase1/yadadri-bhuvanagiri.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase1/yadadri-bhuvanagiri",
+   "source": "eenadu.net",
+   "sha256": "327f0eedbdbbed3cb773fa3f399240b9f9f0ffd1cc85033a3f77796782ea8ebe",
+   "bytes": "156188",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:21Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/adilabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/adilabad",
+   "source": "eenadu.net",
+   "sha256": "1b6948641aa020cb5eb53509fe63f75e19c08aebabd787d40d462a2832b09ed1",
+   "bytes": "157264",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:23Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/bhadradri-kothagudem.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/bhadradri-kothagudem",
+   "source": "eenadu.net",
+   "sha256": "bc97739c9e6cf4dfc6a34adf2874e847cffcb46db1a71f920f59d3255f7ead8c",
+   "bytes": "158205",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:26Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/hanumakonda.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/hanumakonda",
+   "source": "eenadu.net",
+   "sha256": "3eccdc4e2324aefe2206007aff8ca03950bdc0d71ba4a96cd7d237019d4ca5da",
+   "bytes": "113237",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:29Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/jagtial.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/jagtial",
+   "source": "eenadu.net",
+   "sha256": "dcb5984a1a826ea9d9e2429323f68cdcd2a17e8fcb857bf4cfaf495a588ab1b7",
+   "bytes": "151879",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:32Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/jayashankar-bhupalpally.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/jayashankar-bhupalpally",
+   "source": "eenadu.net",
+   "sha256": "7dc5406ca2fba8f73461420808a9b09a558cad5fbee1a3e6e0794861e16c8a1c",
+   "bytes": "117189",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:34Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/jangaon.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/jangaon",
+   "source": "eenadu.net",
+   "sha256": "4311777376b9ce7b31014c269349656e1eae935fb1da577fa8f521853cf01845",
+   "bytes": "115825",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:37Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/rajanna-sircilla.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/rajanna-sircilla",
+   "source": "eenadu.net",
+   "sha256": "56b3508abff72ab6cd8419629a0c68ce3119a9aa8c607bdc929d8a7757abaad6",
+   "bytes": "119691",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:40Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/mahabubabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/mahabubabad",
+   "source": "eenadu.net",
+   "sha256": "bc76532823f382d47f3f05dc8ac425b7561e1afaad82e647a863a7717de13e45",
+   "bytes": "159606",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:43Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/mahabubnagar.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/mahabubnagar",
+   "source": "eenadu.net",
+   "sha256": "a4eb3879d63b4f145a2c99f0a36f8ac1b257ad64131c07ad4d846308fcfa6862",
+   "bytes": "156497",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:56Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/mancherial.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/mancherial",
+   "source": "eenadu.net",
+   "sha256": "2cb9eb46b7201ff9f4d2373c9aeb425b00f41ddb9fd678d53cfe8c9368ddb068",
+   "bytes": "137941",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:08:59Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/medak.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/medak",
+   "source": "eenadu.net",
+   "sha256": "3fffdb0f45c89fc3b470638728446e6a5ece61b5f67578ebcb6c63ba98252157",
+   "bytes": "155755",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:02Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/mulugu.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/mulugu",
+   "source": "eenadu.net",
+   "sha256": "ae92385c447fa76f75d6ea7e9e7a31e48512295bf11c7093691ff30f64014973",
+   "bytes": "100853",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:05Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/nagarkurnool.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/nagarkurnool",
+   "source": "eenadu.net",
+   "sha256": "3a0d01a678477c2ff4622c12d58db192fa576f83d77e68e296d67269d1717322",
+   "bytes": "156979",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:07Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/nalgonda.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/nalgonda",
+   "source": "eenadu.net",
+   "sha256": "fcdc52fb9cf6abfdb6c0f4af899bfe5656629d17e2b09378a76c966d4179d948",
+   "bytes": "226697",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:10Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/narayanpet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/narayanpet",
+   "source": "eenadu.net",
+   "sha256": "19459dcd3f448e24faab0c6f5e54e7f822906062e5eefe4313fde357490cf130",
+   "bytes": "124966",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:13Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/nirmal.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/nirmal",
+   "source": "eenadu.net",
+   "sha256": "0dd43a4b99eb715cd67147cbc508089a15c811fc149e71e3628127a35d6fe25d",
+   "bytes": "145280",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:15Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/nizamabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/nizamabad",
+   "source": "eenadu.net",
+   "sha256": "ab90a5548bcbed06106333563ed0f6b99b621fd153e5c9854458aed2ba6a3c49",
+   "bytes": "180154",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:18Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/peddapally.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/peddapally",
+   "source": "eenadu.net",
+   "sha256": "4f9739d9f1ab2caab5625e849efe48ce8407b83668a3119095efcef9868f3cba",
+   "bytes": "112703",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:21Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/rangareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/rangareddy",
+   "source": "eenadu.net",
+   "sha256": "42cded4b873cfb524133d9ac0d19e6d1fa39c642abef7fc3441a7da4ea678ca6",
+   "bytes": "170039",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:24Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/sangareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/sangareddy",
+   "source": "eenadu.net",
+   "sha256": "103c02f4179631dea8df47a96f941f1df4fb385580c231a63708ca83c70306f7",
+   "bytes": "207534",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:26Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/wanaparthy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/wanaparthy",
+   "source": "eenadu.net",
+   "sha256": "274b35a228970acf8a2580b28a7471d8be0d252bbfdde41a75ea89aec0bf3757",
+   "bytes": "125160",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:29Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/siddipet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/siddipet",
+   "source": "eenadu.net",
+   "sha256": "b720c875a65e3c63ec66066a521ac9c59c60c3d01870f747f64ffe39c96563ed",
+   "bytes": "176253",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:32Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/suryapet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/suryapet",
+   "source": "eenadu.net",
+   "sha256": "ef171e7970766d59b27499c2b3e4023a5653ed76ec1335a15900925cb8255402",
+   "bytes": "172485",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:35Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/vikarabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/vikarabad",
+   "source": "eenadu.net",
+   "sha256": "0a243941550faa5ef13a095bdc601b3bb02ee700b9c99989af509c81f386314b",
+   "bytes": "168662",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:38Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/jogulamba-gadwala.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/jogulamba-gadwala",
+   "source": "eenadu.net",
+   "sha256": "856c232643aff355d824d20d35c91b5013669d1fc74dac38c73392615e76bc9a",
+   "bytes": "113556",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:41Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/kamareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/kamareddy",
+   "source": "eenadu.net",
+   "sha256": "131fae684940f7f98be77adeeac00946d9db346a699c7da4432706a92fc7b8ab",
+   "bytes": "180430",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:44Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/karimnagar.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/karimnagar",
+   "source": "eenadu.net",
+   "sha256": "6aef94febb87429cfc768b8c33ca9b3dce7e725187415650122422b6629f31d7",
+   "bytes": "134377",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:47Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/khammam.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/khammam",
+   "source": "eenadu.net",
+   "sha256": "39bbe27ff590c4ce8903287460aa2aedcb7301ebef5a9a5d79db3ce273bd8cc4",
+   "bytes": "171661",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:49Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/kumurambheem-asifabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/kumurambheem-asifabad",
+   "source": "eenadu.net",
+   "sha256": "1d0f4218010c1e762332d9cefd8650507ebc7415aa56e927f6518c1d82a16ce6",
+   "bytes": "135845",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:52Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/warangal.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/warangal",
+   "source": "eenadu.net",
+   "sha256": "fe82dc3a19ebdd519ca170abf3737079ba38d1e974d59fd2afbd421b809e6081",
+   "bytes": "135110",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:54Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase2/yadadri-bhuvanagiri.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase2/yadadri-bhuvanagiri",
+   "source": "eenadu.net",
+   "sha256": "b4c2aa4289cf8d672943b918f67b28c1971b33fb962b222e0c08265beb948d86",
+   "bytes": "154002",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:57Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/adilabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/adilabad",
+   "source": "eenadu.net",
+   "sha256": "81fe38c61f674adad7144bce253e55af39a2b7c4a394b11d2c6e24773eb96b02",
+   "bytes": "153548",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:09:59Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/bhadradri-kothagudem.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/bhadradri-kothagudem",
+   "source": "eenadu.net",
+   "sha256": "0de245c9a753683662d17da687a8eb8e3b8597780c70d0e272b7d754a1eb79ef",
+   "bytes": "158288",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:02Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/hanumakonda.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/hanumakonda",
+   "source": "eenadu.net",
+   "sha256": "23cdec5414ebe37782324064346b53b4aa22a55f34b04f073dc902bca7e6e338",
+   "bytes": "96259",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:15Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/jagtial.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/jagtial",
+   "source": "eenadu.net",
+   "sha256": "9b8beafbdb4e965badc863c36d14d97b6c1e8c5a013daf94771391bfda5d8afe",
+   "bytes": "138194",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:18Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/jayashankar-bhupalpally.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/jayashankar-bhupalpally",
+   "source": "eenadu.net",
+   "sha256": "420533edd2b635d9c2c4e3c24f29d54d4cdb4fc4290b054b133c5f01aefd2a75",
+   "bytes": "123972",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:21Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/jangaon.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/jangaon",
+   "source": "eenadu.net",
+   "sha256": "f4c3d5cb669d7f86db2b29e8a15ee03fdb1dd65c5ebae0b1eb6cb871c60ed3cf",
+   "bytes": "120938",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:23Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/rajanna-sircilla.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/rajanna-sircilla",
+   "source": "eenadu.net",
+   "sha256": "2e9550886d1eca17a323954f8abde795ff102ccdc56df47e92503c815a09103c",
+   "bytes": "119633",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:26Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/mahabubabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/mahabubabad",
+   "source": "eenadu.net",
+   "sha256": "0f227cbbf2283233c532154692ce263686cb2c736cc524a8b94da398a44e61a9",
+   "bytes": "165239",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:29Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/mahabubnagar.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/mahabubnagar",
+   "source": "eenadu.net",
+   "sha256": "e1c512315c2f11fb70207a12d68091183565dd6264d79b5d489acafbbe799fbe",
+   "bytes": "145957",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:32Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/mancherial.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/mancherial",
+   "source": "eenadu.net",
+   "sha256": "1601fcf3496ffe31886154117a4b60e6bcee3a35158138d3cf980c4af4f62ae7",
+   "bytes": "130444",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:34Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/medak.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/medak",
+   "source": "eenadu.net",
+   "sha256": "ac5919ad19a2295dea3345e07a4e12ef484f06dc1ebad0f74a7e618d4e60c6bd",
+   "bytes": "173472",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:36Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/mulugu.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/mulugu",
+   "source": "eenadu.net",
+   "sha256": "85d1c630b182f916cd11bcf06a43b599ce08e3347e9c9c9c5ff65db546645027",
+   "bytes": "97269",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:39Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/nagarkurnool.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/nagarkurnool",
+   "source": "eenadu.net",
+   "sha256": "7811121f502831cac6c812b33e053614a408fe6f8322bbf51b1165aa01264fe2",
+   "bytes": "160568",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:42Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/nalgonda.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/nalgonda",
+   "source": "eenadu.net",
+   "sha256": "66a33d48bf3305c0d2dfa95b1f2746a4b52ae876e558088f7817d8c8554274c6",
+   "bytes": "220350",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:56Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/narayanpet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/narayanpet",
+   "source": "eenadu.net",
+   "sha256": "fbfcb97a24824a18843823547fc0fac7d0962ac6f2a9dcb42b23ff31fb041916",
+   "bytes": "132827",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:10:59Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/nirmal.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/nirmal",
+   "source": "eenadu.net",
+   "sha256": "f496506e6d6a1ec31e1f0a8f6e47795d2fa558c7c54d11fc825d26088536f624",
+   "bytes": "144706",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:12Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/nizamabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/nizamabad",
+   "source": "eenadu.net",
+   "sha256": "56df4f30ed4a9b15bd62ba5d6fc04931fb8e2abc6da0abf840f9329a905cc00e",
+   "bytes": "166696",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:15Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/peddapally.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/peddapally",
+   "source": "eenadu.net",
+   "sha256": "152a132cdb3010639514fe1d499e96f4084adb73051c2412ecc85abf266fdc2a",
+   "bytes": "121768",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:17Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/rangareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/rangareddy",
+   "source": "eenadu.net",
+   "sha256": "8607d27ad3b42a552c0438a7201dd85b9cc67179e911c696abd788f452a197ec",
+   "bytes": "167193",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:20Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/sangareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/sangareddy",
+   "source": "eenadu.net",
+   "sha256": "158f1c198649be04edaf02cd78eb179e23ece105637393763095ca667abf2527",
+   "bytes": "200592",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:23Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/wanaparthy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/wanaparthy",
+   "source": "eenadu.net",
+   "sha256": "8ad4d6037af5c6c28e1ee0e0b26f311e9d4472a3f9078051ca8ba463711809ba",
+   "bytes": "121815",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:26Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/siddipet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/siddipet",
+   "source": "eenadu.net",
+   "sha256": "83adf7fb4f9a6e247ad910d22b0fa4fc7fbc8886f7a3485d1d4565ffdbc737cb",
+   "bytes": "164828",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:29Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/suryapet.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/suryapet",
+   "source": "eenadu.net",
+   "sha256": "10de6d0753a34bc31350ecc121ab7f5199a34f70645a523dcc283e901fcb1a75",
+   "bytes": "153803",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:32Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/vikarabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/vikarabad",
+   "source": "eenadu.net",
+   "sha256": "640cad005e0b2e3e29f02bc4f5e627e10cbc6505040a53932c59fa7c7f07134b",
+   "bytes": "157903",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:35Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/jogulamba-gadwala.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/jogulamba-gadwala",
+   "source": "eenadu.net",
+   "sha256": "891296dedaa2e2c523bd4f872bab851d026a9228946ec59dfa4b51996dd88336",
+   "bytes": "114886",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:37Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/kamareddy.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/kamareddy",
+   "source": "eenadu.net",
+   "sha256": "c3afe66c0d0abd63d0db531ed1a16677e2e4fe00dc440c3af7c4f7ae21df8381",
+   "bytes": "165922",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:40Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/karimnagar.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/karimnagar",
+   "source": "eenadu.net",
+   "sha256": "b715dd70d0c911a8371136df9cf99556bd7ae4f9590b275084543e32b3da3359",
+   "bytes": "132547",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:42Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/khammam.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/khammam",
+   "source": "eenadu.net",
+   "sha256": "d2004f86374d252a988aa5992bbab1190b4ef71e9d075d57b062eaa2c6293314",
+   "bytes": "177106",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:44Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/kumurambheem-asifabad.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/kumurambheem-asifabad",
+   "source": "eenadu.net",
+   "sha256": "24376a645d18f127cf71db0a39704d7cf4605fdd3a02f03f9cb8655bfb4d543a",
+   "bytes": "130517",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:47Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/warangal.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/warangal",
+   "source": "eenadu.net",
+   "sha256": "22dc45def8218572314f2570f123bc84bdc2683606b74afa393a7061bafc72da",
+   "bytes": "129622",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:49Z"
+  },
+  {
+   "path": "data/raw/2025/eenadu/phase3/yadadri-bhuvanagiri.html",
+   "url": "https://www.eenadu.net/telangana/panchayat-elections-results-phase3/yadadri-bhuvanagiri",
+   "source": "eenadu.net",
+   "sha256": "b1a1bd9f17496e679c68f82e665bd5dcc30fa46db1294b3a3e2409908f11c5fc",
+   "bytes": "140597",
+   "status": "200",
+   "fetched_at_utc": "2026-10-18T22:11:52Z"
+  }
+ ],
+ "raw_held": [
+  {
+   "path": "data/raw/2019/2019_gp_sarpanch.csv",
+   "sha256": "4c9411fcc3f0aadd3a59e2144247987fa59b7c80565273b7633737c286fda233"
+  },
+  {
+   "path": "data/raw/2019/grampanchayatelectionsdata_2019_sarpanch.csv",
+   "sha256": "5cd63ddfaa6d8b6eebd4b3b053a4cee5e339cfc952119ad1bdfd1f002dd45d1f"
+  }
+ ],
+ "checks": [
+  {
+   "check": "2019_coverage_vs_notified",
+   "appeals_to": "external",
+   "status": "pass",
+   "blocking": false,
+   "detail": "12,018 elected sarpanches of 12,728 notified posts (94.4%). Source: TGSEC notification for the 2019 GP election, as reported: 12,728 sarpanch posts across 12,751 GPs (local_elections, common/reference.py).",
+   "rows": 12018,
+   "reference": 12728
+  },
+  {
+   "check": "2019_key_unique",
+   "appeals_to": "internal",
+   "status": "warn",
+   "blocking": false,
+   "detail": "7 (district, mandal, GP) keys appear more than once (14 rows). Kept as printed: two GPs can share a name inside a mandal, and the listing has no GP code.",
+   "duplicate_keys": [
+    [
+     "Bhadradri",
+     "Palawancha",
+     "Laxmidevipally"
+    ],
+    [
+     "Bhadradri",
+     "Tekulapalle",
+     "Kothathanda"
+    ],
+    [
+     "Mahabubabad",
+     "Kuravi",
+     "Rekula Thanda"
+    ],
+    [
+     "Mahabubabad",
+     "Nellikudur",
+     "Pedda Thanda"
+    ],
+    [
+     "Nalgonda",
+     "Devarakonda",
+     "Pathlavath Thanda"
+    ],
+    [
+     "Vikarabad",
+     "Kulkacharla",
+     "Chervumundali Thanda"
+    ],
+    [
+     "Warangal Rural",
+     "Raiparthy",
+     "Jayaram Thanda"
+    ]
+   ]
+  },
+  {
+   "check": "2019_women_share_vs_statute",
+   "appeals_to": "external",
+   "status": "pass",
+   "blocking": false,
+   "detail": "50.02% of seats reserved for women; the Act requires 50% (rounded down where a category's count is odd).",
+   "share": 0.5002
+  },
+  {
+   "check": "2019_winner_is_top_vote_getter",
+   "appeals_to": "external",
+   "status": "pass",
+   "blocking": false,
+   "detail": "Of 9,954 GPs found in both the SEC elected listing and the open-data vote table (untied, votes > 0), the listed winner is the top vote-getter in 100.0%. Mismatches include spelling differences between the two releases.",
+   "compared": 9954,
+   "agree": 0.9999
+  },
+  {
+   "check": "2025_district_counts_vs_sec",
+   "appeals_to": "external",
+   "status": "warn",
+   "blocking": false,
+   "detail": "Eenadu rows per district against the SEC phase table (31 districts, 12,733 GPs). 2 district(s) differ by more than 1%; largest absolute gap 24. Total rows 12,727.",
+   "by_district": [
+    {
+     "district": "Adilabad",
+     "sec_table": 473,
+     "court_held": 0,
+     "eenadu_rows": 473,
+     "diff": 0
+    },
+    {
+     "district": "Bhadradri Kothagudem",
+     "sec_table": 471,
+     "court_held": 0,
+     "eenadu_rows": 471,
+     "diff": 0
+    },
+    {
+     "district": "Hanumakonda",
+     "sec_table": 210,
+     "court_held": 0,
+     "eenadu_rows": 186,
+     "diff": -24
+    },
+    {
+     "district": "Jagtial",
+     "sec_table": 385,
+     "court_held": 0,
+     "eenadu_rows": 385,
+     "diff": 0
+    },
+    {
+     "district": "Jangaon",
+     "sec_table": 280,
+     "court_held": 0,
+     "eenadu_rows": 280,
+     "diff": 0
+    },
+    {
+     "district": "Jayashankar Bhupalpally",
+     "sec_table": 248,
+     "court_held": 0,
+     "eenadu_rows": 272,
+     "diff": 24
+    },
+    {
+     "district": "Jogulamba Gadwal",
+     "sec_table": 255,
+     "court_held": 0,
+     "eenadu_rows": 255,
+     "diff": 0
+    },
+    {
+     "district": "Kamareddy",
+     "sec_table": 532,
+     "court_held": 0,
+     "eenadu_rows": 532,
+     "diff": 0
+    },
+    {
+     "district": "Karimnagar",
+     "sec_table": 316,
+     "court_held": 2,
+     "eenadu_rows": 316,
+     "diff": 0
+    },
+    {
+     "district": "Khammam",
+     "sec_table": 571,
+     "court_held": 5,
+     "eenadu_rows": 566,
+     "diff": -5
+    },
+    {
+     "district": "Komaram Bheem Asifabad",
+     "sec_table": 335,
+     "court_held": 0,
+     "eenadu_rows": 335,
+     "diff": 0
+    },
+    {
+     "district": "Mahabubabad",
+     "sec_table": 482,
+     "court_held": 0,
+     "eenadu_rows": 482,
+     "diff": 0
+    },
+    {
+     "district": "Mahabubnagar",
+     "sec_table": 423,
+     "court_held": 0,
+     "eenadu_rows": 423,
+     "diff": 0
+    },
+    {
+     "district": "Mancherial",
+     "sec_table": 306,
+     "court_held": 0,
+     "eenadu_rows": 306,
+     "diff": 0
+    },
+    {
+     "district": "Medak",
+     "sec_table": 492,
+     "court_held": 0,
+     "eenadu_rows": 492,
+     "diff": 0
+    },
+    {
+     "district": "Mulugu",
+     "sec_table": 146,
+     "court_held": 25,
+     "eenadu_rows": 146,
+     "diff": 0
+    },
+    {
+     "district": "Nagarkurnool",
+     "sec_table": 460,
+     "court_held": 0,
+     "eenadu_rows": 460,
+     "diff": 0
+    },
+    {
+     "district": "Nalgonda",
+     "sec_table": 869,
+     "court_held": 0,
+     "eenadu_rows": 869,
+     "diff": 0
+    },
+    {
+     "district": "Narayanpet",
+     "sec_table": 272,
+     "court_held": 0,
+     "eenadu_rows": 272,
+     "diff": 0
+    },
+    {
+     "district": "Nirmal",
+     "sec_table": 400,
+     "court_held": 0,
+     "eenadu_rows": 399,
+     "diff": -1
+    },
+    {
+     "district": "Nizamabad",
+     "sec_table": 545,
+     "court_held": 0,
+     "eenadu_rows": 545,
+     "diff": 0
+    },
+    {
+     "district": "Peddapalli",
+     "sec_table": 263,
+     "court_held": 0,
+     "eenadu_rows": 263,
+     "diff": 0
+    },
+    {
+     "district": "Rajanna Sircilla",
+     "sec_table": 260,
+     "court_held": 0,
+     "eenadu_rows": 260,
+     "diff": 0
+    },
+    {
+     "district": "Rangareddy",
+     "sec_table": 526,
+     "court_held": 0,
+     "eenadu_rows": 526,
+     "diff": 0
+    },
+    {
+     "district": "Sangareddy",
+     "sec_table": 613,
+     "court_held": 0,
+     "eenadu_rows": 613,
+     "diff": 0
+    },
+    {
+     "district": "Siddipet",
+     "sec_table": 508,
+     "court_held": 0,
+     "eenadu_rows": 508,
+     "diff": 0
+    },
+    {
+     "district": "Suryapet",
+     "sec_table": 486,
+     "court_held": 0,
+     "eenadu_rows": 486,
+     "diff": 0
+    },
+    {
+     "district": "Vikarabad",
+     "sec_table": 594,
+     "court_held": 0,
+     "eenadu_rows": 594,
+     "diff": 0
+    },
+    {
+     "district": "Wanaparthy",
+     "sec_table": 268,
+     "court_held": 0,
+     "eenadu_rows": 268,
+     "diff": 0
+    },
+    {
+     "district": "Warangal",
+     "sec_table": 317,
+     "court_held": 0,
+     "eenadu_rows": 317,
+     "diff": 0
+    },
+    {
+     "district": "Yadadri Bhuvanagiri",
+     "sec_table": 427,
+     "court_held": 0,
+     "eenadu_rows": 427,
+     "diff": 0
+    }
+   ]
+  },
+  {
+   "check": "2025_coverage_vs_notified",
+   "appeals_to": "external",
+   "status": "pass",
+   "blocking": false,
+   "detail": "12,727 GP rows against 12,728 sarpanch posts notified (99.99%). Other published denominators: {'sec_phase_table_gps': 12733, 'gps_notified': 12735, 'sarpanch_posts_notified': 12728, 'gps_in_results_count': 12727}.",
+   "rows": 12727
+  },
+  {
+   "check": "2025_pages_internally_complete",
+   "appeals_to": "internal",
+   "status": "pass",
+   "blocking": false,
+   "detail": "Every page's row count equals its printed panchayat total: True. Pages whose printed declared count is below their total: 17."
+  },
+  {
+   "check": "2025_key_unique",
+   "appeals_to": "internal",
+   "status": "warn",
+   "blocking": false,
+   "detail": "2 (district, mandal, GP) keys appear more than once (4 rows).",
+   "duplicate_rows": [
+    {
+     "district": "Khammam",
+     "block": "పెనుబల్లి",
+     "gram_panchayat": "విఎంబంజర",
+     "winner": NaN,
+     "source_locator": "mandal block 2, row 30"
+    },
+    {
+     "district": "Khammam",
+     "block": "పెనుబల్లి",
+     "gram_panchayat": "విఎంబంజర",
+     "winner": "ప్రసాద్",
+     "source_locator": "mandal block 2, row 31"
+    },
+    {
+     "district": "Mancherial",
+     "block": "కోటపల్లి",
+     "gram_panchayat": "వెల్మపల్లి",
+     "winner": "మణిశెట్టి శ్యామల",
+     "source_locator": "mandal block 4, row 30"
+    },
+    {
+     "district": "Mancherial",
+     "block": "కోటపల్లి",
+     "gram_panchayat": "వెల్మపల్లి",
+     "winner": "పడాల రవళి",
+     "source_locator": "mandal block 4, row 31"
+    }
+   ]
+  },
+  {
+   "check": "2025_women_and_category_shares",
+   "appeals_to": "external",
+   "status": "not_run",
+   "blocking": false,
+   "detail": "No 2025 reservation source is parsed: Eenadu prints none, the commission's tables need an Indian connection, and the collectorate statements found are scans. Reference figures to use once it is: BC 2,176 of 12,735 (17.08%; SEC figures reported by Siasat (article above) and South First, 'Telangana gram panchayat polls: BC quota slashed to 17 percent', https://thesouthfirst.com/telangana/telangana-gram-panchayat-polls-bc-quota-slashed-to-17-percent-amidst-backlash-over-betrayal-of-promises/); women 50% (Telangana Panchayat Raj Act 2018 and G.O.Ms.No.46 (22 Nov 2025): 50% of seats in each category for women, rounded down where odd (South First, 'Telangana issues new reservation guidelines').)."
+  },
+  {
+   "check": "2025_backing_party_vs_siasat",
+   "appeals_to": "external",
+   "status": "pass",
+   "blocking": false,
+   "detail": "Share of GPs by backing party, Eenadu minus Siasat: {'INC': -0.0004, 'BRS': 0.0001, 'BJP': 0.0001, 'OTH': 0.0002}. Eenadu counts {'INC': 6804, 'BRS': 3514, 'OTH': 1653, 'BJP': 703} of 12,674; Siasat {'INC': 6822, 'BRS': 3519, 'BJP': 703, 'OTH': 1654} of 12,698 (declared results only). Both are newspaper tallies, so agreement shows the parse is faithful, not that either is official. Siasat, 18 Dec 2025 (article above): Congress-backed 6,822 (53.60%), BRS 3,519, BJP-backed 703, independents and others 1,654.",
+   "share_gap": {
+    "INC": -0.0004,
+    "BRS": 0.0001,
+    "BJP": 0.0001,
+    "OTH": 0.0002
+   }
+  },
+  {
+   "check": "link_preview_2019_2025",
+   "appeals_to": "internal",
+   "status": "info",
+   "blocking": false,
+   "detail": "2025 names are Telugu, 2019 names Latin, so a raw exact match is 0 by construction. After rule-based Telugu->Latin transliteration (indic-transliteration, HK scheme): exact folded match within the same district name 22.2%; loose match (vowel length, aspiration, v/w, s/sh collapsed) within district 67.7%; loose match anywhere in the state 72.8%; loose match against a different district's 2019 names (chance benchmark) 4.3%. Districts are compared as groups that absorb renames and splits (Mulugu and Narayanpet were carved out in Feb 2019 and the 2019 listing files them under their parents; Hanumakonda and Warangal swapped mandals in 2021). Mandals are not used: 2025 mandal names are Telugu and several mandals were created after 2019. Unmatched district groups: ['Medchal-Malkajgiri'].",
+   "exact_within_district": 0.2217,
+   "loose_within_district": 0.6767,
+   "loose_statewide": 0.7275,
+   "loose_other_district": 0.0425
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+sheet_item,district,phase,block,gram_panchayat,winner,backing_party_printed,source_path,source_locator,verdict
+0,Nalgonda,3,కొండమల్లేపల్లి,గన్యానాయక్‌ తండా,గోజీ,కాంగ్రెస్‌,data/raw/2025/eenadu/phase3/nalgonda.html,"mandal block 6, row 13",match
+1,Khammam,1,చింతకాని,బస్వాపురం,నర్సింహారావు,సిపిఐ,data/raw/2025/eenadu/phase1/khammam.html,"mandal block 2, row 2",match
+2,Nalgonda,1,నాంపల్లి,మేళ్లవాయి,వంశీ,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/nalgonda.html,"mandal block 10, row 16",match
+3,Adilabad,2,తాంసి,అత్నంగూడ,సంజీవ్,ఇతరులు,data/raw/2025/eenadu/phase2/adilabad.html,"mandal block 8, row 2",match
+4,Jogulamba Gadwal,1,ధరూర్,ఉప్పేరు,మహేశ్వరమ్మ,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/jogulamba-gadwala.html,"mandal block 1, row 27",match
+5,Mancherial,2,కన్నేపల్లి,మాడవెల్లి,జిమ్మిడి సునీత,కాంగ్రెస్‌,data/raw/2025/eenadu/phase2/mancherial.html,"mandal block 3, row 6",match
+6,Warangal,1,రాయపర్తి,శివరామపురం,హేమలత,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/warangal.html,"mandal block 3, row 40",match
+7,Jagtial,3,గొల్లపల్లి,బీబీరాజ్‌పల్లి,ఓరుగంటి తిరుపతి,ఇతరులు,data/raw/2025/eenadu/phase3/jagtial.html,"mandal block 3, row 4",match
+8,Vikarabad,2,మర్పల్లి,నర్సాపూర్ పెద్ద తండా,కమ్లిబాయి,కాంగ్రెస్‌,data/raw/2025/eenadu/phase2/vikarabad.html,"mandal block 5, row 5",match
+9,Khammam,3,వేంసూరు,భీమవరం,కృష్ణార్జునరావు,కాంగ్రెస్‌,data/raw/2025/eenadu/phase3/khammam.html,"mandal block 5, row 5",match
+10,Nalgonda,1,తిప్పర్తి,ఎల్లమ్మగూడెం,వాణి,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/nalgonda.html,"mandal block 7, row 26",match
+11,Nalgonda,3,నేరెడుగొమ్ము,పెద్దమునగల్‌,అంబాలి,బీఆర్‌ఎస్‌,data/raw/2025/eenadu/phase3/nalgonda.html,"mandal block 7, row 14",match
+12,Jagtial,1,మేడిపల్లి,కల్వకోట,రమేశ్‌,ఇతరులు,data/raw/2025/eenadu/phase1/jagtial.html,"mandal block 6, row 4",match
+13,Mancherial,1,లక్సెట్టిపేట,వెంకట్‌రావుపేట్‌,నలిమెల రాజు,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/mancherial.html,"mandal block 4, row 18",match
+14,Mahabubnagar,1,మహబూబ్‌నగర్‌,మాచన్‌పల్లి,జి. వెంకటయ్య (మన్నెం),బీఆర్‌ఎస్‌,data/raw/2025/eenadu/phase1/mahabubnagar.html,"mandal block 2, row 13",match
+15,Mahabubabad,1,గూడూరు,శ్రీ హనుమాన్ తండా,రమేశ్‌,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/mahabubabad.html,"mandal block 1, row 15",match
+16,Suryapet,1,తుంగతుర్తి,సూర్యతండ,బాజు భాయ్‌,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/suryapet.html,"mandal block 1, row 4",match
+17,Narayanpet,3,కృష్ణ,చేగుంట,విద్యాధరి,బిజెపి,data/raw/2025/eenadu/phase3/narayanpet.html,"mandal block 1, row 3",match
+18,Jagtial,2,కొడిమ్యాల,నాచుపల్లి,నాగమణి,ఇతరులు,data/raw/2025/eenadu/phase2/jagtial.html,"mandal block 1, row 10",match
+19,Bhadradri Kothagudem,1,అశ్వాపురం,వెంకటాపురం,మూలమ్మ,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/bhadradri-kothagudem.html,"mandal block 1, row 23",match
+20,Nirmal,3,భైంసా,బోరెగాం (బి),బండోల్ల వందన,ఇతరులు,data/raw/2025/eenadu/phase3/nirmal.html,"mandal block 2, row 1",match
+21,Jayashankar Bhupalpally,2,టేకుమట్ల,ఆశిరెడ్డిపల్లి,కుమారస్వామి,ఇతరులు,data/raw/2025/eenadu/phase2/jayashankar-bhupalpally.html,"mandal block 3, row 3",match
+22,Khammam,3,కల్లూరు,బత్తులపల్లి,ఉషారాణి,కాంగ్రెస్‌,data/raw/2025/eenadu/phase3/khammam.html,"mandal block 1, row 1",match
+23,Rajanna Sircilla,1,చందుర్తి,నర్సింగాపూర్,మల్లిక్,బీఆర్‌ఎస్‌,data/raw/2025/eenadu/phase1/rajanna-sircilla.html,"mandal block 1, row 15",match
+24,Sangareddy,3,నాగలగిద్ద,ముక్తాపూర్,సుభాష్‌ చంద్రబోస్,బీఆర్‌ఎస్‌,data/raw/2025/eenadu/phase3/sangareddy.html,"mandal block 4, row 18",match
+25,Nalgonda,2,వేములపల్లి,కామేపల్లి,మమత,కాంగ్రెస్‌,data/raw/2025/eenadu/phase2/nalgonda.html,"mandal block 5, row 8",match
+26,Jagtial,1,ఇబ్రహీంపట్నం,ఇబ్రహీంపట్నం,గోపి,బీఆర్‌ఎస్‌,data/raw/2025/eenadu/phase1/jagtial.html,"mandal block 1, row 8",match
+27,Bhadradri Kothagudem,1,మణుగూరు,ఇప్పల సింగారం,రాములు,కాంగ్రెస్‌,data/raw/2025/eenadu/phase1/bhadradri-kothagudem.html,"mandal block 6, row 4",match
+28,Medak,3,శివ్వంపేట,పాంబండ,నాయిని సమత,కాంగ్రెస్‌,data/raw/2025/eenadu/phase3/medak.html,"mandal block 5, row 19",match
+29,Komaram Bheem Asifabad,2,బెజ్జూర్,వూట్ సారంగపల్లి,యెంక శ్రీహరి,బీఆర్‌ఎస్‌,data/raw/2025/eenadu/phase2/kumurambheem-asifabad.html,"mandal block 1, row 4",match
