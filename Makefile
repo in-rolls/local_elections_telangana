@@ -1,0 +1,32 @@
+PY = .venv/bin/python
+RUFF = .venv/bin/ruff
+
+.PHONY: sync collect collect-tsec data manifest lint verify check
+
+sync:
+	uv sync --frozen --all-groups
+
+# network: fetches only what fetch_log.csv does not already hold
+collect:
+	$(PY) -m local_elections_telangana.collect.sources_2025
+
+# needs an Indian connection; never run from here (see collect/tsec.py)
+collect-tsec:
+	$(PY) -m local_elections_telangana.collect.tsec
+
+data:
+	$(PY) -m local_elections_telangana.parse.y2019
+	$(PY) -m local_elections_telangana.parse.y2025
+	$(MAKE) manifest
+
+manifest:
+	$(PY) -m local_elections_telangana.build.release write
+
+lint:
+	$(RUFF) check .
+	$(RUFF) format --check .
+
+verify:
+	$(PY) -m local_elections_telangana.build.release verify
+
+check: lint verify
