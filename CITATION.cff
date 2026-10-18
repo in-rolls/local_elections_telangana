@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "Please cite the repository and record the commit used."
+type: dataset
+title: "Telangana Gram Panchayat Sarpanch Elections, 2019 and 2025"
+authors:
+  - family-names: Sood
+    given-names: Gaurav
+repository-code: "https://github.com/in-rolls/local_elections_telangana"
+url: "https://github.com/in-rolls/local_elections_telangana"
+keywords:
+  - Telangana
+  - local elections
+  - sarpanch
+  - reservation

@@ -1,0 +1,4 @@
+# Raw sources are stored byte-for-byte; their sha256 is in data/raw/fetch_log.csv.
+data/raw/** -text
+*.parquet binary
+*.png binary
