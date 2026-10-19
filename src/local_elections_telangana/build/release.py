@@ -13,6 +13,7 @@ Commands:
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import re
@@ -43,6 +44,28 @@ RENAMED_2019 = {
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def raw_sha256(path):
+    """sha256 of a fetched file as received.
+
+    Large HTML responses are committed gzipped (path + ".gz"); their hash is
+    taken on the decompressed bytes, so it still matches the fetch log.
+    """
+    if path.exists():
+        return sha256(path)
+    packed = path.with_name(path.name + ".gz")
+    if packed.exists():
+        return hashlib.sha256(gzip.decompress(packed.read_bytes())).hexdigest()
+    # Files over GitHub's 100 MB limit are committed as byte-split parts
+    # (`split -b 90m -a 1 FILE FILE.part_`); cat the parts to restore it.
+    parts = sorted(path.parent.glob(path.name + ".part_*"))
+    if parts:
+        digest = hashlib.sha256()
+        for part in parts:
+            digest.update(part.read_bytes())
+        return digest.hexdigest()
+    return None
 
 
 def result(name, appeals_to, status, detail, blocking=False, **numbers):
@@ -439,8 +462,8 @@ def verify():
             problems.append(f"hash changed: {entry['file']}")
     fetched, _ = raw_entries()
     for row in fetched:
-        if sha256(ROOT / row["path"]) != row["sha256"]:
-            problems.append(f"raw file changed since fetch: {row['path']}")
+        if raw_sha256(ROOT / row["path"]) != row["sha256"]:
+            problems.append(f"raw file missing or changed since fetch: {row['path']}")
     for row in manifest["raw_held"]:
         if sha256(ROOT / row["path"]) != row["sha256"]:
             problems.append(f"raw file changed: {row['path']}")

@@ -27,6 +27,7 @@ warnings go to data/raw/2025/tsec/collect.log.
 Run: python -m local_elections_telangana.collect.tsec
 """
 
+import gzip
 import logging
 import re
 import time
@@ -123,7 +124,13 @@ def gp_count(html, kind):
 
 
 def read(rel):
-    return (ROOT / rel).read_text(encoding="utf-8", errors="replace")
+    """A saved page; committed pages are gzipped (rel + ".gz")."""
+    path = ROOT / rel
+    if not path.exists():
+        return gzip.decompress((ROOT / f"{rel}.gz").read_bytes()).decode(
+            "utf-8", "replace"
+        )
+    return path.read_text(encoding="utf-8", errors="replace")
 
 
 def cached(client, query, rel, done):
