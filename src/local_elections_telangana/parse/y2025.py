@@ -183,7 +183,7 @@ def build():
 def main():
     seats, mandals, pages = build()
     (DATA / "2025").mkdir(exist_ok=True)
-    seats.to_parquet(DATA / "2025" / "sarpanch_results.parquet", index=False)
+    seats.to_parquet(DATA / "2025" / "eenadu_results.parquet", index=False)
     mandals.to_parquet(DATA / "2025" / "eenadu_mandal_counts.parquet", index=False)
     pages.to_parquet(DATA / "2025" / "eenadu_page_counts.parquet", index=False)
 

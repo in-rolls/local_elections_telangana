@@ -45,7 +45,7 @@ async def shoot(sample, tmp):
 
 
 def main():
-    seats = pd.read_parquet(DATA / "2025" / "sarpanch_results.parquet")
+    seats = pd.read_parquet(DATA / "2025" / "eenadu_results.parquet")
     sample = seats.sample(30, random_state=20251217).reset_index(drop=True)
     OUT.mkdir(parents=True, exist_ok=True)
     asyncio.run(shoot(sample, OUT))

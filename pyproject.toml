@@ -10,8 +10,9 @@ license-files = ["LICENSE"]
 keywords = ["Telangana", "elections", "panchayats", "sarpanch", "reservation", "data"]
 dependencies = [
     "beautifulsoup4>=4.13",
-    "indic-transliteration>=2.3.82",
+    "frictionless>=5.21",
     "pandas>=2.3",
+    "pandera[io]>=0.34",
     "pyarrow>=21",
     "requests>=2.32",
 ]

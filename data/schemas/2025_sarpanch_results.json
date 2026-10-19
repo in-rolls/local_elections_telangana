@@ -1,0 +1,385 @@
+{
+ "name": "2025_sarpanch_results",
+ "title": "Telangana 2025 sarpanch seats, from the State Election Commission's reports",
+ "description": "One row per gram panchayat (GP) in the commission's per-mandal 'Only Elected' (E) or 'All Contested' (A) reports.",
+ "primaryKey": [
+  "source_path",
+  "source_locator"
+ ],
+ "fields": [
+  {
+   "name": "state",
+   "type": "string",
+   "arrowType": "string",
+   "description": "State",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "Telangana"
+    ]
+   }
+  },
+  {
+   "name": "year",
+   "type": "integer",
+   "arrowType": "int16",
+   "description": "Election year",
+   "constraints": {
+    "required": true,
+    "enum": [
+     2025
+    ]
+   }
+  },
+  {
+   "name": "district",
+   "type": "string",
+   "arrowType": "string",
+   "description": "District, as on the commission's form",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "block",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Mandal, as on the commission's form",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "gram_panchayat",
+   "type": "string",
+   "arrowType": "string",
+   "description": "GP name as printed",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "tier",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Pooled tier",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "gp_head"
+    ]
+   }
+  },
+  {
+   "name": "tier_local",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Local name of the post",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "sarpanch"
+    ]
+   }
+  },
+  {
+   "name": "reservation",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Pooled reservation label of the seat",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "Other than Woman",
+     "Woman",
+     "SC Woman",
+     "SC Other than Woman",
+     "ST Woman",
+     "ST Other than Woman",
+     "BC Woman",
+     "BC Other than Woman"
+    ]
+   }
+  },
+  {
+   "name": "caste_reservation",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Seat's caste category (UR printed as NONE)",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "NONE",
+     "SC",
+     "ST",
+     "BC"
+    ]
+   }
+  },
+  {
+   "name": "woman_reserved",
+   "type": "integer",
+   "arrowType": "int8",
+   "description": "1 if the seat is reserved for a woman",
+   "constraints": {
+    "required": true,
+    "enum": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "name": "reservation_raw",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's code: category, then (G)eneral or (W)oman",
+   "constraints": {
+    "required": true,
+    "pattern": "(UR|SC|ST|BC)\\((G|W)\\)"
+   }
+  },
+  {
+   "name": "winner",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Elected sarpanch as printed in the E report; null if the GP is not in it",
+   "constraints": {
+    "required": false
+   }
+  },
+  {
+   "name": "winner_basis",
+   "type": "string",
+   "arrowType": "string",
+   "description": "'published' where the E report names a winner",
+   "constraints": {
+    "required": false,
+    "enum": [
+     "published"
+    ]
+   }
+  },
+  {
+   "name": "party",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Not reported (non-party polls); always null",
+   "constraints": {
+    "required": false
+   }
+  },
+  {
+   "name": "unopposed",
+   "type": "integer",
+   "arrowType": "int8",
+   "description": "1 if the A report lists one candidate and zero valid votes; null if the GP is not in the A report",
+   "constraints": {
+    "required": false,
+    "enum": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "name": "script",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Script of names",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "latin"
+    ]
+   }
+  },
+  {
+   "name": "district_id",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's district code",
+   "constraints": {
+    "required": true,
+    "pattern": "\\d{2}"
+   }
+  },
+  {
+   "name": "mandal_id",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's mandal code within the district; mostly two digits, but some newer mandals carry a long code (Bheemaram, Jagtial: 302152)",
+   "constraints": {
+    "required": true,
+    "pattern": "\\d+"
+   }
+  },
+  {
+   "name": "gp_code",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's GP code within the mandal, from the GP dropdown; null if the name is missing or repeated there",
+   "constraints": {
+    "required": false,
+    "pattern": "\\d+"
+   }
+  },
+  {
+   "name": "result_declared",
+   "type": "boolean",
+   "arrowType": "bool",
+   "description": "True if the E report names a winner",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "in_reports",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Which mandal reports hold the GP",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "both",
+     "elected_only",
+     "candidates_only"
+    ]
+   }
+  },
+  {
+   "name": "listed_twice",
+   "type": "boolean",
+   "arrowType": "bool",
+   "description": "True if the E report prints this GP twice (same GP code); the repeat row is dropped",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "reservation_raw_a",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Reservation code in the A report's GP caption",
+   "constraints": {
+    "required": false,
+    "pattern": "(UR|SC|ST|BC)\\((G|W)\\)"
+   }
+  },
+  {
+   "name": "candidates",
+   "type": "integer",
+   "arrowType": "int16",
+   "description": "Candidates listed in the A report",
+   "constraints": {
+    "required": false,
+    "minimum": 1
+   }
+  },
+  {
+   "name": "elected_count",
+   "type": "integer",
+   "arrowType": "int16",
+   "description": "Candidates marked Elected in the A report",
+   "constraints": {
+    "required": false,
+    "minimum": 0,
+    "maximum": 1
+   }
+  },
+  {
+   "name": "elected_name",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Candidate marked Elected in the A report",
+   "constraints": {
+    "required": false
+   }
+  },
+  {
+   "name": "total_valid_votes",
+   "type": "integer",
+   "arrowType": "int32",
+   "description": "Valid votes (A caption)",
+   "constraints": {
+    "required": false,
+    "minimum": 0
+   }
+  },
+  {
+   "name": "rejected_votes",
+   "type": "integer",
+   "arrowType": "int32",
+   "description": "Rejected votes (A caption)",
+   "constraints": {
+    "required": false,
+    "minimum": 0
+   }
+  },
+  {
+   "name": "tendered_votes",
+   "type": "integer",
+   "arrowType": "int32",
+   "description": "Tendered votes (A caption)",
+   "constraints": {
+    "required": false,
+    "minimum": 0
+   }
+  },
+  {
+   "name": "nota_votes",
+   "type": "integer",
+   "arrowType": "int32",
+   "description": "NOTA votes (A caption)",
+   "constraints": {
+    "required": false,
+    "minimum": 0
+   }
+  },
+  {
+   "name": "a_path",
+   "type": "string",
+   "arrowType": "string",
+   "description": "A report file holding the GP",
+   "constraints": {
+    "required": false
+   }
+  },
+  {
+   "name": "a_locator",
+   "type": "string",
+   "arrowType": "string",
+   "description": "GP caption position in the A report",
+   "constraints": {
+    "required": false
+   }
+  },
+  {
+   "name": "source_path",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Committed raw file the row was read from (gzipped as .gz)",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_url",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Endpoint the raw file was fetched from (POST form)",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_locator",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Position in the raw file",
+   "constraints": {
+    "required": true
+   }
+  }
+ ]
+}

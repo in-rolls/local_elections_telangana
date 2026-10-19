@@ -19,11 +19,12 @@ import json
 import re
 import subprocess
 import sys
-import unicodedata
 
 import pandas as pd
 
+from local_elections_telangana.build import contract
 from local_elections_telangana.build import reference as ref
+from local_elections_telangana.parse import y2025_sec
 from local_elections_telangana.parse.common import DATA, ROOT, fold
 
 MANIFEST = DATA / "MANIFEST.json"
@@ -31,6 +32,8 @@ OUTPUTS = [
     "2019/sarpanch_results.parquet",
     "2019/sarpanch_candidates.parquet",
     "2025/sarpanch_results.parquet",
+    "2025/sarpanch_candidates.parquet",
+    "2025/eenadu_results.parquet",
     "2025/eenadu_mandal_counts.parquet",
     "2025/eenadu_page_counts.parquet",
 ]
@@ -183,7 +186,228 @@ def sec_district_counts():
 
 
 def checks_2025():
+    """The commission's own 2025 tables: two reports and published totals."""
     seats = pd.read_parquet(DATA / "2025/sarpanch_results.parquet")
+    cands = pd.read_parquet(DATA / "2025/sarpanch_candidates.parquet")
+    out = []
+
+    problems = {name: contract.failures(name) for name in contract.TABLES}
+    bad = {k: v for k, v in problems.items() if v}
+    out.append(
+        result(
+            "2025_table_schema",
+            "internal",
+            "fail" if bad else "pass",
+            "Each 2025 table matches its Table Schema in data/schemas/ (Arrow "
+            f"types, required fields, codes, keys). Failing: {bad or 'none'}.",
+            blocking=True,
+        )
+    )
+
+    # The district report and the mandal reports are separate queries of the
+    # same results; a mandal the collector missed shows up as a shortfall.
+    counts = y2025_sec.district_report_counts()
+    rows = []
+    for (kind, d), whole in sorted(counts.items()):
+        col = "result_declared" if kind == "E" else "a_path"
+        part = seats[seats["district_id"].eq(d) & seats[col].notna()]
+        if kind == "E":
+            part = part[part["result_declared"]]
+        # the E report's repeats are counted in the district report too
+        twice = int(part["listed_twice"].sum()) if kind == "E" else 0
+        rows.append(
+            {
+                "report": kind,
+                "district_id": d,
+                "district": whole,
+                "mandals": len(part) + twice,
+                "diff": len(part) + twice - whole,
+            }
+        )
+    table = pd.DataFrame(rows)
+    off = table[table["diff"] != 0]
+    out.append(
+        result(
+            "2025_mandal_reports_vs_district_reports",
+            "internal",
+            "pass" if off.empty else "warn",
+            f"GPs in the mandal reports against the district reports, per "
+            f"district and report: {len(off)} of {len(table)} differ "
+            f"(mandal total {int(table['mandals'].sum()):,}, district total "
+            f"{int(table['district'].sum()):,}).",
+            differences=off.to_dict("records"),
+        )
+    )
+
+    both = seats[seats["in_reports"].eq("both")]
+    only = (
+        seats["in_reports"]
+        .value_counts()
+        .reindex(["elected_only", "candidates_only"], fill_value=0)
+    )
+    same = both["winner"].map(fold) == both["elected_name"].map(fold)
+    out.append(
+        result(
+            "2025_elected_report_vs_candidates_report",
+            "internal",
+            "pass" if same.mean() >= 0.99 else "warn",
+            f"Of {len(both):,} GPs in both mandal reports, the E report's winner "
+            f"is the A report's 'Elected' candidate in {same.mean():.2%}. "
+            f"Only in E: {only['elected_only']}; only in A: "
+            f"{only['candidates_only']}.",
+            mismatches=both.loc[
+                ~same, ["district", "block", "gram_panchayat", "winner", "elected_name"]
+            ].to_dict("records"),
+        )
+    )
+    res_same = both["reservation_raw"] == both["reservation_raw_a"]
+    out.append(
+        result(
+            "2025_reservation_same_in_both_reports",
+            "internal",
+            "pass" if res_same.all() else "fail",
+            f"Reservation code agrees between the E and A reports for "
+            f"{int(res_same.sum()):,} of {len(both):,} GPs.",
+            blocking=True,
+        )
+    )
+
+    c = cands.merge(
+        seats[["a_path", "a_locator", "total_valid_votes"]].dropna(),
+        left_on=["source_path", cands["source_locator"].str.split(",").str[0]],
+        right_on=["a_path", "a_locator"],
+    )
+    sums = c.groupby(["a_path", "a_locator"]).agg(
+        votes=("candidate_votes", "sum"), valid=("total_valid_votes", "first")
+    )
+    adds = (sums["votes"] == sums["valid"]).mean()
+    top = c.sort_values("candidate_votes", ascending=False).groupby(
+        ["a_path", "a_locator"]
+    )
+    first, second = top.nth(0), top.nth(1)
+    first = first.set_index(["a_path", "a_locator"])
+    second = second.set_index(["a_path", "a_locator"])["candidate_votes"]
+    contested = first[first["total_valid_votes"].gt(0)]
+    untied = contested[contested["candidate_votes"] > second.reindex(contested.index)]
+    top_elected = untied["elected"].mean()
+    out.append(
+        result(
+            "2025_elected_is_top_vote_getter",
+            "internal",
+            "pass" if top_elected >= 0.99 and adds >= 0.99 else "warn",
+            f"In {len(untied):,} contested GPs without a tie for first, the "
+            f"candidate marked Elected has the most votes in {top_elected:.2%}. "
+            f"Candidates' votes add up to the caption's valid votes in "
+            f"{adds:.2%} of {len(sums):,} GPs.",
+        )
+    )
+
+    key = ["district_id", "mandal_id", "gram_panchayat"]
+    dup = seats[seats.duplicated(key, keep=False)].sort_values(key)
+    out.append(
+        result(
+            "2025_key_unique",
+            "internal",
+            "pass" if dup.empty else "warn",
+            f"{dup[key].drop_duplicates().shape[0]} (district, mandal, GP) names "
+            f"appear more than once ({len(dup)} rows). GPs without a GP code: "
+            f"{int(seats['gp_code'].isna().sum())}. GPs the E report prints twice "
+            f"(repeat dropped): {int(seats['listed_twice'].sum())}.",
+            duplicate_rows=dup[[*key, "winner"]].to_dict("records"),
+        )
+    )
+
+    sec = sec_district_counts()
+    got = seats.groupby("district").size()
+    rows = []
+    for d, official in sorted(sec.items()):
+        rows.append(
+            {
+                "district": d,
+                "sec_table": official,
+                "seats": int(got.get(d, 0)),
+                "diff": int(got.get(d, 0)) - official,
+            }
+        )
+    table = pd.DataFrame(rows)
+    unmatched = sorted(set(got.index) - set(sec))
+    off = table[table["diff"].abs() > table["sec_table"] * 0.01]
+    out.append(
+        result(
+            "2025_district_counts_vs_sec_phase_table",
+            "external",
+            "pass" if off.empty and not unmatched else "warn",
+            f"GPs per district against the SEC's September phase table "
+            f"({sum(sec.values()):,} GPs): {len(off)} district(s) differ by more "
+            f"than 1%. Districts not in the table: {unmatched or 'none'}. "
+            f"Total {len(seats):,}.",
+            by_district=table.to_dict("records"),
+        )
+    )
+    n = len(seats)
+    posts = ref.TOTALS_2025["sarpanch_posts_notified"]["value"]
+    out.append(
+        result(
+            "2025_coverage_vs_notified",
+            "external",
+            "pass" if abs(n / posts - 1) <= 0.01 else "warn",
+            f"{n:,} GPs against {posts:,} sarpanch posts notified "
+            f"({n / posts:.2%}; the SEC's GP count is "
+            f"{ref.TOTALS_2025['gps_notified']['value']:,}); with a declared winner: "
+            f"{int(seats['result_declared'].sum()):,}.",
+            rows=n,
+        )
+    )
+
+    # GO 46 reserves half of each category's seats for women, rounded down.
+    # The data show the rounding happens within each mandal and category,
+    # which is why the statewide share is below 50%.
+    women = seats["woman_reserved"].mean()
+    cells = seats.groupby(["district_id", "mandal_id", "caste_reservation"])[
+        "woman_reserved"
+    ].agg(["sum", "size"])
+    floor = cells["sum"].eq(cells["size"] // 2)
+    bc = int(seats["caste_reservation"].eq("BC").sum())
+    out.append(
+        result(
+            "2025_women_and_category_shares",
+            "external",
+            "pass" if floor.mean() >= 0.95 else "warn",
+            f"Women's seats equal half the seats, rounded down, in "
+            f"{floor.mean():.1%} of {len(cells):,} mandal x category groups; "
+            f"statewide {women:.2%} of seats are reserved for women. BC seats "
+            f"{bc:,} of {n:,} ({bc / n:.2%}) against the SEC's reported "
+            f"{ref.BC_2025['seats']:,} of {ref.BC_2025['of']:,} "
+            f"({ref.BC_2025['share']:.2%}; {ref.BC_2025['source']}). Rule: "
+            f"{ref.WOMEN_STATUTE['source']}",
+            women_share=round(float(women), 4),
+            floor_rule_share=round(float(floor.mean()), 4),
+            off_rule=cells[~floor].reset_index().to_dict("records"),
+            bc_seats=bc,
+        )
+    )
+
+    e = pd.read_parquet(DATA / "2025/eenadu_results.parquet")
+    ours = seats.groupby("district").size()
+    theirs = e.groupby("district").size()
+    gap = (ours - theirs.reindex(ours.index)).dropna().astype(int)
+    out.append(
+        result(
+            "2025_district_counts_vs_eenadu",
+            "external",
+            "pass" if gap.abs().max() <= 0.01 * ours.max() else "warn",
+            f"GPs per district, SEC minus Eenadu's newspaper tables (independent "
+            f"source): {int((gap != 0).sum())} of {len(gap)} districts differ; "
+            f"largest gap {int(gap.abs().max())}. Totals: SEC {len(seats):,}, "
+            f"Eenadu {len(e):,}.",
+            by_district=gap[gap != 0].to_dict(),
+        )
+    )
+    return out
+
+
+def checks_eenadu():
+    seats = pd.read_parquet(DATA / "2025/eenadu_results.parquet")
     pages = pd.read_parquet(DATA / "2025/eenadu_page_counts.parquet")
     out = []
     n = len(seats)
@@ -213,7 +437,7 @@ def checks_2025():
     off = table[table["diff"].abs() > table["sec_table"] * 0.01]
     out.append(
         result(
-            "2025_district_counts_vs_sec",
+            "eenadu_district_counts_vs_sec",
             "external",
             "pass" if off.empty else "warn",
             f"Eenadu rows per district against the SEC phase table (31 districts, "
@@ -226,7 +450,7 @@ def checks_2025():
     refs = {k: v["value"] for k, v in ref.TOTALS_2025.items()}
     out.append(
         result(
-            "2025_coverage_vs_notified",
+            "eenadu_coverage_vs_notified",
             "external",
             "pass" if 0.98 <= n / refs["sarpanch_posts_notified"] <= 1.0 else "warn",
             f"{n:,} GP rows against {refs['sarpanch_posts_notified']:,} sarpanch "
@@ -238,7 +462,7 @@ def checks_2025():
     pend = pages[pages["declared"] != pages["total"]]
     out.append(
         result(
-            "2025_pages_internally_complete",
+            "eenadu_pages_internally_complete",
             "internal",
             "pass" if (pages["rows"] == pages["total"]).all() else "warn",
             f"Every page's row count equals its printed panchayat total: "
@@ -250,25 +474,12 @@ def checks_2025():
     dup = seats[seats.duplicated(key, keep=False)].sort_values(key)
     out.append(
         result(
-            "2025_key_unique",
+            "eenadu_key_unique",
             "internal",
             "pass" if dup.empty else "warn",
             f"{dup[key].drop_duplicates().shape[0]} (district, mandal, GP) keys "
             f"appear more than once ({len(dup)} rows).",
             duplicate_rows=dup[[*key, "winner", "source_locator"]].to_dict("records"),
-        )
-    )
-    out.append(
-        result(
-            "2025_women_and_category_shares",
-            "external",
-            "not_run",
-            "No 2025 reservation source is parsed: Eenadu prints none, the "
-            "commission's tables need an Indian connection, and the collectorate "
-            "statements found are scans. Reference figures to use once it is: "
-            f"BC {ref.BC_2025['seats']:,} of {ref.BC_2025['of']:,} "
-            f"({ref.BC_2025['share']:.2%}; {ref.BC_2025['source']}); women "
-            f"{ref.WOMEN_STATUTE['share']:.0%} ({ref.WOMEN_STATUTE['source']}).",
         )
     )
     declared = seats[seats["result_declared"]]
@@ -284,7 +495,7 @@ def checks_2025():
     }
     out.append(
         result(
-            "2025_backing_party_vs_siasat",
+            "eenadu_backing_party_vs_siasat",
             "external",
             "pass" if max(abs(g) for g in gaps.values()) <= 0.02 else "warn",
             f"Share of GPs by backing party, Eenadu minus Siasat: {gaps}. "
@@ -315,101 +526,70 @@ def group(district):
     return GROUP.get(district, district)
 
 
+def loose(text):
+    """Collapse what English spellings of Telugu names vary on.
+
+    Vowel length, aspiration, retroflex vs dental, v/w, s/sh, doubled letters.
+    """
+    t = fold(text)
+    for a, b in [
+        ("aa", "a"),
+        ("ee", "i"),
+        ("oo", "u"),
+        ("ii", "i"),
+        ("uu", "u"),
+        ("th", "t"),
+        ("dh", "d"),
+        ("bh", "b"),
+        ("kh", "k"),
+        ("gh", "g"),
+        ("ph", "p"),
+        ("ch", "c"),
+        ("sh", "s"),
+        ("w", "v"),
+        ("z", "j"),
+        ("y", "i"),
+        ("e", "i"),
+        ("o", "u"),
+    ]:
+        t = t.replace(a, b)
+    t = re.sub(r"(.)\1+", r"\1", t)
+    return re.sub(r"(m|n)(?=[kgcjtdpb])", "n", t)
+
+
 def link_preview():
-    """Share of 2025 GPs whose name matches a 2019 GP after transliteration."""
-    try:
-        from indic_transliteration import sanscript
-    except ImportError:
-        return result(
-            "link_preview_2019_2025",
-            "internal",
-            "not_run",
-            "indic-transliteration not installed (uv sync --all-groups).",
-        )
+    """Share of 2025 GPs whose name matches a 2019 GP in the same district group.
+
+    A preview for the 2019 -> 2025 link, not the link itself: names only, no
+    mandal, no one-to-one assignment.
+    """
     s19 = pd.read_parquet(DATA / "2019/sarpanch_results.parquet")
     s25 = pd.read_parquet(DATA / "2025/sarpanch_results.parquet")
-
-    def latin(text):
-        # HK marks Telugu's short e/o as è/ò; drop the accent, keep the vowel.
-        hk = sanscript.transliterate(text, sanscript.TELUGU, sanscript.HK)
-        bare = unicodedata.normalize("NFKD", hk)
-        return "".join(c for c in bare if not unicodedata.combining(c))
-
-    def loose(text):
-        # Collapse the distinctions English spellings of Telugu names drop:
-        # vowel length, aspiration, retroflex vs dental, v/w, s/sh.
-        t = fold(text)
-        for a, b in [
-            ("aa", "a"),
-            ("ee", "i"),
-            ("oo", "u"),
-            ("ii", "i"),
-            ("uu", "u"),
-            ("th", "t"),
-            ("dh", "d"),
-            ("bh", "b"),
-            ("kh", "k"),
-            ("gh", "g"),
-            ("ph", "p"),
-            ("ch", "c"),
-            ("sh", "s"),
-            ("w", "v"),
-            ("z", "j"),
-            ("y", "i"),
-            ("e", "i"),
-            ("o", "u"),
-        ]:
-            t = t.replace(a, b)
-        t = re.sub(r"(.)\1+", r"\1", t)
-        return re.sub(r"(m|n)(?=[kgcjtdpb])", "n", t)
-
-    d25 = s25.assign(
-        exact=s25["gram_panchayat"].map(latin).map(fold),
-        lo=s25["gram_panchayat"].map(latin).map(loose),
-    )
     s19 = s19.assign(district=s19["district"].map(group))
-    d25 = d25.assign(district=d25["district"].map(group))
-    n19 = set(zip(s19["district"], s19["gram_panchayat"].map(fold), strict=True))
-    l19 = set(zip(s19["district"], s19["gram_panchayat"].map(loose), strict=True))
-    l_any = set(s19["gram_panchayat"].map(loose))
-    exact = sum(
-        (d, g) in n19 for d, g in zip(d25["district"], d25["exact"], strict=True)
-    )
-    loose_d = sum(
-        (d, g) in l19 for d, g in zip(d25["district"], d25["lo"], strict=True)
-    )
-    loose_s = d25["lo"].isin(l_any).sum()
-    # Chance benchmark: the same rule against the 2019 names of the next
-    # district group in alphabetical order, which shares no GPs by design.
+    s25 = s25.assign(district=s25["district"].map(group))
+    exact19 = set(zip(s19["district"], s19["gram_panchayat"].map(fold), strict=True))
+    loose19 = set(zip(s19["district"], s19["gram_panchayat"].map(loose), strict=True))
+    pairs = list(zip(s25["district"], s25["gram_panchayat"], strict=True))
+    exact = sum((d, fold(g)) in exact19 for d, g in pairs)
+    near = sum((d, loose(g)) in loose19 for d, g in pairs)
+    # Chance benchmark: the same rule against the next district group's 2019
+    # names, which share no GPs by design.
     groups = sorted(set(s19["district"]))
     shift = dict(zip(groups, groups[1:] + groups[:1], strict=True))
-    chance = sum(
-        (shift.get(d, d), g) in l19
-        for d, g in zip(d25["district"], d25["lo"], strict=True)
-    )
-    n = len(d25)
-    d19 = set(s19["district"])
-    d25s = set(d25["district"])
+    chance = sum((shift.get(d, d), loose(g)) in loose19 for d, g in pairs)
+    n = len(pairs)
+    unmatched = sorted(set(s19["district"]) ^ set(s25["district"]))
     return result(
         "link_preview_2019_2025",
         "internal",
         "info",
-        f"2025 names are Telugu, 2019 names Latin, so a raw exact match is 0 by "
-        f"construction. After rule-based Telugu->Latin transliteration "
-        f"(indic-transliteration, HK scheme): exact folded match within the same "
-        f"district name {exact / n:.1%}; loose match (vowel length, aspiration, "
-        f"v/w, s/sh collapsed) within district {loose_d / n:.1%}; loose match "
-        f"anywhere in the state {loose_s / n:.1%}; loose match against a "
-        f"different district's 2019 names (chance benchmark) {chance / n:.1%}. "
-        f"Districts are compared as "
-        f"groups that absorb renames and splits (Mulugu and Narayanpet were "
-        f"carved out in Feb 2019 and the 2019 listing files them under their "
-        f"parents; Hanumakonda and Warangal swapped mandals in 2021). Mandals "
-        f"are not used: 2025 mandal names are Telugu and several mandals were "
-        f"created after 2019. Unmatched district groups: {sorted(d19 ^ d25s)}.",
+        f"2025 GP names found among 2019 GP names of the same district group: "
+        f"exact (folded) {exact / n:.1%}; loose (vowel length, aspiration, v/w, "
+        f"s/sh collapsed) {near / n:.1%}; loose against a different district's "
+        f"names (chance benchmark) {chance / n:.1%}. District groups absorb the "
+        f"2019 and 2021 reorganisations. Groups in one year only: {unmatched}.",
         exact_within_district=round(exact / n, 4),
-        loose_within_district=round(loose_d / n, 4),
-        loose_statewide=round(float(loose_s / n), 4),
+        loose_within_district=round(near / n, 4),
         loose_other_district=round(chance / n, 4),
     )
 
@@ -451,7 +631,7 @@ def raw_entries():
 
 
 def run_checks():
-    return checks_2019() + checks_2025() + [link_preview()]
+    return checks_2019() + checks_2025() + checks_eenadu() + [link_preview()]
 
 
 def verify():

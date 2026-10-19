@@ -14,31 +14,23 @@ Column names follow that repository's pooled schema.
 
 | | 2019 | 2025 |
 |---|---|---|
-| Seats | 12,018 of 12,728 notified (94%) | 12,727 of 12,728 notified; 12,674 with a declared result |
-| Reservation (caste + women) | yes, from the State Election Commission's (SEC) listing | **no.** Not in any source reachable from outside India |
-| Winner | yes (Latin script) | yes, as Eenadu printed it (Telugu script; mostly given names only) |
-| Source | SEC listing + Telangana Open Data candidate votes | **Eenadu** (newspaper) results tables, plus archived SEC notifications |
+| Seats | 12,018 of 12,728 notified (94%) | 12,735 GPs, the SEC's full count; 12,702 with a declared winner |
+| Reservation (caste + women) | yes, from the State Election Commission's (SEC) listing | yes, from the SEC's results reports |
+| Winner | yes (Latin script) | yes (Latin script), plus every candidate's votes |
+| Source | SEC listing + Telangana Open Data candidate votes | SEC results reports (tsec.gov.in, collected through a VM in Mumbai), checked against Eenadu's newspaper tables |
 
-The 2025 file supports the "who won" half of the planned 2019→2025 analysis. It
-does not support the "was the 2025 seat open" half. The SEC's own per-GP
-results, with reservation, are at `https://tsec.gov.in/knowPRRural.do`, and
-that site refuses connections from outside India.
-
-Both SEC collectors were run on 2026-10-18 through an SSH tunnel to a Google
-Cloud VM in Mumbai (`gcloud compute ssh <vm> -- -N -D 1080`, then
+The SEC's site refuses connections from outside India. Both SEC collectors
+were run on 2026-10-18 and 2026-10-19 through an SSH tunnel to a Google Cloud
+VM in Mumbai (`gcloud compute ssh <vm> -- -N -D 1080`, then
 `HTTPS_PROXY=socks5h://localhost:1080 make collect-tsec` and
 `make collect-tsec-docs`; PySocks is in the `collect` dependency group):
 
 - [collect/tsec.py](src/local_elections_telangana/collect/tsec.py): the 2025
-  elected and all-candidates reports, per district and per mandal. The district
-  reports hold 12,697 elected GPs; the mandal reports 12,181, because the site's
-  mandal list omits some mandals.
+  elected and all-candidates reports, per district and per mandal, and the
+  form's mandal and GP lists.
 - [collect/tsec_docs.py](src/local_elections_telangana/collect/tsec_docs.py):
   106 result, reservation and report documents (sarpanch winners for 1995, 2001,
   2006, 2013 and 2019; reservations for 2013 and 2019; election reports).
-
-The raw responses (about 1.8 GB) are not yet committed; where they will live is
-undecided.
 
 ## Data
 
@@ -46,7 +38,9 @@ undecided.
 |---|---:|---|
 | [2019/sarpanch_results.parquet](data/2019/sarpanch_results.parquet) | 12,018 | an elected sarpanch and their seat's reservation |
 | [2019/sarpanch_candidates.parquet](data/2019/sarpanch_candidates.parquet) | 35,121 | a contesting candidate's votes (12,137 GPs) |
-| [2025/sarpanch_results.parquet](data/2025/sarpanch_results.parquet) | 12,727 | a GP in the December 2025 election and its winner |
+| [2025/sarpanch_results.parquet](data/2025/sarpanch_results.parquet) | 12,735 | a GP in the December 2025 election: reservation, winner, votes (SEC) |
+| [2025/sarpanch_candidates.parquet](data/2025/sarpanch_candidates.parquet) | 39,207 | a contesting candidate's votes (SEC) |
+| [2025/eenadu_results.parquet](data/2025/eenadu_results.parquet) | 12,727 | a GP and its winner as Eenadu printed them (Telugu) |
 | [2025/eenadu_mandal_counts.parquet](data/2025/eenadu_mandal_counts.parquet) | 563 | a mandal block on an Eenadu page, with its printed counts |
 | [2025/eenadu_page_counts.parquet](data/2025/eenadu_page_counts.parquet) | 93 | an Eenadu page (district × phase), with its printed counts |
 
@@ -61,7 +55,7 @@ import pandas as pd
 s19 = pd.read_parquet("data/2019/sarpanch_results.parquet")
 s25 = pd.read_parquet("data/2025/sarpanch_results.parquet")
 s19.groupby("caste_reservation")["woman_reserved"].mean()
-s25[s25["result_declared"]].groupby("backing_party").size()
+s25.groupby(["caste_reservation", "woman_reserved"]).size()
 ```
 
 ## Reproducing

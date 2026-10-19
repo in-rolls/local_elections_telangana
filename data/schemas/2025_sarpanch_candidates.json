@@ -1,0 +1,147 @@
+{
+ "name": "2025_sarpanch_candidates",
+ "title": "Telangana 2025 sarpanch candidates, from the commission's All Contested report",
+ "description": "One row per candidate per GP in the per-mandal A reports.",
+ "primaryKey": [
+  "source_path",
+  "source_locator"
+ ],
+ "fields": [
+  {
+   "name": "state",
+   "type": "string",
+   "arrowType": "string",
+   "description": "State",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "Telangana"
+    ]
+   }
+  },
+  {
+   "name": "year",
+   "type": "integer",
+   "arrowType": "int16",
+   "description": "Election year",
+   "constraints": {
+    "required": true,
+    "enum": [
+     2025
+    ]
+   }
+  },
+  {
+   "name": "district",
+   "type": "string",
+   "arrowType": "string",
+   "description": "District",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "block",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Mandal",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "gram_panchayat",
+   "type": "string",
+   "arrowType": "string",
+   "description": "GP name as printed in the caption",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "district_id",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's district code",
+   "constraints": {
+    "required": true,
+    "pattern": "\\d{2}"
+   }
+  },
+  {
+   "name": "mandal_id",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's mandal code; mostly two digits, but some newer mandals carry a long code (Bheemaram, Jagtial: 302152)",
+   "constraints": {
+    "required": true,
+    "pattern": "\\d+"
+   }
+  },
+  {
+   "name": "serial",
+   "type": "integer",
+   "arrowType": "int32",
+   "description": "Sl No. in the report",
+   "constraints": {
+    "required": true,
+    "minimum": 1
+   }
+  },
+  {
+   "name": "candidate",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Candidate as printed",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "candidate_votes",
+   "type": "integer",
+   "arrowType": "int32",
+   "description": "Votes secured",
+   "constraints": {
+    "required": true,
+    "minimum": 0
+   }
+  },
+  {
+   "name": "elected",
+   "type": "boolean",
+   "arrowType": "bool",
+   "description": "Marked Elected",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_path",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Committed raw file the row was read from (gzipped as .gz)",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_url",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Endpoint the raw file was fetched from (POST form)",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_locator",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Position in the raw file",
+   "constraints": {
+    "required": true
+   }
+  }
+ ]
+}
