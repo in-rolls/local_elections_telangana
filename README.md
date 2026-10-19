@@ -22,10 +22,23 @@ Column names follow that repository's pooled schema.
 The 2025 file supports the "who won" half of the planned 2019→2025 analysis. It
 does not support the "was the 2025 seat open" half. The SEC's own per-GP
 results, with reservation, are at `https://tsec.gov.in/knowPRRural.do`, and
-that site refuses connections from outside India. `make collect-tsec` is
-written for someone on an Indian connection to run (see
-[collect/tsec.py](src/local_elections_telangana/collect/tsec.py)). It has not
-been run yet, so treat its first run as a test.
+that site refuses connections from outside India.
+
+Both SEC collectors were run on 2026-10-18 through an SSH tunnel to a Google
+Cloud VM in Mumbai (`gcloud compute ssh <vm> -- -N -D 1080`, then
+`HTTPS_PROXY=socks5h://localhost:1080 make collect-tsec` and
+`make collect-tsec-docs`; PySocks is in the `collect` dependency group):
+
+- [collect/tsec.py](src/local_elections_telangana/collect/tsec.py): the 2025
+  elected and all-candidates reports, per district and per mandal. The district
+  reports hold 12,697 elected GPs; the mandal reports 12,181, because the site's
+  mandal list omits some mandals.
+- [collect/tsec_docs.py](src/local_elections_telangana/collect/tsec_docs.py):
+  106 result, reservation and report documents (sarpanch winners for 1995, 2001,
+  2006, 2013 and 2019; reservations for 2013 and 2019; election reports).
+
+The raw responses (about 1.8 GB) are not yet committed; where they will live is
+undecided.
 
 ## Data
 
