@@ -1,0 +1,72 @@
+{
+ "purpose": "2019 to 2025 sarpanch seat links, precision first. A link states that the commission's code and/or the GP name agree, not that boundaries are unchanged.",
+ "matcher": {
+  "preclink": "1.2.0",
+  "rapidfuzz": "3.14.6",
+  "name_threshold": 0.95,
+  "code_name_floor": 0.8,
+  "margin": 0.05
+ },
+ "inputs": {
+  "data/2019/sarpanch_results.parquet": "5f3feeb7f61a0dccc1203ef4295de9d2567163339648e702c592ca022328d720",
+  "data/2019/sarpanch_candidates.parquet": "0b0039135a3fc586365857114c16940721290718f66bc1f4b2d8611882eb7659",
+  "data/2025/sarpanch_results.parquet": "ebfa1647820de6cedb74780bdc67e8a4323c24c9f0ec663ffe6bd421814f7c88"
+ },
+ "code_sha256": "9a8261cfea1b91ecb6ef79a3b49cc2f34c814244251c679a66c14b5edc5f88f7",
+ "output": {
+  "path": "gp_2019_2025.parquet",
+  "rows": 11464,
+  "sha256": "5aadd70d572176c5182d70e2e1fcf9b449b49fa1cf96f2cff67b474ec43e8ff9"
+ },
+ "summary": {
+  "seats_2019": 12018,
+  "seats_2025": 12735,
+  "linked": 11464,
+  "by_basis": {
+   "code_and_name": 9463,
+   "code_only": 1647,
+   "name_only": 354
+  },
+  "conflicts_dropped": 9,
+  "code_route": {
+   "seats_2019_with_code": 12003,
+   "pairs": 11116,
+   "code_matches_rejected_for_name": 285
+  },
+  "name_route": {
+   "pairs": 9820,
+   "2019_name_repeated_in_group": 1408,
+   "2025_name_repeated_in_group": 1586
+  },
+  "name_route_bands": {
+   "[0.75, 0.8)": {
+    "judged": 2,
+    "agree": 0.0
+   },
+   "[0.8, 0.85)": {
+    "judged": 16,
+    "agree": 0.9375
+   },
+   "[0.85, 0.9)": {
+    "judged": 64,
+    "agree": 0.9531
+   },
+   "[0.9, 0.95)": {
+    "judged": 113,
+    "agree": 0.9646
+   },
+   "[0.95, 1.0)": {
+    "judged": 9464,
+    "agree": 0.9998
+   }
+  },
+  "routes_agree_where_both_link_the_2019_gp": 0.9997,
+  "winner_name_shared": {
+   "linked": 0.0099,
+   "code_and_name": 0.01,
+   "code_only": 0.0079,
+   "name_only": 0.0169,
+   "random_pairs_in_group": 0.0003
+  }
+ }
+}

@@ -13,7 +13,9 @@ dependencies = [
     "frictionless>=5.21",
     "pandas>=2.3",
     "pandera[io]>=0.34",
+    "preclink>=1.2.0",
     "pyarrow>=21",
+    "rapidfuzz>=3.9",
     "requests>=2.32",
 ]
 

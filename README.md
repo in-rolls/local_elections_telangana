@@ -58,11 +58,17 @@ s19.groupby("caste_reservation")["woman_reserved"].mean()
 s25.groupby(["caste_reservation", "woman_reserved"]).size()
 ```
 
+## Links between elections
+
+[data/linkage/](data/linkage/) links 11,464 of the 12,018 2019 seats to their
+2025 seats, by the commission's codes and by GP names, and says how well the
+two agree.
+
 ## Reproducing
 
 ```
 make sync      # uv environment
-make data      # parse the committed raw files, rebuild MANIFEST.json and the checks
+make data      # parse the committed raw files, link 2019 to 2025, rebuild MANIFEST.json and the checks
 make check     # ruff + hash and check verification
 make collect   # network: fetch anything missing from data/raw/fetch_log.csv
 ```
