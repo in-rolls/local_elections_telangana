@@ -1,7 +1,7 @@
 PY = .venv/bin/python
 RUFF = .venv/bin/ruff
 
-.PHONY: sync collect collect-tsec data manifest lint verify check
+.PHONY: sync collect collect-tsec collect-tsec-docs data manifest lint verify check
 
 sync:
 	uv sync --frozen --all-groups
@@ -13,6 +13,9 @@ collect:
 # needs an Indian connection; never run from here (see collect/tsec.py)
 collect-tsec:
 	$(PY) -m local_elections_telangana.collect.tsec
+
+collect-tsec-docs:
+	$(PY) -m local_elections_telangana.collect.tsec_docs
 
 data:
 	$(PY) -m local_elections_telangana.parse.y2019

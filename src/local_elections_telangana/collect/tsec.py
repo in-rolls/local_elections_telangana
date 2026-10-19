@@ -1,100 +1,255 @@
 """Collect the commission's own 2025 sarpanch results. Needs an Indian connection.
 
-tsec.gov.in refuses TCP connections from outside India (all three addresses it
-resolves to time out; checked 2026-10-18 from the US). This collector has
-therefore NOT been run. It is written against the form on
-https://tsec.gov.in/knowPRRural.do as archived by the Internet Archive on
-2025-11-17 and 2026-03-09, and the first run should be watched: the response
-layout is assumed, not seen.
+tsec.gov.in refuses TCP connections from outside India (checked 2026-10-18:
+it answers an Indian probe and times out from 35 other countries). Run this
+from India, or through a proxy there, e.g. an SSH tunnel to a VM in
+asia-south1 with HTTPS_PROXY=socks5h://localhost:1080 (needs PySocks).
 
-The 2019 elected-sarpanch file in this repository has exactly the columns this
-page's "Only Elected Candidates" report prints, which is why it is the target.
+The form is https://tsec.gov.in/knowPRRural.do ("Know your Public
+Representative - Rural"). Its live JavaScript (read 2026-10-18) uses the
+"...new" request modes; the older modes, as in the 2025 archived copy, return
+an empty table for 2025. Flow:
 
-Flow, as the page's own JavaScript does it:
-1. GET knowPRRural.do -> session cookie and Struts token.
-2. POST knowPRRural.do?mode=getElectionFor&year_id=2025&knowYour=S -> <option>s;
-   keep the one naming the 2025 ordinary gram panchayat election.
-3. For each district, POST knowPRRural.se with mode=getSarpanchDetails and
-   typeOfReport E (elected only) and A (all contested candidates). Mandal and
-   GP are left at 0, which the page's JavaScript allows for sarpanch reports.
+1. GET knowPRRural.do -> session cookie, Struts token, district list.
+2. POST knowPRRural.do?mode=getElectionFornew&year_id=2025&knowYour=S -> the
+   election id ("ORDINARY ELECTIONS TO GRAM PANCHAYATHS, 2025").
+3. GP frame: per district getMandal, per mandal getGramPanchayat. These are the
+   dropdowns' GP lists, kept as an independent count to check the reports.
+4. Reports: per district, POST knowPRRural.se mode=getSarpanchDetailsnew with
+   typeOfReport E (elected: GP, reservation, winner) and A (all candidates
+   with votes, plus valid/rejected/NOTA votes per GP). A district whose report
+   has fewer GPs than its frame is fetched again mandal by mandal.
+
+Every saved response is logged in data/raw/fetch_log.csv (sha256, time) and a
+path already logged is not fetched again, so a rerun resumes. Progress and
+warnings go to data/raw/2025/tsec/collect.log.
 
 Run: python -m local_elections_telangana.collect.tsec
 """
 
+import logging
 import re
 import time
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
-from local_elections_telangana.collect.fetch import HEADERS, logged, save
+from local_elections_telangana.collect.fetch import HEADERS, ROOT, logged, save
 
 BASE = "https://tsec.gov.in"
-# knowPRRural.do district ids; 21 Medchal-Malkajgiri and 22 Hyderabad held no
-# 2025 gram panchayat election.
-DISTRICTS = [f"{i:02d}" for i in range(1, 34) if i not in (21, 22)]
+OUT = "data/raw/2025/tsec"
+YEAR = "2025"
 TOKEN = re.compile(r'name="org\.apache\.struts\.taglib\.html\.TOKEN" value="(\w+)"')
-OPTION = re.compile(r'<option value="([^"]+)"[^>]*>([^<]+)</option>')
+OPTION = re.compile(r'<option value="([^"]*)"[^>]*>([^<]*)</option>')
+DISTRICT_SELECT = re.compile(r'id="district_id"[^>]*>(.*?)</select>', re.S)
+# Data rows of the elected report start with a serial number; the
+# all-candidates report opens each GP with a "Gram Panchayat :" caption row.
+ELECTED_ROW = re.compile(r"<tr[^>]*>\s*<td[^>]*>\s*\d+\s*</td>")
+CANDIDATE_GP = re.compile(r"Gram Panchayat\s*:")
+
+log = logging.getLogger("tsec")
 
 
-def token(html):
-    found = TOKEN.search(html)
-    if not found:
-        raise RuntimeError("no Struts token on the page; the form has changed")
-    return found.group(1)
-
-
-def main(delay=3.0):
+def session():
     s = requests.Session()
     s.headers.update(HEADERS)
-    page = s.get(f"{BASE}/knowPRRural.do", timeout=60)
-    page.raise_for_status()
-    tok = token(page.text)
-    opts = s.post(
-        f"{BASE}/knowPRRural.do?mode=getElectionFor&year_id=2025&knowYour=S",
-        timeout=60,
-    ).text
-    save(
-        opts.encode(),
-        "data/raw/2025/tsec/election_options.html",
-        f"{BASE}/knowPRRural.do?mode=getElectionFor&year_id=2025&knowYour=S",
-        "tsec.gov.in",
-        200,
+    retry = Retry(
+        total=6,
+        connect=6,
+        read=6,
+        backoff_factor=5,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=None,  # retry POSTs too: every request here only reads
+        respect_retry_after_header=True,
     )
-    chosen = [
-        (v, t) for v, t in OPTION.findall(opts) if "GRAM" in t.upper() and v != "0"
-    ]
-    if len(chosen) != 1:
-        raise RuntimeError(f"expected one 2025 GP election option, got {chosen}")
-    election = chosen[0][0]
-    done = logged()
-    for report in ("E", "A"):
-        for district in DISTRICTS:
-            rel = f"data/raw/2025/tsec/report_{report}/district_{district}.html"
-            if rel in done:
-                continue
-            form = {
-                "org.apache.struts.taglib.html.TOKEN": tok,
-                "mode": "getSarpanchDetails",
-                "property(knowYour)": "S",
-                "property(year)": "2025",
-                "property(electionFor)": election,
-                "property(district_id)": district,
-                "property(mandal_id)": "0",
-                "property(mptc)": "0",
-                "property(gpcode)": "0",
-                "property(typeOfReport)": report,
-            }
-            resp = s.post(f"{BASE}/knowPRRural.se", data=form, timeout=120)
-            resp.raise_for_status()
-            url = (
-                f"{BASE}/knowPRRural.se?mode=getSarpanchDetails&year=2025"
-                f"&electionFor={election}&district_id={district}"
-                f"&typeOfReport={report}"
-            )
+    s.mount("https://", HTTPAdapter(max_retries=retry))
+    return s
+
+
+def options(html):
+    return [(v, t.strip()) for v, t in OPTION.findall(html) if v not in ("", "0")]
+
+
+class Client:
+    """One browser-like session: cookie, rotating Struts token, polite delay."""
+
+    def __init__(self, delay):
+        self.delay = delay
+        self.start()
+
+    def start(self):
+        self.s = session()
+        page = self.s.get(f"{BASE}/knowPRRural.do", timeout=120)
+        page.raise_for_status()
+        self.page = page.text
+        found = TOKEN.search(page.text)
+        if not found:
+            raise RuntimeError("no Struts token on the form; the page has changed")
+        self.token = found.group(1)
+
+    def ajax(self, query):
+        resp = self.s.post(f"{BASE}/knowPRRural.do?{query}", timeout=120)
+        resp.raise_for_status()
+        time.sleep(self.delay)
+        return resp
+
+    def report(self, election, district, mandal, kind):
+        form = {
+            "org.apache.struts.taglib.html.TOKEN": self.token,
+            "mode": "getSarpanchDetailsnew",
+            "property(knowYour)": "S",
+            "property(year)": YEAR,
+            "property(electionFor)": election,
+            "property(district_id)": district,
+            "property(mandal_id)": mandal,
+            "property(mptc)": "0",
+            "property(gpcode)": "0",
+            "property(typeOfReport)": kind,
+        }
+        resp = self.s.post(f"{BASE}/knowPRRural.se", data=form, timeout=300)
+        resp.raise_for_status()
+        found = TOKEN.search(resp.text)
+        if found:
+            self.token = found.group(1)
+        time.sleep(self.delay)
+        return resp
+
+
+def gp_count(html, kind):
+    pattern = ELECTED_ROW if kind == "E" else CANDIDATE_GP
+    return len(pattern.findall(html))
+
+
+def read(rel):
+    return (ROOT / rel).read_text(encoding="utf-8", errors="replace")
+
+
+def cached(client, query, rel, done):
+    if rel not in done:
+        resp = client.ajax(query)
+        save(
+            resp.content,
+            rel,
+            f"{BASE}/knowPRRural.do?{query}",
+            "tsec.gov.in (POST)",
+            200,
+        )
+        done[rel] = True
+    return read(rel)
+
+
+def fetch_report(client, election, district, mandal, kind, rel, done, attempts=3):
+    """Fetch one report; a page without the results grid is retried in a new session."""
+    if rel in done:
+        return read(rel)
+    url = (
+        f"{BASE}/knowPRRural.se?mode=getSarpanchDetailsnew&year={YEAR}"
+        f"&electionFor={election}&district_id={district}&mandal_id={mandal}"
+        f"&typeOfReport={kind}"
+    )
+    nogrid = rel.replace(".html", ".nogrid.html")
+    if nogrid in done:
+        return ""
+    for attempt in range(1, attempts + 1):
+        resp = client.report(election, district, mandal, kind)
+        if 'id="GridView1"' in resp.text:
             save(resp.content, rel, url, "tsec.gov.in (POST)", resp.status_code)
-            # Struts rotates the token per response
-            tok = token(resp.text) if TOKEN.search(resp.text) else tok
-            time.sleep(delay)
+            done[rel] = True
+            return resp.text
+        log.warning("%s: no results grid (attempt %d); new session", rel, attempt)
+        if attempt < attempts:
+            time.sleep(30 * attempt)
+            client.start()
+    # A mandal with no GPs (an urban mandal) legitimately has no table. Keep the
+    # page as evidence under its own name so the parser can tell it apart.
+    save(resp.content, nogrid, url, "tsec.gov.in (POST)", resp.status_code)
+    done[nogrid] = True
+    log.warning("%s: saved without a results grid", nogrid)
+    return ""
+
+
+def collect_district(client, election, district, name, done):
+    q = f"mode=getMandal&district_id={district}"
+    mandals = options(cached(client, q, f"{OUT}/frame/mandals_{district}.html", done))
+    frame = 0
+    for mandal, _ in mandals:
+        q = f"mode=getGramPanchayat&district_id={district}&mandal_id={mandal}"
+        frame += len(
+            options(
+                cached(client, q, f"{OUT}/frame/gps_{district}_{mandal}.html", done)
+            )
+        )
+    row = {"district": district, "name": name, "mandals": len(mandals), "frame": frame}
+    # The district report names no mandal, and GP names repeat across mandals
+    # within a district, so the mandal reports are what key a GP. The district
+    # report is kept as an independent count of the same GPs.
+    for kind in ("E", "A"):
+        rel = f"{OUT}/report_{kind}/district_{district}.html"
+        whole = gp_count(
+            fetch_report(client, election, district, "0", kind, rel, done), kind
+        )
+        parts = 0
+        for mandal, _ in mandals:
+            rel = f"{OUT}/report_{kind}/by_mandal/district_{district}_{mandal}.html"
+            parts += gp_count(
+                fetch_report(client, election, district, mandal, kind, rel, done),
+                kind,
+            )
+        if parts != whole:
+            log.warning(
+                "%s %s: mandal reports %d GPs, district report %d",
+                name,
+                kind,
+                parts,
+                whole,
+            )
+        row[kind] = parts
+        row[f"{kind}_district_report"] = whole
+    return row
+
+
+def main(delay=2.0):
+    (ROOT / OUT).mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler(ROOT / OUT / "collect.log"),
+        ],
+    )
+    done = logged()
+    client = Client(delay)
+    districts = [
+        (d, n)
+        for d, n in options(DISTRICT_SELECT.search(client.page).group(1))
+        if d.isdigit()
+    ]
+    log.info("%d districts on the form", len(districts))
+
+    q = f"mode=getElectionFornew&year_id={YEAR}&knowYour=S"
+    opts = options(cached(client, q, f"{OUT}/election_options.html", done))
+    chosen = [v for v, t in opts if "GRAM PANCHAYAT" in t.upper()]
+    if len(chosen) != 1:
+        raise RuntimeError(f"expected one {YEAR} GP election option, got {opts}")
+    election = chosen[0]
+    log.info("election id %s", election)
+
+    summary = []
+    for district, name in districts:
+        row = collect_district(client, election, district, name, done)
+        log.info("%s", row)
+        summary.append(row)
+    log.info(
+        "totals: frame %d, elected report %d, all-candidates report %d",
+        sum(r["frame"] for r in summary),
+        sum(r["E"] for r in summary),
+        sum(r["A"] for r in summary),
+    )
+    for r in summary:
+        if r["E"] != r["E_district_report"] or r["A"] != r["A_district_report"]:
+            log.warning("mandal and district reports disagree %s", r)
 
 
 if __name__ == "__main__":

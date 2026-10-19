@@ -21,6 +21,9 @@ Repository = "https://github.com/in-rolls/local_elections_telangana"
 Issues = "https://github.com/in-rolls/local_elections_telangana/issues"
 
 [dependency-groups]
+collect = [
+    "pysocks>=1.7.1",
+]
 dev = ["ruff>=0.14"]
 
 [tool.ruff]
