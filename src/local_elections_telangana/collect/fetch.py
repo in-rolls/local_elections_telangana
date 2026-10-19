@@ -52,9 +52,22 @@ def record(rel, url, source, status):
         )
 
 
+def contained(rel):
+    """ROOT/rel, refusing any path that resolves outside data/raw/.
+
+    Local names are built from text the server returns (option values, document
+    paths), so a hostile or malformed response must not be able to write
+    anywhere else.
+    """
+    path = (ROOT / rel).resolve()
+    if not path.is_relative_to(RAW.resolve()):
+        raise ValueError(f"refusing to write outside data/raw/: {rel!r}")
+    return path
+
+
 def save(content, rel, url, source, status):
     """Write a response body obtained some other way (e.g. a POST) and log it."""
-    path = ROOT / rel
+    path = contained(rel)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(content)
     record(rel, url, source, status)
@@ -63,7 +76,7 @@ def save(content, rel, url, source, status):
 
 def fetch(url, rel, source, session=None, delay=2.0, retries=3, timeout=60):
     """Save url to ROOT/rel unless already logged; return the local path."""
-    path = ROOT / rel
+    path = contained(rel)
     if rel in logged() and path.exists():
         return path
     session = session or requests.Session()

@@ -68,7 +68,8 @@ def session():
 
 
 def options(html):
-    return [(v, t.strip()) for v, t in OPTION.findall(html) if v not in ("", "0")]
+    """The dropdown's (id, label) pairs. Ids become file names, so only digits."""
+    return [(v, t.strip()) for v, t in OPTION.findall(html) if v.isdigit() and v != "0"]
 
 
 class Client:
