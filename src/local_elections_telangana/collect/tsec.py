@@ -44,6 +44,7 @@ YEAR = "2025"
 TOKEN = re.compile(r'name="org\.apache\.struts\.taglib\.html\.TOKEN" value="(\w+)"')
 OPTION = re.compile(r'<option value="([^"]*)"[^>]*>([^<]*)</option>')
 DISTRICT_SELECT = re.compile(r'id="district_id"[^>]*>(.*?)</select>', re.S)
+MANDAL_SELECT = re.compile(r'id="mandal_id"[^>]*>(.*?)</select>', re.S)
 # Data rows of the elected report start with a serial number; the
 # all-candidates report opens each GP with a "Gram Panchayat :" caption row.
 ELECTED_ROW = re.compile(r"<tr[^>]*>\s*<td[^>]*>\s*\d+\s*</td>")
@@ -177,9 +178,23 @@ def fetch_report(client, election, district, mandal, kind, rel, done, attempts=3
     return ""
 
 
+def report_mandals(html):
+    """The (id, label) pairs in a report page's own mandal dropdown."""
+    found = MANDAL_SELECT.search(html)
+    return options(found.group(1)) if found else []
+
+
 def collect_district(client, election, district, name, done):
     q = f"mode=getMandal&district_id={district}"
     mandals = options(cached(client, q, f"{OUT}/frame/mandals_{district}.html", done))
+    # getMandal omits mandals created after 2019 (37 statewide, checked
+    # 2026-10-19); the report page's own dropdown lists them. Read the
+    # district report first and add its mandals, so their GPs get a mandal
+    # report too.
+    rel = f"{OUT}/report_E/district_{district}.html"
+    page = fetch_report(client, election, district, "0", "E", rel, done)
+    known = {m for m, _ in mandals}
+    mandals += [(m, n) for m, n in report_mandals(page) if m not in known]
     frame = 0
     for mandal, _ in mandals:
         q = f"mode=getGramPanchayat&district_id={district}&mandal_id={mandal}"
