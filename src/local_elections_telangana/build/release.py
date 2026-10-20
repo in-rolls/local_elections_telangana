@@ -31,6 +31,7 @@ MANIFEST = DATA / "MANIFEST.json"
 OUTPUTS = [
     "2019/sarpanch_results.parquet",
     "2019/sarpanch_candidates.parquet",
+    "2019/ward_results.parquet",
     "2025/sarpanch_results.parquet",
     "2025/sarpanch_candidates.parquet",
     "2025/eenadu_results.parquet",
@@ -154,6 +155,32 @@ def checks_2019():
             "differences between the two releases.",
             compared=len(j),
             agree=round(float(agree), 4),
+        )
+    )
+    wards = pd.read_parquet(DATA / "2019/ward_results.parquet")
+    n = len(wards)
+    out.append(
+        result(
+            "2019_ward_coverage_vs_notified",
+            "external",
+            "warn",
+            f"{n:,} ward members against {ref.WARDS_2019['value']:,} ward seats "
+            f"({n / ref.WARDS_2019['value']:.1%}); the listing covers part of the "
+            f"state. Source: {ref.WARDS_2019['source']}",
+            rows=n,
+        )
+    )
+    key = ["district", "block", "gram_panchayat", "ward_no"]
+    dup = wards.duplicated(key, keep=False)
+    women = wards["woman_reserved"].mean()
+    out.append(
+        result(
+            "2019_ward_key_and_women_share",
+            "internal",
+            "pass" if not dup.any() and 0.45 <= women <= 0.55 else "warn",
+            f"(district, mandal, GP, ward) repeats on {int(dup.sum())} rows; "
+            f"{women:.2%} of wards reserved for women; "
+            f"{int(wards['unopposed'].sum()):,} filled unanimously.",
         )
     )
     return out
@@ -623,9 +650,14 @@ def raw_entries():
     log = ROOT / "data/raw/fetch_log.csv"
     with log.open(encoding="utf-8") as fh:
         fetched = list(csv.DictReader(fh))
+    # Files held rather than fetched: copied from in-rolls/local_elections,
+    # where they were committed without a fetch record.
+    logged = {row["path"] for row in fetched}
     held = [
-        {"path": f"data/raw/2019/{p.name}", "sha256": sha256(p)}
-        for p in sorted((DATA / "raw/2019").glob("*.csv"))
+        {"path": str(p.relative_to(ROOT)), "sha256": sha256(p)}
+        for folder in ("raw/2019", "raw/urban", "raw/docs")
+        for p in sorted((DATA / folder).rglob("*"))
+        if p.is_file() and str(p.relative_to(ROOT)) not in logged
     ]
     return fetched, held
 

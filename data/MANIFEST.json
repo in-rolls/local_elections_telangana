@@ -172,6 +172,93 @@
    ]
   },
   {
+   "file": "2019/ward_results.parquet",
+   "sha256": "47bf9050e6b36655af1ebfe16acce0cbc5c95fda9247dd640f72965b53c5875a",
+   "rows": 49823,
+   "schema": [
+    {
+     "name": "state",
+     "type": "large_string"
+    },
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "district",
+     "type": "large_string"
+    },
+    {
+     "name": "block",
+     "type": "large_string"
+    },
+    {
+     "name": "gram_panchayat",
+     "type": "large_string"
+    },
+    {
+     "name": "ward_no",
+     "type": "large_string"
+    },
+    {
+     "name": "tier",
+     "type": "large_string"
+    },
+    {
+     "name": "tier_local",
+     "type": "large_string"
+    },
+    {
+     "name": "reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "caste_reservation",
+     "type": "large_string"
+    },
+    {
+     "name": "woman_reserved",
+     "type": "int8"
+    },
+    {
+     "name": "reservation_raw",
+     "type": "large_string"
+    },
+    {
+     "name": "winner",
+     "type": "large_string"
+    },
+    {
+     "name": "winner_basis",
+     "type": "large_string"
+    },
+    {
+     "name": "party",
+     "type": "large_string"
+    },
+    {
+     "name": "unopposed",
+     "type": "int8"
+    },
+    {
+     "name": "script",
+     "type": "large_string"
+    },
+    {
+     "name": "source_path",
+     "type": "large_string"
+    },
+    {
+     "name": "source_url",
+     "type": "large_string"
+    },
+    {
+     "name": "source_locator",
+     "type": "large_string"
+    }
+   ]
+  },
+  {
    "file": "2025/sarpanch_results.parquet",
    "sha256": "ebfa1647820de6cedb74780bdc67e8a4323c24c9f0ec663ffe6bd421814f7c88",
    "rows": 12735,
@@ -20770,6 +20857,33 @@
    "bytes": "88333",
    "status": "200",
    "fetched_at_utc": "2026-10-19T22:31:41Z"
+  },
+  {
+   "path": "data/raw/labels/lokdhaba_telangana_ae_2014.csv",
+   "url": "https://data.opencity.in/dataset/d04849f0-e55c-4821-b857-b85746cbc773/resource/bd8a598d-8d62-475e-9025-b30293321e11/download/0880930f-ad89-47cb-8501-1e9720885752.csv",
+   "source": "data.opencity.in (Lok Dhaba / ECI mirror)",
+   "sha256": "f70d4763f164e1f4c99f9aae9eaa476706f8b15763abf885d96d1b4edb3c931e",
+   "bytes": "430711",
+   "status": "200",
+   "fetched_at_utc": "2026-10-20T02:24:28Z"
+  },
+  {
+   "path": "data/raw/labels/lokdhaba_telangana_ae_2018.csv",
+   "url": "https://data.opencity.in/dataset/6b406b78-2605-4815-810d-e2e5be19bd92/resource/bb8608e9-e043-4c9c-8433-ea1e843cbcf2/download/46f8cd87-a546-4301-8eaa-de4e871d1e49.csv",
+   "source": "data.opencity.in (Lok Dhaba / ECI mirror)",
+   "sha256": "4ee63542c04fb683a34f63d908be56a54791ae7eab6123f584e2c6065ddc7ede",
+   "bytes": "526335",
+   "status": "200",
+   "fetched_at_utc": "2026-10-20T02:24:30Z"
+  },
+  {
+   "path": "data/raw/labels/eci_telangana_ae_2023_detailed_results.xlsx",
+   "url": "https://data.opencity.in/dataset/62ad1510-22c4-4f9f-a22c-aa5391ec89b6/resource/3632e39e-63c6-4d2f-b240-5decb915f4d0/download/detailed_results.xlsx",
+   "source": "data.opencity.in (Lok Dhaba / ECI mirror)",
+   "sha256": "1780d1afbbddaa0657de619fc0babb88bb516f20f23f3f14ac5e0c8fb73557fe",
+   "bytes": "177806",
+   "status": "200",
+   "fetched_at_utc": "2026-10-20T02:24:32Z"
   }
  ],
  "raw_held": [
@@ -20780,6 +20894,150 @@
   {
    "path": "data/raw/2019/grampanchayatelectionsdata_2019_sarpanch.csv",
    "sha256": "5cd63ddfaa6d8b6eebd4b3b053a4cee5e339cfc952119ad1bdfd1f002dd45d1f"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Bhadradri.csv",
+   "sha256": "a8b7b8f711a27b6eabf9c6185a78cdd6e5c6aff868b003cd72a178c089003d91"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Hanumakonda.csv",
+   "sha256": "30c39c2c9fda58510f95fcc787559e96dc45c25f36fd98dc8b4d34d66f197ff4"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Jagtial.csv",
+   "sha256": "2d156cb4f03b1488f6ce5dd37bf5b8f134d63b8735b66990e8f23019468882b4"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Jangaon.csv",
+   "sha256": "5d0884d022cc77e53427de30661a14bd8ff7b3de0d1cbba67014b6802ad90ee6"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Jayashankar Bhupalpally.csv",
+   "sha256": "76ba05b142c4c9c65318b056873db5c523eb570339b6cfe5eebca4914979ae47"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Jogulamba Gadwal.csv",
+   "sha256": "bd3c763a5bfd441e4b73960877877c1592215ff8894876764654ad62b1f1da4c"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Kamareddy.csv",
+   "sha256": "1ca44cbedebc3221181e127879e35dedea3f3cc4969b95a8699b3caf89a063a9"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Karimnagar.csv",
+   "sha256": "6b878e935a825a5d153171d744dfb06398248816f24cd4aeb72705279e1ce478"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Khammam.csv",
+   "sha256": "e54b468269589ae99295565063fb9d9862344940c2a4513876ad411b367f03dd"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Komaram Bheem.csv",
+   "sha256": "dd414fc5ad0ceb76a4ee02be9fd8d0c7672ed3e7f1036ecea038e913e01bcefc"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Mahabubabad.csv",
+   "sha256": "cfe5fb12fbca03d1e8126d43b1056db53ee18598ba22cc8feae5a698a0a892b9"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Mahabubnagar.csv",
+   "sha256": "9ce47c856c2589cd0bd3dce01871da7a4048ff240753c09079de009fa234dbbe"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Mancherial.csv",
+   "sha256": "ac903902cf165c56b5f61130ee930a91e5fdc79604844d0fd76ce2541a5de291"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Medak.csv",
+   "sha256": "c45a8929a2c0796f2c12973492faaab803ffa8abaf18bd78244e47bf4a232e81"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Medchal-Malkajgiri.csv",
+   "sha256": "9eae7218dff707bc765470f831b91b6c10ed18dd5bb5136e2da27ed81846fccf"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Nagarkurnool.csv",
+   "sha256": "2351be6d58b78fc19ab1e9e3440475e0447d7e17ce099a6f5a21194d92801e74"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Nalgonda.csv",
+   "sha256": "d5f7df0a260f88863fe15883e1504f761cbfcc5bb95550893d86fbe73dafa8f2"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Nirmal.csv",
+   "sha256": "3b457ae78c2cdb666bd16d6d245bdb37cfedc5aedc8f03597fb47ad231aa7e0e"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Nizamabad.csv",
+   "sha256": "95801f6389d93cfbca6754f7f9fa90149fe205ab427a512714f53f33aa7524ae"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Peddapalli.csv",
+   "sha256": "76e75623abbe3b056742244bea142e5c7b7f07144e5f88c5aeba907dfd6041f9"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Rajanna Sircilla.csv",
+   "sha256": "b0817bfc77f8eeecaa2001b0c827f6b2035d2c8884a0b932e7c6c7f37c2fc33e"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Rangareddy.csv",
+   "sha256": "d3948429f46edacd73371010dbcba3c24687dec2a4d466fa2e044d2338907f45"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Sangareddy.csv",
+   "sha256": "e3ac28dfc40107e4557fadce5a856b05336e079b353056683b73c461115fbef4"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Siddipet.csv",
+   "sha256": "ca7eb8d6ba18bb15bf2a93063db8a6bdb85481a256ddd0301ef3c7f600e3d97f"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Suryapet.csv",
+   "sha256": "de7acafa8ea7e76a0feceff4b4305ae4b9dc9180df196459eb990ff5f36a37f7"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Vikarabad.csv",
+   "sha256": "82ebc68d2474f480a7945b59315088c01216a9fff548ffa7fb7e74189641779d"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Wanaparthy.csv",
+   "sha256": "3e87aaaa10670e76140b1bf9e690986713d49b345adc0e95d80e3f8814b0ef75"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Warangal Rural.csv",
+   "sha256": "46ed107f3a1dd4b86d0c07f8b83f87b3c5d3a1e23d31f4da38fbc68f38e99621"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_Yadadri Bhongiri.csv",
+   "sha256": "af03f7fdb22628c50ba22d104503f861b61c8fcd5003dcfba1e457c9c7de74d1"
+  },
+  {
+   "path": "data/raw/2019/ward/2019_ward_adilabad.csv",
+   "sha256": "6289d998db7e673efb1a1af07dd2549250bfb7654fcea87e6cc6db397a37e4be"
+  },
+  {
+   "path": "data/raw/urban/GO.Ms.No.7_&_8,_dt.05.01.2020-Reservasions-Mayor_&_Chairpersons_1375.pdf",
+   "sha256": "52373dd57109ad5e4d9d49784ef1de6d773ce91d9934f5a6da13adee415ba181"
+  },
+  {
+   "path": "data/raw/urban/Ward_Reservations_ULBs-2021._1593.pdf",
+   "sha256": "29a485659e9071d4e36a9e804d0a00f1650c6e00cf44ce228d8a234ef0f497b4"
+  },
+  {
+   "path": "data/raw/urban/municipal_2020.csv",
+   "sha256": "0f0170c3a1fa15dffec62b999d335dbcb801bacd7d57e48c0790e330515afa97"
+  },
+  {
+   "path": "data/raw/urban/municipal_2021_bye_elections.csv",
+   "sha256": "6dd491fe84c25224790f2e6cabc866e7415d2b6504687bc4b43b32de6b987ba2"
+  },
+  {
+   "path": "data/raw/docs/Manual_of_Election_Law_dt.13.12.2022_258.pdf",
+   "sha256": "f97f753c208550a72b38e4cfa67cad6bebedd8aca522f95e09dc159b886fcab9"
+  },
+  {
+   "path": "data/raw/docs/NN-II-2001-FINAL.pdf",
+   "sha256": "ccb587604b86b80f2861e265409c189255e8452a7b447aefe1016f21acb138df"
   }
  ],
  "checks": [
@@ -20852,6 +21110,21 @@
    "detail": "Of 9,954 GPs found in both the SEC elected listing and the open-data vote table (untied, votes > 0), the listed winner is the top vote-getter in 100.0%. Mismatches include spelling differences between the two releases.",
    "compared": 9954,
    "agree": 0.9999
+  },
+  {
+   "check": "2019_ward_coverage_vs_notified",
+   "appeals_to": "external",
+   "status": "warn",
+   "blocking": false,
+   "detail": "49,823 ward members against 112,242 ward seats (44.4%); the listing covers part of the state. Source: Ward-member seats in the 2019 GP election as recorded in in-rolls/local_elections (data/telangana readme, 'vs published').",
+   "rows": 49823
+  },
+  {
+   "check": "2019_ward_key_and_women_share",
+   "appeals_to": "internal",
+   "status": "warn",
+   "blocking": false,
+   "detail": "(district, mandal, GP, ward) repeats on 26 rows; 51.09% of wards reserved for women; 12,977 filled unanimously."
   },
   {
    "check": "2025_table_schema",

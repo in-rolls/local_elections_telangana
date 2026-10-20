@@ -38,6 +38,7 @@ VM in Mumbai (`gcloud compute ssh <vm> -- -N -D 1080`, then
 |---|---:|---|
 | [2019/sarpanch_results.parquet](data/2019/sarpanch_results.parquet) | 12,018 | an elected sarpanch and their seat's reservation |
 | [2019/sarpanch_candidates.parquet](data/2019/sarpanch_candidates.parquet) | 35,121 | a contesting candidate's votes (12,137 GPs) |
+| [2019/ward_results.parquet](data/2019/ward_results.parquet) | 49,823 | an elected ward member and their seat's reservation |
 | [2025/sarpanch_results.parquet](data/2025/sarpanch_results.parquet) | 12,735 | a GP in the December 2025 election: reservation, winner, votes (SEC) |
 | [2025/sarpanch_candidates.parquet](data/2025/sarpanch_candidates.parquet) | 39,207 | a contesting candidate's votes (SEC) |
 | [2025/eenadu_results.parquet](data/2025/eenadu_results.parquet) | 12,727 | a GP and its winner as Eenadu printed them (Telugu) |

@@ -12,6 +12,16 @@
 Both files were copied unchanged from `local_elections/data/telangana/raw/`.
 `raw_held` in MANIFEST.json gives their hashes.
 
+Also from in-rolls/local_elections (held there until commit `a89a170`, now
+here; hashes in MANIFEST.json `raw_held`):
+
+| File | What |
+|---|---|
+| `raw/2019/ward/2019_ward_<district>.csv` | 49,823 elected ward members in 30 district files, misaligned against their own header (see `parse/y2019.py`); parsed into `2019/ward_results.parquet` |
+| `raw/urban/municipal_2020.csv`, `municipal_2021_bye_elections.csv` | 2020 municipal ward results and 2021 by-elections, every candidate's votes; not parsed here (urban bodies) |
+| `raw/urban/*.pdf` | 2020 mayor/chairperson reservation G.O.s 7 & 8 and 2021 ULB ward reservations |
+| `raw/docs/*.pdf` | the SEC's 2022 manual of election law and the 2001 report `NN-II-2001-FINAL.pdf` |
+
 ### 2025
 
 | Files | What | Origin |
@@ -130,6 +140,8 @@ saved page. All 30 match, by eye. Per-district counts are in MANIFEST.json under
 | `2019_key_unique` | internal | warn | 7 (district, mandal, GP) keys appear more than once (14 rows). Kept as printed: two GPs can share a name inside a mandal, and the listing has no GP code. |
 | `2019_women_share_vs_statute` | external | pass | 50.02% of seats reserved for women; the Act requires 50% (rounded down where a category's count is odd). |
 | `2019_winner_is_top_vote_getter` | external | pass | Of 9,954 GPs found in both the SEC elected listing and the open-data vote table (untied, votes > 0), the listed winner is the top vote-getter in 100.0%. Mismatches include spelling differences between the two releases. |
+| `2019_ward_coverage_vs_notified` | external | warn | 49,823 ward members against 112,242 ward seats (44.4%); the listing covers part of the state. Source: Ward-member seats in the 2019 GP election as recorded in in-rolls/local_elections (data/telangana readme, 'vs published'). |
+| `2019_ward_key_and_women_share` | internal | warn | (district, mandal, GP, ward) repeats on 26 rows; 51.09% of wards reserved for women; 12,977 filled unanimously. |
 | `2025_table_schema` | internal | pass | Each 2025 table matches its Table Schema in data/schemas/ (Arrow types, required fields, codes, keys). Failing: none. |
 | `2025_mandal_reports_vs_district_reports` | internal | pass | GPs in the mandal reports against the district reports, per district and report: 0 of 62 differ (mandal total 25,442, district total 25,442). |
 | `2025_elected_report_vs_candidates_report` | internal | pass | Of 12,702 GPs in both mandal reports, the E report's winner is the A report's 'Elected' candidate in 99.99%. Only in E: 0; only in A: 33. |
