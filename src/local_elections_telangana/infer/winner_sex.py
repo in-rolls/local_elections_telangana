@@ -186,7 +186,10 @@ def main():
                 out,
                 x[["first_word", "last_word", "naampy_first", "naampy_last"]],
                 x[["female", "male"]].rename(
-                    columns={"female": "female_marker", "male": "male_marker"}
+                    columns={
+                        "female": "winner_woman_name_marker",
+                        "male": "winner_man_name_marker",
+                    }
                 ),
             ],
             axis=1,
