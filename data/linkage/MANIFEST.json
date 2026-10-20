@@ -8,9 +8,9 @@
   "margin": 0.05
  },
  "inputs": {
-  "data/2019/sarpanch_results.parquet": "5f3feeb7f61a0dccc1203ef4295de9d2567163339648e702c592ca022328d720",
-  "data/2019/sarpanch_candidates.parquet": "0b0039135a3fc586365857114c16940721290718f66bc1f4b2d8611882eb7659",
-  "data/2025/sarpanch_results.parquet": "ebfa1647820de6cedb74780bdc67e8a4323c24c9f0ec663ffe6bd421814f7c88"
+  "data/2019/sarpanch_results.parquet": "a36308426daccb2960e9be73a4b92ade85b9fb3269fdd4804c6addfd65d80f27",
+  "data/2019/sarpanch_candidates.parquet": "846ec72827fa66a31e92a28876908fa9f40027554222e5e1e695be8e6a68f9ee",
+  "data/2025/sarpanch_results.parquet": "0606569e358db5ca738e0a9e7a28a24bcbd05fa5c7eacea2e10fe903f5d61355"
  },
  "code_sha256": "9a8261cfea1b91ecb6ef79a3b49cc2f34c814244251c679a66c14b5edc5f88f7",
  "output": {

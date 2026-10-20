@@ -1,6 +1,6 @@
 # Inferred winner sex
 
-Neither source records a sarpanch's sex. `winner_female_probability_{2019,2025}.parquet`
+Neither source records a sarpanch's sex. `winner_woman_probability_{2019,2025}.parquet`
 hold, per seat with a named winner, the probability that the winner is a woman,
 inferred from the printed name by `make infer` (`infer/winner_sex.py`). Use it
 averaged over seats to estimate a share of women; never as anyone's sex.

@@ -59,7 +59,7 @@ def seats():
             "gram_panchayat": squeeze(raw["Grampanchayat Name"]),
             "tier": "gp_head",
             "tier_local": "sarpanch",
-            "reservation_raw": raw["Reserved For"].str.strip(),
+            "reserved_raw": raw["Reserved For"].str.strip(),
             "winner": squeeze(raw["Name Of The Contesting Candidate"]),
             "winner_basis": "published",
             "party": raw["Party Affiliation"].str.strip(),
@@ -71,13 +71,13 @@ def seats():
             "source_locator": [f"row {i + 1}" for i in range(len(raw))],
         }
     )
-    codes = out["reservation_raw"].map(reservation)
-    out["reservation"] = [c[0] for c in codes]
-    out["caste_reservation"] = [c[1] for c in codes]
-    out["woman_reserved"] = [c[2] for c in codes]
+    codes = out["reserved_raw"].map(reservation)
+    out["reserved_label"] = [c[0] for c in codes]
+    out["reserved_caste"] = [c[1] for c in codes]
+    out["reserved_woman"] = [c[2] for c in codes]
     out["unopposed"] = out["unopposed"].astype("Int8")
     out["year"] = out["year"].astype("int16")
-    out["woman_reserved"] = out["woman_reserved"].astype("int8")
+    out["reserved_woman"] = out["reserved_woman"].astype("int8")
     return out[SEAT_COLUMNS]
 
 
@@ -96,7 +96,7 @@ def candidates():
             "gpcode": "gp_code",
             "contestant": "candidate",
             "votes_received": "candidate_votes",
-            "reserved_for": "reservation_raw",
+            "reserved_for": "reserved_raw",
             "NOTA": "nota_votes",
         }
     )
@@ -110,9 +110,9 @@ def candidates():
         "nota_votes",
     ]:
         out[col] = pd.to_numeric(out[col], errors="raise").astype("int32")
-    codes = out["reservation_raw"].str.strip().map(reservation)
-    out["caste_reservation"] = [c[1] for c in codes]
-    out["woman_reserved"] = pd.Series([c[2] for c in codes], dtype="int8")
+    codes = out["reserved_raw"].str.strip().map(reservation)
+    out["reserved_caste"] = [c[1] for c in codes]
+    out["reserved_woman"] = pd.Series([c[2] for c in codes], dtype="int8")
     out.insert(0, "year", pd.Series(2019, index=out.index, dtype="int16"))
     out.insert(0, "state", "Telangana")
     out["source_path"] = CANDIDATES
@@ -139,7 +139,7 @@ def wards():
                     "block": r.Mandal.strip(),
                     "gram_panchayat": r._1.strip(),
                     "ward_no": r.Category.strip(),
-                    "reservation_raw": f"{category}({gender})",
+                    "reserved_raw": f"{category}({gender})",
                     "winner": re.sub(r"\s+", " ", winner).strip(),
                     "unopposed": int(r.Status.strip().lower() == "unanimous"),
                     "source_path": f"{WARDS}/{path.name}",
@@ -147,14 +147,14 @@ def wards():
                 }
             )
     out = pd.DataFrame(rows)
-    codes = out["reservation_raw"].map(reservation)
+    codes = out["reserved_raw"].map(reservation)
     out.insert(0, "year", pd.Series(2019, index=out.index, dtype="int16"))
     out.insert(0, "state", "Telangana")
     out["tier"] = "gp_ward"
     out["tier_local"] = "ward member"
-    out["reservation"] = [c[0] for c in codes]
-    out["caste_reservation"] = [c[1] for c in codes]
-    out["woman_reserved"] = pd.Series([c[2] for c in codes], dtype="int8")
+    out["reserved_label"] = [c[0] for c in codes]
+    out["reserved_caste"] = [c[1] for c in codes]
+    out["reserved_woman"] = pd.Series([c[2] for c in codes], dtype="int8")
     out["winner_basis"] = "published"
     out["party"] = pd.Series(pd.NA, index=out.index, dtype="string")
     out["unopposed"] = out["unopposed"].astype("Int8")

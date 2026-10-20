@@ -116,7 +116,7 @@ def checks_2019():
             duplicate_keys=dup[key].drop_duplicates().values.tolist(),
         )
     )
-    women = seats["woman_reserved"].mean()
+    women = seats["reserved_woman"].mean()
     out.append(
         result(
             "2019_women_share_vs_statute",
@@ -172,7 +172,7 @@ def checks_2019():
     )
     key = ["district", "block", "gram_panchayat", "ward_no"]
     dup = wards.duplicated(key, keep=False)
-    women = wards["woman_reserved"].mean()
+    women = wards["reserved_woman"].mean()
     out.append(
         result(
             "2019_ward_key_and_women_share",
@@ -287,7 +287,7 @@ def checks_2025():
             ].to_dict("records"),
         )
     )
-    res_same = both["reservation_raw"] == both["reservation_raw_a"]
+    res_same = both["reserved_raw"] == both["reserved_raw_a"]
     out.append(
         result(
             "2025_reservation_same_in_both_reports",
@@ -389,12 +389,12 @@ def checks_2025():
     # GO 46 reserves half of each category's seats for women, rounded down.
     # The data show the rounding happens within each mandal and category,
     # which is why the statewide share is below 50%.
-    women = seats["woman_reserved"].mean()
-    cells = seats.groupby(["district_id", "mandal_id", "caste_reservation"])[
-        "woman_reserved"
+    women = seats["reserved_woman"].mean()
+    cells = seats.groupby(["district_id", "mandal_id", "reserved_caste"])[
+        "reserved_woman"
     ].agg(["sum", "size"])
     floor = cells["sum"].eq(cells["size"] // 2)
-    bc = int(seats["caste_reservation"].eq("BC").sum())
+    bc = int(seats["reserved_caste"].eq("BC").sum())
     out.append(
         result(
             "2025_women_and_category_shares",

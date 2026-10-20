@@ -55,8 +55,8 @@ import pandas as pd
 
 s19 = pd.read_parquet("data/2019/sarpanch_results.parquet")
 s25 = pd.read_parquet("data/2025/sarpanch_results.parquet")
-s19.groupby("caste_reservation")["woman_reserved"].mean()
-s25.groupby(["caste_reservation", "woman_reserved"]).size()
+s19.groupby("reserved_caste")["reserved_woman"].mean()
+s25.groupby(["reserved_caste", "reserved_woman"]).size()
 ```
 
 ## Links between elections

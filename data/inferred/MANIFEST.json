@@ -87,8 +87,8 @@
   "data/raw/labels/lokdhaba_telangana_ae_2014.csv": "f70d4763f164e1f4c99f9aae9eaa476706f8b15763abf885d96d1b4edb3c931e",
   "data/raw/labels/lokdhaba_telangana_ae_2018.csv": "4ee63542c04fb683a34f63d908be56a54791ae7eab6123f584e2c6065ddc7ede",
   "data/raw/labels/eci_telangana_ae_2023_detailed_results.xlsx": "1780d1afbbddaa0657de619fc0babb88bb516f20f23f3f14ac5e0c8fb73557fe",
-  "data/2019/sarpanch_results.parquet": "5f3feeb7f61a0dccc1203ef4295de9d2567163339648e702c592ca022328d720",
-  "data/2025/sarpanch_results.parquet": "ebfa1647820de6cedb74780bdc67e8a4323c24c9f0ec663ffe6bd421814f7c88"
+  "data/2019/sarpanch_results.parquet": "a36308426daccb2960e9be73a4b92ade85b9fb3269fdd4804c6addfd65d80f27",
+  "data/2025/sarpanch_results.parquet": "0606569e358db5ca738e0a9e7a28a24bcbd05fa5c7eacea2e10fe903f5d61355"
  },
- "code_sha256": "54f5835760aab27d7010f1e6493513fc8eb83bd3476e773ff278b9eb88867af6"
+ "code_sha256": "9203ae1e652da904067cf28a0fd3aeed9b3ddf76bd5382c135af661ea39668e2"
 }
