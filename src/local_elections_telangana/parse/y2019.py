@@ -12,13 +12,26 @@ telangana-gram-panchayat-sarpanch-election-data-2019): every contesting
 candidate's votes plus each GP's valid, rejected and tendered votes and NOTA.
 It carries GP codes but no winner flag, and uses the district names in force
 before 2021 (Warangal Urban rather than Hanumakonda).
+
+`ward/2019_ward_<district>.csv` (30 files) list 49,823 elected ward members.
+They are misaligned against their own header, identically in all 30: `Ward`
+holds the literal "Ward", the ward number sits under `Category`, and the
+category is glued to the front of the winner's name under `Name`
+("ST(W) KOUSALYA PAYAM"). The district is in the filename only. `Status`
+says whether the ward was filled unanimously. These came from in-rolls/
+local_elections (data/telangana/2019_ward, held there until a89a170), which
+parsed them the same way.
 """
+
+import re
 
 import pandas as pd
 
 from local_elections_telangana.parse.common import DATA, SEAT_COLUMNS, reservation
 
 RAW = DATA / "raw" / "2019"
+WARDS = "data/raw/2019/ward"
+PREFIX = re.compile(r"^(UR|SC|ST|BC)\((G|W)\)\s*(.*)$")
 ELECTED = "data/raw/2019/2019_gp_sarpanch.csv"
 CANDIDATES = "data/raw/2019/grampanchayatelectionsdata_2019_sarpanch.csv"
 ELECTED_URL = "https://tsec.gov.in/knowPRRural.do"
@@ -108,10 +121,60 @@ def candidates():
     return out
 
 
+def wards():
+    rows = []
+    for path in sorted((DATA.parent / WARDS).glob("*.csv")):
+        district = path.stem.removeprefix("2019_ward_").strip()
+        raw = pd.read_csv(path, dtype=str, keep_default_na=False)
+        if set(raw["Ward"].str.strip()) != {"Ward"}:
+            raise SystemExit(f"{path.name}: the Ward column is not the literal 'Ward'")
+        for i, r in enumerate(raw.itertuples(index=False), start=1):
+            got = PREFIX.match(r.Name.strip())
+            if not got:
+                raise SystemExit(f"{path.name} row {i}: no category prefix: {r.Name!r}")
+            category, gender, winner = got.groups()
+            rows.append(
+                {
+                    "district": district,
+                    "block": r.Mandal.strip(),
+                    "gram_panchayat": r._1.strip(),
+                    "ward_no": r.Category.strip(),
+                    "reservation_raw": f"{category}({gender})",
+                    "winner": re.sub(r"\s+", " ", winner).strip(),
+                    "unopposed": int(r.Status.strip().lower() == "unanimous"),
+                    "source_path": f"{WARDS}/{path.name}",
+                    "source_locator": f"row {i}",
+                }
+            )
+    out = pd.DataFrame(rows)
+    codes = out["reservation_raw"].map(reservation)
+    out.insert(0, "year", pd.Series(2019, index=out.index, dtype="int16"))
+    out.insert(0, "state", "Telangana")
+    out["tier"] = "gp_ward"
+    out["tier_local"] = "ward member"
+    out["reservation"] = [c[0] for c in codes]
+    out["caste_reservation"] = [c[1] for c in codes]
+    out["woman_reserved"] = pd.Series([c[2] for c in codes], dtype="int8")
+    out["winner_basis"] = "published"
+    out["party"] = pd.Series(pd.NA, index=out.index, dtype="string")
+    out["unopposed"] = out["unopposed"].astype("Int8")
+    out["script"] = "latin"
+    # inferred, as for the 2019 elected listing: the same commission report
+    out["source_url"] = ELECTED_URL
+    cols = [
+        c
+        for c in SEAT_COLUMNS
+        if c not in ("source_path", "source_url", "source_locator")
+    ]
+    cols.insert(cols.index("tier"), "ward_no")
+    return out[[*cols, "source_path", "source_url", "source_locator"]]
+
+
 def main():
     (DATA / "2019").mkdir(exist_ok=True)
     seats().to_parquet(DATA / "2019" / "sarpanch_results.parquet", index=False)
     candidates().to_parquet(DATA / "2019" / "sarpanch_candidates.parquet", index=False)
+    wards().to_parquet(DATA / "2019" / "ward_results.parquet", index=False)
 
 
 if __name__ == "__main__":

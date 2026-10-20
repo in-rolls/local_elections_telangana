@@ -80,3 +80,9 @@ SEC_TABLE_NAMES = {
     "Jagital": "Jagtial",
     "Rajanna sircilla": "Rajanna Sircilla",
 }
+
+WARDS_2019 = {
+    "value": 112242,
+    "source": "Ward-member seats in the 2019 GP election as recorded in "
+    "in-rolls/local_elections (data/telangana readme, 'vs published').",
+}
