@@ -1,7 +1,7 @@
 PY = .venv/bin/python
 RUFF = .venv/bin/ruff
 
-.PHONY: sync collect collect-tsec collect-tsec-docs data link manifest lint verify check
+.PHONY: sync collect collect-tsec collect-tsec-docs data link infer manifest lint verify check
 
 sync:
 	uv sync --frozen --all-groups
@@ -24,6 +24,9 @@ data:
 	$(PY) -m local_elections_telangana.build.contract
 	$(PY) -m local_elections_telangana.linkage.gp_links
 	$(MAKE) manifest
+
+infer:
+	$(PY) -m local_elections_telangana.infer.winner_sex
 
 manifest:
 	$(PY) -m local_elections_telangana.build.release write

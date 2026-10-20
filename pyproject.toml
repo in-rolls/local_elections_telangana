@@ -11,12 +11,15 @@ keywords = ["Telangana", "elections", "panchayats", "sarpanch", "reservation", "
 dependencies = [
     "beautifulsoup4>=4.13",
     "frictionless>=5.21",
+    "naampy>=0.11.0",
+    "openpyxl>=3.1.5",
     "pandas>=2.3",
     "pandera[io]>=0.34",
     "preclink>=1.2.0",
     "pyarrow>=21",
     "rapidfuzz>=3.9",
     "requests>=2.32",
+    "scikit-learn>=1.9.1",
 ]
 
 [project.urls]
