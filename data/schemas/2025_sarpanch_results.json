@@ -83,7 +83,7 @@
    }
   },
   {
-   "name": "reservation",
+   "name": "reserved_label",
    "type": "string",
    "arrowType": "string",
    "description": "Pooled reservation label of the seat",
@@ -102,7 +102,7 @@
    }
   },
   {
-   "name": "caste_reservation",
+   "name": "reserved_caste",
    "type": "string",
    "arrowType": "string",
    "description": "Seat's caste category (UR printed as NONE)",
@@ -117,7 +117,7 @@
    }
   },
   {
-   "name": "woman_reserved",
+   "name": "reserved_woman",
    "type": "integer",
    "arrowType": "int8",
    "description": "1 if the seat is reserved for a woman",
@@ -130,7 +130,7 @@
    }
   },
   {
-   "name": "reservation_raw",
+   "name": "reserved_raw",
    "type": "string",
    "arrowType": "string",
    "description": "Commission's code: category, then (G)eneral or (W)oman",
@@ -257,7 +257,7 @@
    }
   },
   {
-   "name": "reservation_raw_a",
+   "name": "reserved_raw_a",
    "type": "string",
    "arrowType": "string",
    "description": "Reservation code in the A report's GP caption",

@@ -69,7 +69,7 @@ FEATURES = [
     "female",
     "male",
 ]
-P = "winner_female_probability_from_name"
+P = "winner_woman_probability"
 
 
 def words(name):
@@ -174,8 +174,8 @@ def main():
                 "district",
                 "block",
                 "gram_panchayat",
-                "woman_reserved",
-                "caste_reservation",
+                "reserved_woman",
+                "reserved_caste",
                 "winner",
                 "source_path",
                 "source_locator",
@@ -192,10 +192,10 @@ def main():
             axis=1,
         )
         out[P] = p
-        out["winner_female_probability_method"] = method
-        out.to_parquet(OUT / f"winner_female_probability_{year}.parquet", index=False)
-        women = out[out["woman_reserved"] == 1]
-        open_ = out[out["woman_reserved"] == 0]
+        out["winner_woman_probability_method"] = method
+        out.to_parquet(OUT / f"winner_woman_probability_{year}.parquet", index=False)
+        women = out[out["reserved_woman"] == 1]
+        open_ = out[out["reserved_woman"] == 0]
         target[str(year)] = {
             "winners_scored": len(out),
             "womens_seat_mean": round(float(women[P].mean()), 4),

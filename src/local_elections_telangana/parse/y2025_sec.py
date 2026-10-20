@@ -172,7 +172,7 @@ def build():
                     "district_id": d,
                     "mandal_id": m,
                     "gram_panchayat": gp,
-                    "reservation_raw": res,
+                    "reserved_raw": res,
                     "winner": winner,
                     "e_path": rel,
                     "e_locator": f"results table row {i} (Sl No. {serial})",
@@ -190,7 +190,7 @@ def build():
                     "district_id": d,
                     "mandal_id": m,
                     "gram_panchayat": g["gp"],
-                    "reservation_raw_a": g["res"],
+                    "reserved_raw_a": g["res"],
                     "total_valid_votes": int(g["valid"]),
                     "rejected_votes": int(g["rejected"]),
                     "tendered_votes": int(g["tendered"]),
@@ -243,13 +243,11 @@ def build():
     seats["listed_twice"] = seats["in_reports"].eq("both") & seats.set_index(
         gp_key
     ).index.isin(twice)
-    seats["reservation_raw"] = seats["reservation_raw"].fillna(
-        seats["reservation_raw_a"]
-    )
-    codes_ = seats["reservation_raw"].map(reservation)
-    seats["reservation"] = [c[0] for c in codes_]
-    seats["caste_reservation"] = [c[1] for c in codes_]
-    seats["woman_reserved"] = pd.Series([c[2] for c in codes_], dtype="int8")
+    seats["reserved_raw"] = seats["reserved_raw"].fillna(seats["reserved_raw_a"])
+    codes_ = seats["reserved_raw"].map(reservation)
+    seats["reserved_label"] = [c[0] for c in codes_]
+    seats["reserved_caste"] = [c[1] for c in codes_]
+    seats["reserved_woman"] = pd.Series([c[2] for c in codes_], dtype="int8")
     seats["district"] = seats["district_id"].map(districts)
     seats["block"] = [
         mandals.get((d, m))
@@ -281,7 +279,7 @@ def build():
         "result_declared",
         "in_reports",
         "listed_twice",
-        "reservation_raw_a",
+        "reserved_raw_a",
         "candidates",
         "elected_count",
         "elected_name",

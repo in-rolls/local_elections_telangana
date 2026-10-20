@@ -3,7 +3,7 @@
  "outputs": [
   {
    "file": "2019/sarpanch_results.parquet",
-   "sha256": "5f3feeb7f61a0dccc1203ef4295de9d2567163339648e702c592ca022328d720",
+   "sha256": "a36308426daccb2960e9be73a4b92ade85b9fb3269fdd4804c6addfd65d80f27",
    "rows": 12018,
    "schema": [
     {
@@ -35,19 +35,19 @@
      "type": "large_string"
     },
     {
-     "name": "reservation",
+     "name": "reserved_label",
      "type": "large_string"
     },
     {
-     "name": "caste_reservation",
+     "name": "reserved_caste",
      "type": "large_string"
     },
     {
-     "name": "woman_reserved",
+     "name": "reserved_woman",
      "type": "int8"
     },
     {
-     "name": "reservation_raw",
+     "name": "reserved_raw",
      "type": "large_string"
     },
     {
@@ -86,7 +86,7 @@
   },
   {
    "file": "2019/sarpanch_candidates.parquet",
-   "sha256": "0b0039135a3fc586365857114c16940721290718f66bc1f4b2d8611882eb7659",
+   "sha256": "846ec72827fa66a31e92a28876908fa9f40027554222e5e1e695be8e6a68f9ee",
    "rows": 35121,
    "schema": [
     {
@@ -130,7 +130,7 @@
      "type": "int32"
     },
     {
-     "name": "reservation_raw",
+     "name": "reserved_raw",
      "type": "large_string"
     },
     {
@@ -150,11 +150,11 @@
      "type": "int32"
     },
     {
-     "name": "caste_reservation",
+     "name": "reserved_caste",
      "type": "large_string"
     },
     {
-     "name": "woman_reserved",
+     "name": "reserved_woman",
      "type": "int8"
     },
     {
@@ -173,7 +173,7 @@
   },
   {
    "file": "2019/ward_results.parquet",
-   "sha256": "47bf9050e6b36655af1ebfe16acce0cbc5c95fda9247dd640f72965b53c5875a",
+   "sha256": "302d6080e0c82f3ad7c75ee946fb0740c96c2dfc7494615fa271bea13ec2e2e5",
    "rows": 49823,
    "schema": [
     {
@@ -209,19 +209,19 @@
      "type": "large_string"
     },
     {
-     "name": "reservation",
+     "name": "reserved_label",
      "type": "large_string"
     },
     {
-     "name": "caste_reservation",
+     "name": "reserved_caste",
      "type": "large_string"
     },
     {
-     "name": "woman_reserved",
+     "name": "reserved_woman",
      "type": "int8"
     },
     {
-     "name": "reservation_raw",
+     "name": "reserved_raw",
      "type": "large_string"
     },
     {
@@ -260,7 +260,7 @@
   },
   {
    "file": "2025/sarpanch_results.parquet",
-   "sha256": "ebfa1647820de6cedb74780bdc67e8a4323c24c9f0ec663ffe6bd421814f7c88",
+   "sha256": "0606569e358db5ca738e0a9e7a28a24bcbd05fa5c7eacea2e10fe903f5d61355",
    "rows": 12735,
    "schema": [
     {
@@ -292,19 +292,19 @@
      "type": "large_string"
     },
     {
-     "name": "reservation",
+     "name": "reserved_label",
      "type": "large_string"
     },
     {
-     "name": "caste_reservation",
+     "name": "reserved_caste",
      "type": "large_string"
     },
     {
-     "name": "woman_reserved",
+     "name": "reserved_woman",
      "type": "int8"
     },
     {
-     "name": "reservation_raw",
+     "name": "reserved_raw",
      "type": "large_string"
     },
     {
@@ -352,7 +352,7 @@
      "type": "bool"
     },
     {
-     "name": "reservation_raw_a",
+     "name": "reserved_raw_a",
      "type": "large_string"
     },
     {
@@ -470,7 +470,7 @@
   },
   {
    "file": "2025/eenadu_results.parquet",
-   "sha256": "ea39e9f18f3fa8e0530b2bbccbb5e2cba0e0b5d5f780a2d084910793cdea0852",
+   "sha256": "ee0757f5c3594bf5935f88cfb681824c08a0b0cd546f20f8450f631a8aac0a4a",
    "rows": 12727,
    "schema": [
     {
@@ -502,19 +502,19 @@
      "type": "large_string"
     },
     {
-     "name": "reservation",
+     "name": "reserved_label",
      "type": "large_string"
     },
     {
-     "name": "caste_reservation",
+     "name": "reserved_caste",
      "type": "large_string"
     },
     {
-     "name": "woman_reserved",
+     "name": "reserved_woman",
      "type": "int8"
     },
     {
-     "name": "reservation_raw",
+     "name": "reserved_raw",
      "type": "large_string"
     },
     {
@@ -21394,231 +21394,231 @@
     {
      "district_id": "01",
      "mandal_id": "11",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 0,
      "size": 2
     },
     {
      "district_id": "01",
      "mandal_id": "12",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 9,
      "size": 20
     },
     {
      "district_id": "01",
      "mandal_id": "14",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 4,
      "size": 10
     },
     {
      "district_id": "01",
      "mandal_id": "15",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 8,
      "size": 18
     },
     {
      "district_id": "02",
      "mandal_id": "04",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 12,
      "size": 26
     },
     {
      "district_id": "02",
      "mandal_id": "09",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 3,
      "size": 9
     },
     {
      "district_id": "02",
      "mandal_id": "10",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 2,
      "size": 6
     },
     {
      "district_id": "02",
      "mandal_id": "11",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 4,
      "size": 10
     },
     {
      "district_id": "02",
      "mandal_id": "12",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 3,
      "size": 9
     },
     {
      "district_id": "03",
      "mandal_id": "10",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 4,
      "size": 10
     },
     {
      "district_id": "04",
      "mandal_id": "10",
-     "caste_reservation": "BC",
+     "reserved_caste": "BC",
      "sum": 2,
      "size": 6
     },
     {
      "district_id": "07",
      "mandal_id": "02",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 1,
      "size": 1
     },
     {
      "district_id": "09",
      "mandal_id": "09",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 15,
      "size": 29
     },
     {
      "district_id": "11",
      "mandal_id": "06",
-     "caste_reservation": "SC",
+     "reserved_caste": "SC",
      "sum": 3,
      "size": 5
     },
     {
      "district_id": "11",
      "mandal_id": "07",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 7,
      "size": 12
     },
     {
      "district_id": "11",
      "mandal_id": "10",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 5,
      "size": 9
     },
     {
      "district_id": "11",
      "mandal_id": "12",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 2,
      "size": 3
     },
     {
      "district_id": "11",
      "mandal_id": "13",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 7,
      "size": 13
     },
     {
      "district_id": "15",
      "mandal_id": "11",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 6,
      "size": 14
     },
     {
      "district_id": "19",
      "mandal_id": "08",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 0,
      "size": 2
     },
     {
      "district_id": "20",
      "mandal_id": "01",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 5,
      "size": 12
     },
     {
      "district_id": "29",
      "mandal_id": "12",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 3,
      "size": 9
     },
     {
      "district_id": "29",
      "mandal_id": "26",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 4,
      "size": 10
     },
     {
      "district_id": "29",
      "mandal_id": "27",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 6,
      "size": 14
     },
     {
      "district_id": "30",
      "mandal_id": "02",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 3,
      "size": 8
     },
     {
      "district_id": "30",
      "mandal_id": "03",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 3,
      "size": 8
     },
     {
      "district_id": "30",
      "mandal_id": "06",
-     "caste_reservation": "NONE",
+     "reserved_caste": "NONE",
      "sum": 3,
      "size": 8
     },
     {
      "district_id": "30",
      "mandal_id": "10",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 7,
      "size": 16
     },
     {
      "district_id": "30",
      "mandal_id": "11",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 2,
      "size": 6
     },
     {
      "district_id": "31",
      "mandal_id": "05",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 5,
      "size": 12
     },
     {
      "district_id": "31",
      "mandal_id": "06",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 5,
      "size": 12
     },
     {
      "district_id": "31",
      "mandal_id": "15",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 2,
      "size": 6
     },
     {
      "district_id": "31",
      "mandal_id": "16",
-     "caste_reservation": "ST",
+     "reserved_caste": "ST",
      "sum": 0,
      "size": 2
     }

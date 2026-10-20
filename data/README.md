@@ -56,10 +56,10 @@ in-rolls/local_elections:
 | `state`, `year` | Telangana; 2019 or 2025 |
 | `district`, `block`, `gram_panchayat` | As printed. `block` is the mandal. 2025: names from the SEC form's dropdowns |
 | `tier`, `tier_local` | `gp_head`, `sarpanch` |
-| `reservation_raw` | The SEC code, e.g. `ST(W)` |
-| `caste_reservation` | The **seat's** category: `ST`, `SC`, `BC`, `NONE` (unreserved). Never the winner's caste |
-| `woman_reserved` | 1 if the **seat** is reserved for a woman |
-| `reservation` | Pooled label, e.g. `SC Woman`, `Other than Woman` |
+| `reserved_raw` | The SEC code, e.g. `ST(W)` |
+| `reserved_caste` | The **seat's** category: `ST`, `SC`, `BC`, `NONE` (unreserved). Never the winner's caste |
+| `reserved_woman` | 1 if the **seat** is reserved for a woman |
+| `reserved_label` | Pooled label, e.g. `SC Woman`, `Other than Woman` |
 | `winner` | As printed. Null where the source gives no name |
 | `winner_basis` | `published` where the source names a result |
 | `party` | 2019: the SEC's party column, `IND` on every row (the polls are formally non-party). 2025: null |
@@ -77,7 +77,7 @@ checked on every `make data`):
 | `result_declared` | True where the E report names a winner (12,702). The 33 others have no nominations, no result, or a court stay |
 | `in_reports` | `both`, or `candidates_only` for GPs in the A report alone |
 | `listed_twice` | True for the 5 GPs the E report prints twice (same GP code and winner); the repeat is dropped |
-| `reservation_raw_a`, `candidates`, `elected_count`, `elected_name` | From the A report: its reservation code, candidate count, how many are marked Elected, and who |
+| `reserved_raw_a`, `candidates`, `elected_count`, `elected_name` | From the A report: its reservation code, candidate count, how many are marked Elected, and who |
 | `total_valid_votes`, `rejected_votes`, `tendered_votes`, `nota_votes` | From the A report's GP caption |
 | `a_path`, `a_locator` | Where the GP is in the A report; `source_*` point to the E report |
 
@@ -96,8 +96,8 @@ one row per candidate: `district`, `block`, `gram_panchayat`, codes, `serial`,
 
 `2019/sarpanch_candidates.parquet` keeps the open-data release's columns,
 renamed: `district`, `block`, `gram_panchayat`, `district_id`, `mandal_id`,
-`gp_code`, `candidate`, `candidate_votes`, `reservation_raw`,
-`caste_reservation`, `woman_reserved`, `total_valid_votes`, `rejected_votes`,
+`gp_code`, `candidate`, `candidate_votes`, `reserved_raw`,
+`reserved_caste`, `reserved_woman`, `total_valid_votes`, `rejected_votes`,
 `tendered_votes`, `nota_votes`, plus provenance. It uses the district names in
 force before 2021 (Warangal Urban, Jayashankar).
 

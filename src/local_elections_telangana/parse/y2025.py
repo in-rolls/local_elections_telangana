@@ -155,9 +155,9 @@ def build():
     out.insert(0, "state", "Telangana")
     out["tier"] = "gp_head"
     out["tier_local"] = "sarpanch"
-    for col in ["reservation", "caste_reservation", "reservation_raw", "party"]:
+    for col in ["reserved_label", "reserved_caste", "reserved_raw", "party"]:
         out[col] = pd.Series(pd.NA, index=out.index, dtype="string")
-    out["woman_reserved"] = pd.Series(pd.NA, index=out.index, dtype="Int8")
+    out["reserved_woman"] = pd.Series(pd.NA, index=out.index, dtype="Int8")
     out["unopposed"] = pd.Series(pd.NA, index=out.index, dtype="Int8")
     # A row with no party and no name is a GP whose result the page does not
     # give (no nominations, court stay, or pending); a party with no name is a
