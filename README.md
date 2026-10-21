@@ -40,6 +40,7 @@ VM in Mumbai (`gcloud compute ssh <vm> -- -N -D 1080`, then
 | [2019/sarpanch_candidates.parquet](data/2019/sarpanch_candidates.parquet) | 35,121 | a contesting candidate's votes (12,137 GPs) |
 | [2019/ward_results.parquet](data/2019/ward_results.parquet) | 49,823 | an elected ward member and their seat's reservation |
 | [2025/sarpanch_results.parquet](data/2025/sarpanch_results.parquet) | 12,735 | a GP in the December 2025 election: reservation, winner, votes (SEC) |
+| [2025/ward_results.parquet](data/2025/ward_results.parquet) | 62,990 | an elected ward member in 2025 and their ward's caste reservation (SEC); no women's reservation, sex or votes are printed, and TSEC published wards for 7,140 of 12,735 GPs |
 | [2025/sarpanch_candidates.parquet](data/2025/sarpanch_candidates.parquet) | 39,207 | a contesting candidate's votes (SEC) |
 | [2025/eenadu_results.parquet](data/2025/eenadu_results.parquet) | 12,727 | a GP and its winner as Eenadu printed them (Telugu) |
 | [2025/eenadu_mandal_counts.parquet](data/2025/eenadu_mandal_counts.parquet) | 563 | a mandal block on an Eenadu page, with its printed counts |

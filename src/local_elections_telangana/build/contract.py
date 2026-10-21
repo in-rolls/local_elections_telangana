@@ -27,6 +27,7 @@ SCHEMAS = DATA / "schemas"
 TABLES = {
     "2025_sarpanch_results": "2025/sarpanch_results.parquet",
     "2025_sarpanch_candidates": "2025/sarpanch_candidates.parquet",
+    "2025_ward_results": "2025/ward_results.parquet",
 }
 ARROW = {
     "string": pa.string(),

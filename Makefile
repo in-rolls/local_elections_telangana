@@ -24,6 +24,7 @@ data:
 	$(PY) -m local_elections_telangana.parse.y2019
 	$(PY) -m local_elections_telangana.parse.y2025
 	$(PY) -m local_elections_telangana.parse.y2025_sec
+	$(PY) -m local_elections_telangana.parse.y2025_wards
 	$(PY) -m local_elections_telangana.build.contract
 	$(PY) -m local_elections_telangana.linkage.gp_links
 	$(MAKE) manifest

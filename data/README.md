@@ -48,6 +48,15 @@ winner, and no reservation.
 
 ## Columns
 
+The 2025 ward members come from the same form's "G.P Ward Member" report
+(`raw/2025/tsec/ward_E/`, collected by `make collect-tsec-wards` from India),
+one page per mandal plus a district page as a second count; parsed by
+`parse/y2025_wards.py` into `2025/ward_results.parquet`. The report gives the
+ward's caste category but not whether it is reserved for a woman, so
+`reserved_woman` is null. TSEC has not published wards for every mandal: 62,990
+wards in 7,140 GPs, and the mandal pages add up to the district pages in every
+district.
+
 Seat tables (`*/sarpanch_results.parquet`) use the pooled schema of
 in-rolls/local_elections:
 
