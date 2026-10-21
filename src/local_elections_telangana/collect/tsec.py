@@ -244,8 +244,11 @@ def collect_wards(client, election, district, name, done):
     the getMandal frame plus the mandals only the report dropdown lists."""
     mandals = options(read(f"{OUT}/frame/mandals_{district}.html"))
     known = {m for m, _ in mandals}
-    page = read(f"{OUT}/report_E/district_{district}.html")
-    mandals += [(m, n) for m, n in report_mandals(page) if m not in known]
+    # A wholly urban district (Hyderabad) has only the sarpanch run's no-grid page.
+    rel = f"{OUT}/report_E/district_{district}.html"
+    if not any((ROOT / f"{rel}{gz}").exists() for gz in ("", ".gz")):
+        rel = rel.replace(".html", ".nogrid.html")
+    mandals += [(m, n) for m, n in report_mandals(read(rel)) if m not in known]
     # TSEC has not published wards for every mandal: Adilabad's district report
     # lists 292 of its GPs, and mandals such as Bheempur return the form without
     # a grid even for a single GP. The district report is kept as a second count,
