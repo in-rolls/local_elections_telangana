@@ -14,6 +14,9 @@ collect:
 collect-tsec:
 	$(PY) -m local_elections_telangana.collect.tsec
 
+collect-tsec-wards:
+	$(PY) -m local_elections_telangana.collect.tsec --wards
+
 collect-tsec-docs:
 	$(PY) -m local_elections_telangana.collect.tsec_docs
 
