@@ -34,6 +34,7 @@ OUTPUTS = [
     "2019/ward_results.parquet",
     "2025/sarpanch_results.parquet",
     "2025/sarpanch_candidates.parquet",
+    "2025/ward_results.parquet",
     "2025/eenadu_results.parquet",
     "2025/eenadu_mandal_counts.parquet",
     "2025/eenadu_page_counts.parquet",

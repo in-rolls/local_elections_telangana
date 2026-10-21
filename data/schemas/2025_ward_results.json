@@ -1,0 +1,242 @@
+{
+ "name": "2025_ward_results",
+ "title": "Telangana 2025 gram panchayat ward members",
+ "description": "One row per ward in the commission's 'G.P Ward Member' elected report (tsec.gov.in/knowPRRural). Covers the mandals TSEC published: 62,990 wards in 7,140 GPs. No women's reservation, winner sex or votes are printed.",
+ "primaryKey": [
+  "source_path",
+  "source_locator"
+ ],
+ "fields": [
+  {
+   "name": "state",
+   "type": "string",
+   "arrowType": "string",
+   "description": "State",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "Telangana"
+    ]
+   }
+  },
+  {
+   "name": "year",
+   "type": "integer",
+   "arrowType": "int16",
+   "description": "Election year",
+   "constraints": {
+    "required": true,
+    "enum": [
+     2025
+    ]
+   }
+  },
+  {
+   "name": "district",
+   "type": "string",
+   "arrowType": "string",
+   "description": "District, as on the commission's form",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "block",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Mandal, as on the commission's form",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "gram_panchayat",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Gram panchayat, as printed in the report's caption",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "ward_no",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Ward number from the report's ward name ('Ward 5' -> '5')",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "tier",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Office, canonical",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "gp_ward"
+    ]
+   }
+  },
+  {
+   "name": "tier_local",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Office as the state names it",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "ward member"
+    ]
+   }
+  },
+  {
+   "name": "reserved_label",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Pooled reservation label; null: the report states no women's reservation, so caste and woman cannot be joined"
+  },
+  {
+   "name": "reserved_caste",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Caste category the ward is reserved for (UR -> NONE); null where the report prints '--'",
+   "constraints": {
+    "enum": [
+     "NONE",
+     "SC",
+     "ST",
+     "BC"
+    ]
+   }
+  },
+  {
+   "name": "reserved_woman",
+   "type": "integer",
+   "arrowType": "int8",
+   "description": "Whether the ward is reserved for a woman: null throughout, because the report's 'Reserved for' cell gives the caste category only",
+   "constraints": {
+    "minimum": 0,
+    "maximum": 1
+   }
+  },
+  {
+   "name": "reserved_raw",
+   "type": "string",
+   "arrowType": "string",
+   "description": "'Reserved for', as printed",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "winner",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Name of the Elected Candidate, as printed; null where the report prints '--'"
+  },
+  {
+   "name": "winner_basis",
+   "type": "string",
+   "arrowType": "string",
+   "description": "How the winner is known",
+   "constraints": {
+    "enum": [
+     "published"
+    ]
+   }
+  },
+  {
+   "name": "party",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Party: not printed in the ward report; null throughout"
+  },
+  {
+   "name": "unopposed",
+   "type": "integer",
+   "arrowType": "int8",
+   "description": "1 for 'Unanimous', 0 for 'Elected'; null where the report prints '--'",
+   "constraints": {
+    "minimum": 0,
+    "maximum": 1
+   }
+  },
+  {
+   "name": "script",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Script of the names",
+   "constraints": {
+    "required": true,
+    "enum": [
+     "latin"
+    ]
+   }
+  },
+  {
+   "name": "district_id",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's district code",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "mandal_id",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's mandal code",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "gp_code",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Commission's GP code within the mandal, from the GP dropdown frame (matched on the folded name)"
+  },
+  {
+   "name": "result_status",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Result Status, as printed; null where '--'",
+   "constraints": {
+    "enum": [
+     "Elected",
+     "Unanimous"
+    ]
+   }
+  },
+  {
+   "name": "source_path",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Saved report page (stored gzipped as <path>.gz)",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_url",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Form the report was posted to",
+   "constraints": {
+    "required": true
+   }
+  },
+  {
+   "name": "source_locator",
+   "type": "string",
+   "arrowType": "string",
+   "description": "Row on the saved page",
+   "constraints": {
+    "required": true
+   }
+  }
+ ]
+}

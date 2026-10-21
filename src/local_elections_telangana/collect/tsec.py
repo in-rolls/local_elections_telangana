@@ -50,6 +50,11 @@ MANDAL_SELECT = re.compile(r'id="mandal_id"[^>]*>(.*?)</select>', re.S)
 ELECTED_ROW = re.compile(r"<tr[^>]*>\s*<td[^>]*>\s*\d+\s*</td>")
 CANDIDATE_GP = re.compile(r"Gram Panchayat\s*:")
 
+# The form's offices (knowYour) and their report modes, from the live page's
+# JavaScript (read 2026-10-21). Ward members (GW) have an elected report only:
+# typeOfReport=A returns the form without a grid.
+MODES = {"S": "getSarpanchDetailsnew", "GW": "getGPWardDetailsnew"}
+
 log = logging.getLogger("tsec")
 
 
@@ -97,11 +102,11 @@ class Client:
         time.sleep(self.delay)
         return resp
 
-    def report(self, election, district, mandal, kind):
+    def report(self, election, district, mandal, kind, office="S"):
         form = {
             "org.apache.struts.taglib.html.TOKEN": self.token,
-            "mode": "getSarpanchDetailsnew",
-            "property(knowYour)": "S",
+            "mode": MODES[office],
+            "property(knowYour)": office,
             "property(year)": YEAR,
             "property(electionFor)": election,
             "property(district_id)": district,
@@ -148,12 +153,14 @@ def cached(client, query, rel, done):
     return read(rel)
 
 
-def fetch_report(client, election, district, mandal, kind, rel, done, attempts=3):
+def fetch_report(
+    client, election, district, mandal, kind, rel, done, attempts=3, office="S"
+):
     """Fetch one report; a page without the results grid is retried in a new session."""
     if rel in done:
         return read(rel)
     url = (
-        f"{BASE}/knowPRRural.se?mode=getSarpanchDetailsnew&year={YEAR}"
+        f"{BASE}/knowPRRural.se?mode={MODES[office]}&knowYour={office}&year={YEAR}"
         f"&electionFor={election}&district_id={district}&mandal_id={mandal}"
         f"&typeOfReport={kind}"
     )
@@ -161,7 +168,7 @@ def fetch_report(client, election, district, mandal, kind, rel, done, attempts=3
     if nogrid in done:
         return ""
     for attempt in range(1, attempts + 1):
-        resp = client.report(election, district, mandal, kind)
+        resp = client.report(election, district, mandal, kind, office)
         if 'id="GridView1"' in resp.text:
             save(resp.content, rel, url, "tsec.gov.in (POST)", resp.status_code)
             done[rel] = True
@@ -232,7 +239,42 @@ def collect_district(client, election, district, name, done):
     return row
 
 
-def main(delay=2.0):
+def collect_wards(client, election, district, name, done):
+    """Every mandal's ward-member report. The mandal list is the sarpanch run's:
+    the getMandal frame plus the mandals only the report dropdown lists."""
+    mandals = options(read(f"{OUT}/frame/mandals_{district}.html"))
+    known = {m for m, _ in mandals}
+    # A wholly urban district (Hyderabad) has only the sarpanch run's no-grid page.
+    rel = f"{OUT}/report_E/district_{district}.html"
+    if not any((ROOT / f"{rel}{gz}").exists() for gz in ("", ".gz")):
+        rel = rel.replace(".html", ".nogrid.html")
+    mandals += [(m, n) for m, n in report_mandals(read(rel)) if m not in known]
+    # TSEC has not published wards for every mandal: Adilabad's district report
+    # lists 292 of its GPs, and mandals such as Bheempur return the form without
+    # a grid even for a single GP. The district report is kept as a second count,
+    # and an empty mandal is tried once - a gap in the source, not a transient
+    # error.
+    rel = f"{OUT}/ward_E/district_{district}.html"
+    page = fetch_report(client, election, district, "0", "E", rel, done, office="GW")
+    whole = len(ELECTED_ROW.findall(page))
+    wards = 0
+    for mandal, _ in mandals:
+        rel = f"{OUT}/ward_E/by_mandal/district_{district}_{mandal}.html"
+        page = fetch_report(
+            client, election, district, mandal, "E", rel, done, attempts=1, office="GW"
+        )
+        wards += len(ELECTED_ROW.findall(page))
+    if wards != whole:
+        log.warning(
+            "%s: mandal reports %d wards, district report %d", name, wards, whole
+        )
+    row = {"district": district, "name": name, "mandals": len(mandals), "wards": wards}
+    row["district_report"] = whole
+    log.info("%s", row)
+    return row
+
+
+def main(delay=2.0, office="S"):
     (ROOT / OUT).mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
@@ -251,14 +293,21 @@ def main(delay=2.0):
     ]
     log.info("%d districts on the form", len(districts))
 
-    q = f"mode=getElectionFornew&year_id={YEAR}&knowYour=S"
-    opts = options(cached(client, q, f"{OUT}/election_options.html", done))
+    q = f"mode=getElectionFornew&year_id={YEAR}&knowYour={office}"
+    name = (
+        "election_options.html" if office == "S" else f"election_options_{office}.html"
+    )
+    opts = options(cached(client, q, f"{OUT}/{name}", done))
     chosen = [v for v, t in opts if "GRAM PANCHAYAT" in t.upper()]
     if len(chosen) != 1:
         raise RuntimeError(f"expected one {YEAR} GP election option, got {opts}")
     election = chosen[0]
     log.info("election id %s", election)
 
+    if office == "GW":
+        rows = [collect_wards(client, election, d, n, done) for d, n in districts]
+        log.info("totals: %d ward rows", sum(r["wards"] for r in rows))
+        return
     summary = []
     for district, name in districts:
         row = collect_district(client, election, district, name, done)
@@ -276,4 +325,6 @@ def main(delay=2.0):
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    main(office="GW" if "--wards" in sys.argv else "S")
