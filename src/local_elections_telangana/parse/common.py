@@ -20,10 +20,10 @@ SEAT_COLUMNS = [
     "gram_panchayat",
     "tier",
     "tier_local",
-    "reservation",
-    "caste_reservation",
-    "woman_reserved",
-    "reservation_raw",
+    "reserved_label",
+    "reserved_caste",
+    "reserved_woman",
+    "reserved_raw",
     "winner",
     "winner_basis",
     "party",
@@ -36,7 +36,7 @@ SEAT_COLUMNS = [
 
 
 def reservation(code):
-    """(reservation label, caste_reservation, woman_reserved) for a code."""
+    """(reservation label, reserved_caste, reserved_woman) for a code."""
     got = CODE.match(code.strip())
     if not got:
         raise ValueError(f"unknown reservation code {code!r}")

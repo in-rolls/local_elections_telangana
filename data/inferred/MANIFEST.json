@@ -1,0 +1,94 @@
+{
+ "method": "logit(naampy 0.11.0 on first and last word + fixed endings) fit on Telangana assembly candidates 2014/2018/2023 recorded sex",
+ "features": [
+  "logit_max",
+  "logit_min",
+  "logit_first",
+  "logit_last",
+  "abstain_first",
+  "abstain_last",
+  "female",
+  "male"
+ ],
+ "coefficients": {
+  "logit_max": 1.3264,
+  "logit_min": 1.1432,
+  "logit_first": -0.1678,
+  "logit_last": -0.0337,
+  "abstain_first": -0.8288,
+  "abstain_last": 0.3352,
+  "female": 2.1086,
+  "male": -2.3584
+ },
+ "intercept": -0.3087,
+ "labels": {
+  "names": 4986,
+  "women": 453,
+  "cv_auc": 0.9822,
+  "cv_accuracy_women": 0.9249,
+  "cv_accuracy_men": 0.9429
+ },
+ "label_calibration_cv": [
+  {
+   "band": "(-0.001, 0.2]",
+   "n": 3872,
+   "predicted": 0.0298,
+   "observed": 0.0026
+  },
+  {
+   "band": "(0.2, 0.4]",
+   "n": 342,
+   "predicted": 0.2883,
+   "observed": 0.038
+  },
+  {
+   "band": "(0.4, 0.6]",
+   "n": 160,
+   "predicted": 0.4873,
+   "observed": 0.1062
+  },
+  {
+   "band": "(0.6, 0.8]",
+   "n": 113,
+   "predicted": 0.6964,
+   "observed": 0.2301
+  },
+  {
+   "band": "(0.8, 1.0]",
+   "n": 499,
+   "predicted": 0.96,
+   "observed": 0.7756
+  }
+ ],
+ "target": {
+  "2019": {
+   "winners_scored": 12018,
+   "womens_seat_mean": 0.9146,
+   "womens_seat_below_half": 0.0592,
+   "open_seat_mean": 0.1748,
+   "both_words_abstained": 0.0001,
+   "naampy_model_revision": "72d5ec16d3ede38e3627504a108b69ffd114c813"
+  },
+  "2025": {
+   "winners_scored": 12702,
+   "womens_seat_mean": 0.9093,
+   "womens_seat_below_half": 0.0619,
+   "open_seat_mean": 0.1578,
+   "both_words_abstained": 0.0006,
+   "naampy_model_revision": "72d5ec16d3ede38e3627504a108b69ffd114c813"
+  }
+ },
+ "versions": {
+  "naampy": "0.11.0",
+  "scikit-learn": "1.9.1",
+  "pandas": "3.0.6"
+ },
+ "inputs": {
+  "data/raw/labels/lokdhaba_telangana_ae_2014.csv": "f70d4763f164e1f4c99f9aae9eaa476706f8b15763abf885d96d1b4edb3c931e",
+  "data/raw/labels/lokdhaba_telangana_ae_2018.csv": "4ee63542c04fb683a34f63d908be56a54791ae7eab6123f584e2c6065ddc7ede",
+  "data/raw/labels/eci_telangana_ae_2023_detailed_results.xlsx": "1780d1afbbddaa0657de619fc0babb88bb516f20f23f3f14ac5e0c8fb73557fe",
+  "data/2019/sarpanch_results.parquet": "a36308426daccb2960e9be73a4b92ade85b9fb3269fdd4804c6addfd65d80f27",
+  "data/2025/sarpanch_results.parquet": "0606569e358db5ca738e0a9e7a28a24bcbd05fa5c7eacea2e10fe903f5d61355"
+ },
+ "code_sha256": "541da6ea0674eb437acc7f1d293961e0159a1d5515469985d49c4b234d6cab00"
+}

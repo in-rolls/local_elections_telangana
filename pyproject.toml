@@ -10,10 +10,16 @@ license-files = ["LICENSE"]
 keywords = ["Telangana", "elections", "panchayats", "sarpanch", "reservation", "data"]
 dependencies = [
     "beautifulsoup4>=4.13",
-    "indic-transliteration>=2.3.82",
+    "frictionless>=5.21",
+    "naampy>=0.11.0",
+    "openpyxl>=3.1.5",
     "pandas>=2.3",
+    "pandera[io]>=0.34",
+    "preclink>=1.2.0",
     "pyarrow>=21",
+    "rapidfuzz>=3.9",
     "requests>=2.32",
+    "scikit-learn>=1.9.1",
 ]
 
 [project.urls]
@@ -21,6 +27,9 @@ Repository = "https://github.com/in-rolls/local_elections_telangana"
 Issues = "https://github.com/in-rolls/local_elections_telangana/issues"
 
 [dependency-groups]
+collect = [
+    "pysocks>=1.7.1",
+]
 dev = ["ruff>=0.14"]
 
 [tool.ruff]
