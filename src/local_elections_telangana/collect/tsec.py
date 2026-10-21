@@ -246,14 +246,27 @@ def collect_wards(client, election, district, name, done):
     known = {m for m, _ in mandals}
     page = read(f"{OUT}/report_E/district_{district}.html")
     mandals += [(m, n) for m, n in report_mandals(page) if m not in known]
+    # TSEC has not published wards for every mandal: Adilabad's district report
+    # lists 292 of its GPs, and mandals such as Bheempur return the form without
+    # a grid even for a single GP. The district report is kept as a second count,
+    # and an empty mandal is tried once - a gap in the source, not a transient
+    # error.
+    rel = f"{OUT}/ward_E/district_{district}.html"
+    page = fetch_report(client, election, district, "0", "E", rel, done, office="GW")
+    whole = len(ELECTED_ROW.findall(page))
     wards = 0
     for mandal, _ in mandals:
         rel = f"{OUT}/ward_E/by_mandal/district_{district}_{mandal}.html"
         page = fetch_report(
-            client, election, district, mandal, "E", rel, done, office="GW"
+            client, election, district, mandal, "E", rel, done, attempts=1, office="GW"
         )
         wards += len(ELECTED_ROW.findall(page))
+    if wards != whole:
+        log.warning(
+            "%s: mandal reports %d wards, district report %d", name, wards, whole
+        )
     row = {"district": district, "name": name, "mandals": len(mandals), "wards": wards}
+    row["district_report"] = whole
     log.info("%s", row)
     return row
 
