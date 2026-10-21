@@ -663,8 +663,37 @@ def raw_entries():
     return fetched, held
 
 
+def check_sources_exist():
+    """Every seat's source_path names a committed file, as written."""
+    tables = [
+        "2019/sarpanch_results.parquet",
+        "2019/ward_results.parquet",
+        "2025/sarpanch_results.parquet",
+        "2025/ward_results.parquet",
+    ]
+    paths = set()
+    for table in tables:
+        paths |= set(pd.read_parquet(DATA / table, columns=["source_path"]).source_path)
+    missing = sorted(p for p in paths if not (DATA.parent / p).exists())
+    return result(
+        "source_paths_exist",
+        "internal",
+        "fail" if missing else "pass",
+        "every source_path in the seat tables is a file in the repository",
+        blocking=True,
+        paths=len(paths),
+        missing=len(missing),
+        examples=missing[:3],
+    )
+
+
 def run_checks():
-    return checks_2019() + checks_2025() + checks_eenadu() + [link_preview()]
+    return (
+        checks_2019()
+        + checks_2025()
+        + checks_eenadu()
+        + [check_sources_exist(), link_preview()]
+    )
 
 
 def verify():

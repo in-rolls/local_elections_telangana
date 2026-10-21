@@ -166,6 +166,7 @@ saved page. All 30 match, by eye. Per-district counts are in MANIFEST.json under
 | `eenadu_pages_internally_complete` | internal | pass | Every page's row count equals its printed panchayat total: True. Pages whose printed declared count is below their total: 17. |
 | `eenadu_key_unique` | internal | warn | 2 (district, mandal, GP) keys appear more than once (4 rows). |
 | `eenadu_backing_party_vs_siasat` | external | pass | Share of GPs by backing party, Eenadu minus Siasat: {'INC': -0.0004, 'BRS': 0.0001, 'BJP': 0.0001, 'OTH': 0.0002}. Eenadu counts {'INC': 6804, 'BRS': 3514, 'OTH': 1653, 'BJP': 703} of 12,674; Siasat {'INC': 6822, 'BRS': 3519, 'BJP': 703, 'OTH': 1654} of 12,698 (declared results only). Both are newspaper tallies, so agreement shows the parse is faithful, not that either is official. Siasat, 18 Dec 2025 (article above): Congress-backed 6,822 (53.60%), BRS 3,519, BJP-backed 703, independents and others 1,654. |
+| `source_paths_exist` | internal | pass | every source_path in the seat tables is a file in the repository |
 | `link_preview_2019_2025` | internal | info | 2025 GP names found among 2019 GP names of the same district group: exact (folded) 87.7%; loose (vowel length, aspiration, v/w, s/sh collapsed) 89.7%; loose against a different district's names (chance benchmark) 4.5%. District groups absorb the 2019 and 2021 reorganisations. Groups in one year only: ['Medchal-Malkajgiri']. |
 
 <!-- checks:end -->

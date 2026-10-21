@@ -470,7 +470,7 @@
   },
   {
    "file": "2025/ward_results.parquet",
-   "sha256": "2a005516403c38749bb89521ec5434db572fd1b02fdb90dabcc9533a3441035b",
+   "sha256": "84f395df06a54c5fec77df8586c4ea72e93c9b5cea29d12ff589075328f05dbe",
    "rows": 62990,
    "schema": [
     {
@@ -28008,6 +28008,16 @@
     "BJP": 0.0001,
     "OTH": 0.0002
    }
+  },
+  {
+   "check": "source_paths_exist",
+   "appeals_to": "internal",
+   "status": "pass",
+   "blocking": true,
+   "detail": "every source_path in the seat tables is a file in the repository",
+   "paths": 1020,
+   "missing": 0,
+   "examples": []
   },
   {
    "check": "link_preview_2019_2025",

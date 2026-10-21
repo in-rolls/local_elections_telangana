@@ -106,9 +106,9 @@ def build():
         if ".nogrid." in path.name:
             continue
         d, m = FILE.search(path.name).groups()
-        rel = f"{RAW}/ward_E/by_mandal/{path.name.removesuffix('.gz')}"
+        rel = f"{RAW}/ward_E/by_mandal/{path.name}"
         for i, (gp, serial, ward, res, winner, status) in enumerate(
-            ward_rows(read(f"{rel}.gz")), 1
+            ward_rows(read(rel)), 1
         ):
             rows.append(
                 {
