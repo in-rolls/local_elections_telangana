@@ -17,7 +17,17 @@ import requests
 ROOT = Path(__file__).resolve().parents[3]
 RAW = ROOT / "data" / "raw"
 LOG = RAW / "fetch_log.csv"
-FIELDS = ["path", "url", "source", "sha256", "bytes", "status", "fetched_at_utc"]
+# The first six are local_elections docs/layout.md's required columns.
+FIELDS = [
+    "path",
+    "url",
+    "sha256",
+    "bytes",
+    "fetched_at_utc",
+    "method",
+    "source",
+    "status",
+]
 HEADERS = {"User-Agent": "Mozilla/5.0 (research data collection; in-rolls)"}
 
 
@@ -48,6 +58,7 @@ def record(rel, url, source, status):
                 "bytes": path.stat().st_size,
                 "status": status,
                 "fetched_at_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "method": "wayback" if "web.archive.org" in source else "live",
             }
         )
 

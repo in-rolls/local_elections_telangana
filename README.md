@@ -36,15 +36,15 @@ VM in Mumbai (`gcloud compute ssh <vm> -- -N -D 1080`, then
 
 | File | Rows | Each row is |
 |---|---:|---|
-| [2019/sarpanch_results.parquet](data/2019/sarpanch_results.parquet) | 12,018 | an elected sarpanch and their seat's reservation |
-| [2019/sarpanch_candidates.parquet](data/2019/sarpanch_candidates.parquet) | 35,121 | a contesting candidate's votes (12,137 GPs) |
-| [2019/ward_results.parquet](data/2019/ward_results.parquet) | 49,823 | an elected ward member and their seat's reservation |
-| [2025/sarpanch_results.parquet](data/2025/sarpanch_results.parquet) | 12,735 | a GP in the December 2025 election: reservation, winner, votes (SEC) |
-| [2025/ward_results.parquet](data/2025/ward_results.parquet) | 62,990 | an elected ward member in 2025 and their ward's caste reservation (SEC); no women's reservation, sex or votes are printed, and TSEC published wards for 7,140 of 12,735 GPs |
-| [2025/sarpanch_candidates.parquet](data/2025/sarpanch_candidates.parquet) | 39,207 | a contesting candidate's votes (SEC) |
-| [2025/eenadu_results.parquet](data/2025/eenadu_results.parquet) | 12,727 | a GP and its winner as Eenadu printed them (Telugu) |
-| [2025/eenadu_mandal_counts.parquet](data/2025/eenadu_mandal_counts.parquet) | 563 | a mandal block on an Eenadu page, with its printed counts |
-| [2025/eenadu_page_counts.parquet](data/2025/eenadu_page_counts.parquet) | 93 | an Eenadu page (district × phase), with its printed counts |
+| [release/2019/sarpanch_results.parquet](data/release/2019/sarpanch_results.parquet) | 12,018 | an elected sarpanch and their seat's reservation |
+| [release/2019/sarpanch_candidates.parquet](data/release/2019/sarpanch_candidates.parquet) | 35,121 | a contesting candidate's votes (12,137 GPs) |
+| [release/2019/ward_results.parquet](data/release/2019/ward_results.parquet) | 49,823 | an elected ward member and their seat's reservation |
+| [release/2025/sarpanch_results.parquet](data/release/2025/sarpanch_results.parquet) | 12,735 | a GP in the December 2025 election: reservation, winner, votes (SEC) |
+| [release/2025/ward_results.parquet](data/release/2025/ward_results.parquet) | 62,990 | an elected ward member in 2025 and their ward's caste reservation (SEC); no women's reservation, sex or votes are printed, and TSEC published wards for 7,140 of 12,735 GPs |
+| [release/2025/sarpanch_candidates.parquet](data/release/2025/sarpanch_candidates.parquet) | 39,207 | a contesting candidate's votes (SEC) |
+| [release/2025/eenadu_results.parquet](data/release/2025/eenadu_results.parquet) | 12,727 | a GP and its winner as Eenadu printed them (Telugu) |
+| [release/2025/eenadu_mandal_counts.parquet](data/release/2025/eenadu_mandal_counts.parquet) | 563 | a mandal block on an Eenadu page, with its printed counts |
+| [release/2025/eenadu_page_counts.parquet](data/release/2025/eenadu_page_counts.parquet) | 93 | an Eenadu page (district × phase), with its printed counts |
 
 Column definitions, sources, and every check with its result are in
 [data/README.md](data/README.md). [data/MANIFEST.json](data/MANIFEST.json)
@@ -54,15 +54,15 @@ of each raw file, and the check results.
 ```python
 import pandas as pd
 
-s19 = pd.read_parquet("data/2019/sarpanch_results.parquet")
-s25 = pd.read_parquet("data/2025/sarpanch_results.parquet")
+s19 = pd.read_parquet("data/release/2019/sarpanch_results.parquet")
+s25 = pd.read_parquet("data/release/2025/sarpanch_results.parquet")
 s19.groupby("reserved_caste")["reserved_woman"].mean()
 s25.groupby(["reserved_caste", "reserved_woman"]).size()
 ```
 
 ## Links between elections
 
-[data/linkage/](data/linkage/) links 11,464 of the 12,018 2019 seats to their
+[data/release/linkage/](data/release/linkage/) links 11,464 of the 12,018 2019 seats to their
 2025 seats, by the commission's codes and by GP names, and says how well the
 two agree.
 

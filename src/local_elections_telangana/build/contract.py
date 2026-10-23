@@ -1,4 +1,4 @@
-"""Validate the published tables against their Table Schemas in data/schemas/.
+"""Validate the published tables against their Table Schemas in schemas/.
 
 The JSON files are the contract, readable by any Frictionless tool. Each field
 also carries `arrowType`, the exact Arrow type the parquet stores. Checks run
@@ -20,14 +20,14 @@ import pyarrow.parquet as pq
 from pandera.errors import SchemaErrors
 from pandera.io.pandas_io import from_frictionless_schema
 
-from local_elections_telangana.parse.common import DATA
+from local_elections_telangana.parse.common import DATA, ROOT
 
-SCHEMAS = DATA / "schemas"
+SCHEMAS = ROOT / "schemas"
 # schema name -> published file
 TABLES = {
-    "2025_sarpanch_results": "2025/sarpanch_results.parquet",
-    "2025_sarpanch_candidates": "2025/sarpanch_candidates.parquet",
-    "2025_ward_results": "2025/ward_results.parquet",
+    "2025_sarpanch_results": "release/2025/sarpanch_results.parquet",
+    "2025_sarpanch_candidates": "release/2025/sarpanch_candidates.parquet",
+    "2025_ward_results": "release/2025/ward_results.parquet",
 }
 ARROW = {
     "string": pa.string(),

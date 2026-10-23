@@ -10,9 +10,9 @@ as results, reservations or election reports (SELECT below). Nothing is parsed
 here.
 
 Every saved file is logged in data/raw/fetch_log.csv with its sha256 and a
-logged path is not fetched again, so a rerun resumes. data/raw/tsec_docs/
-index.csv lists each document's title, the menu pages that link it and its
-site path.
+logged path is not fetched again, so a rerun resumes.
+data/search_log/tsec_docs_index.csv lists each document's title, the menu pages
+that link it and its site path.
 
 Run: python -m local_elections_telangana.collect.tsec_docs
 """
@@ -29,6 +29,7 @@ from local_elections_telangana.collect.fetch import ROOT, logged, save
 from local_elections_telangana.collect.tsec import BASE, TOKEN, session
 
 OUT = "data/raw/tsec_docs"
+INDEX = "data/search_log/tsec_docs_index.csv"
 MENU_ID = re.compile(r"getLeftMenuData\('([0-9a-f]{32})'\)[^>]*>([^<]*)")
 DOC = re.compile(r"getDownload\('([A-Za-z0-9+/=]+)'\)\"?[^>]*>(.*?)</a>", re.S)
 # Site folders (the part after /Uploads/TSEC/pdf/) kept whole, and folders
@@ -154,7 +155,7 @@ def main(delay=2.0):
         log.info("saved %s (%d bytes)", rel, len(resp.content))
         time.sleep(delay)
 
-    with (ROOT / OUT / "index.csv").open("w", newline="", encoding="utf-8") as fh:
+    with (ROOT / INDEX).open("w", newline="", encoding="utf-8") as fh:
         writer = csv.writer(fh, lineterminator="\n")
         writer.writerow(["title", "menu_pages", "site_path", "local_path", "selected"])
         for path, d in sorted(docs.items()):

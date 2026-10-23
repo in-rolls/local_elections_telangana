@@ -27,7 +27,12 @@ import re
 
 import pandas as pd
 
-from local_elections_telangana.parse.common import DATA, SEAT_COLUMNS, reservation
+from local_elections_telangana.parse.common import (
+    DATA,
+    RELEASE,
+    SEAT_COLUMNS,
+    reservation,
+)
 
 RAW = DATA / "raw" / "2019"
 WARDS = "data/raw/2019/ward"
@@ -171,10 +176,12 @@ def wards():
 
 
 def main():
-    (DATA / "2019").mkdir(exist_ok=True)
-    seats().to_parquet(DATA / "2019" / "sarpanch_results.parquet", index=False)
-    candidates().to_parquet(DATA / "2019" / "sarpanch_candidates.parquet", index=False)
-    wards().to_parquet(DATA / "2019" / "ward_results.parquet", index=False)
+    (RELEASE / "2019").mkdir(parents=True, exist_ok=True)
+    seats().to_parquet(RELEASE / "2019" / "sarpanch_results.parquet", index=False)
+    candidates().to_parquet(
+        RELEASE / "2019" / "sarpanch_candidates.parquet", index=False
+    )
+    wards().to_parquet(RELEASE / "2019" / "ward_results.parquet", index=False)
 
 
 if __name__ == "__main__":

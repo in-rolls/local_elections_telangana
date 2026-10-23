@@ -28,6 +28,7 @@ import pandas as pd
 
 from local_elections_telangana.parse.common import (
     DATA,
+    RELEASE,
     SEAT_COLUMNS,
     fold,
     reservation,
@@ -349,9 +350,9 @@ def district_report_counts():
 
 def main():
     seats, cands = build()
-    (DATA / "2025").mkdir(exist_ok=True)
-    seats.to_parquet(DATA / "2025" / "sarpanch_results.parquet", index=False)
-    cands.to_parquet(DATA / "2025" / "sarpanch_candidates.parquet", index=False)
+    (RELEASE / "2025").mkdir(parents=True, exist_ok=True)
+    seats.to_parquet(RELEASE / "2025" / "sarpanch_results.parquet", index=False)
+    cands.to_parquet(RELEASE / "2025" / "sarpanch_candidates.parquet", index=False)
 
 
 if __name__ == "__main__":

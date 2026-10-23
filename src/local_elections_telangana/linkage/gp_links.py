@@ -55,13 +55,13 @@ from preclink import Pipeline
 from rapidfuzz import fuzz
 
 from local_elections_telangana.build.release import GROUP, RENAMED_2019, loose
-from local_elections_telangana.parse.common import DATA, fold
+from local_elections_telangana.parse.common import DATA, RELEASE, fold
 
-OUT = DATA / "linkage"
+OUT = RELEASE / "linkage"
 SOURCES = {
-    "seats_2019": DATA / "2019/sarpanch_results.parquet",
-    "candidates_2019": DATA / "2019/sarpanch_candidates.parquet",
-    "seats_2025": DATA / "2025/sarpanch_results.parquet",
+    "seats_2019": RELEASE / "2019/sarpanch_results.parquet",
+    "candidates_2019": RELEASE / "2019/sarpanch_candidates.parquet",
+    "seats_2025": RELEASE / "2025/sarpanch_results.parquet",
 }
 # Districts carved out in 2019 are filed under their parents in the 2019
 # listing; group them with the parent.

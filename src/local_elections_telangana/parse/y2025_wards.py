@@ -20,7 +20,7 @@ import re
 
 import pandas as pd
 
-from local_elections_telangana.parse.common import DATA, SEAT_COLUMNS, fold
+from local_elections_telangana.parse.common import DATA, RELEASE, SEAT_COLUMNS, fold
 
 RAW = "data/raw/2025/tsec"
 URL = "https://tsec.gov.in/knowPRRural.se"
@@ -153,8 +153,8 @@ def build():
 
 def main():
     wards = build()
-    (DATA / "2025").mkdir(exist_ok=True)
-    wards.to_parquet(DATA / "2025" / "ward_results.parquet", index=False)
+    (RELEASE / "2025").mkdir(parents=True, exist_ok=True)
+    wards.to_parquet(RELEASE / "2025" / "ward_results.parquet", index=False)
     gps = wards.groupby(["district_id", "mandal_id", "gram_panchayat"]).ngroups
     print(f"{len(wards):,} wards in {gps:,} GPs")
 

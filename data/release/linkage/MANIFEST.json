@@ -8,11 +8,11 @@
   "margin": 0.05
  },
  "inputs": {
-  "data/2019/sarpanch_results.parquet": "a36308426daccb2960e9be73a4b92ade85b9fb3269fdd4804c6addfd65d80f27",
-  "data/2019/sarpanch_candidates.parquet": "846ec72827fa66a31e92a28876908fa9f40027554222e5e1e695be8e6a68f9ee",
-  "data/2025/sarpanch_results.parquet": "0606569e358db5ca738e0a9e7a28a24bcbd05fa5c7eacea2e10fe903f5d61355"
+  "data/release/2019/sarpanch_results.parquet": "a36308426daccb2960e9be73a4b92ade85b9fb3269fdd4804c6addfd65d80f27",
+  "data/release/2019/sarpanch_candidates.parquet": "846ec72827fa66a31e92a28876908fa9f40027554222e5e1e695be8e6a68f9ee",
+  "data/release/2025/sarpanch_results.parquet": "0606569e358db5ca738e0a9e7a28a24bcbd05fa5c7eacea2e10fe903f5d61355"
  },
- "code_sha256": "9a8261cfea1b91ecb6ef79a3b49cc2f34c814244251c679a66c14b5edc5f88f7",
+ "code_sha256": "2222cbdc0184d41c0800676a1e4dabe8769dfc87a592374cbd4e3604b567eac4",
  "output": {
   "path": "gp_2019_2025.parquet",
   "rows": 11464,

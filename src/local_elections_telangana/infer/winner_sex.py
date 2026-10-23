@@ -42,10 +42,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import GroupKFold
 
-from local_elections_telangana.parse.common import DATA
+from local_elections_telangana.parse.common import DATA, RELEASE
 
-OUT = DATA / "inferred"
-SEATS = {year: DATA / f"{year}/sarpanch_results.parquet" for year in (2019, 2025)}
+OUT = RELEASE / "inferred"
+SEATS = {year: RELEASE / f"{year}/sarpanch_results.parquet" for year in (2019, 2025)}
 LABELS = {
     "data/raw/labels/lokdhaba_telangana_ae_2014.csv": ("Candidate", "Sex"),
     "data/raw/labels/lokdhaba_telangana_ae_2018.csv": ("Candidate", "Sex"),

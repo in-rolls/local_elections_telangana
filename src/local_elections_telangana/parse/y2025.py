@@ -26,7 +26,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 from local_elections_telangana.collect.sources_2025 import EENADU, EENADU_DISTRICTS
-from local_elections_telangana.parse.common import DATA, SEAT_COLUMNS
+from local_elections_telangana.parse.common import DATA, RELEASE, SEAT_COLUMNS
 
 RAW = DATA / "raw" / "2025" / "eenadu"
 
@@ -182,10 +182,10 @@ def build():
 
 def main():
     seats, mandals, pages = build()
-    (DATA / "2025").mkdir(exist_ok=True)
-    seats.to_parquet(DATA / "2025" / "eenadu_results.parquet", index=False)
-    mandals.to_parquet(DATA / "2025" / "eenadu_mandal_counts.parquet", index=False)
-    pages.to_parquet(DATA / "2025" / "eenadu_page_counts.parquet", index=False)
+    (RELEASE / "2025").mkdir(parents=True, exist_ok=True)
+    seats.to_parquet(RELEASE / "2025" / "eenadu_results.parquet", index=False)
+    mandals.to_parquet(RELEASE / "2025" / "eenadu_mandal_counts.parquet", index=False)
+    pages.to_parquet(RELEASE / "2025" / "eenadu_page_counts.parquet", index=False)
 
 
 if __name__ == "__main__":

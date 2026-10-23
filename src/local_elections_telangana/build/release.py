@@ -25,19 +25,19 @@ import pandas as pd
 from local_elections_telangana.build import contract
 from local_elections_telangana.build import reference as ref
 from local_elections_telangana.parse import y2025_sec
-from local_elections_telangana.parse.common import DATA, ROOT, fold
+from local_elections_telangana.parse.common import DATA, RELEASE, ROOT, fold
 
 MANIFEST = DATA / "MANIFEST.json"
 OUTPUTS = [
-    "2019/sarpanch_results.parquet",
-    "2019/sarpanch_candidates.parquet",
-    "2019/ward_results.parquet",
-    "2025/sarpanch_results.parquet",
-    "2025/sarpanch_candidates.parquet",
-    "2025/ward_results.parquet",
-    "2025/eenadu_results.parquet",
-    "2025/eenadu_mandal_counts.parquet",
-    "2025/eenadu_page_counts.parquet",
+    "release/2019/sarpanch_results.parquet",
+    "release/2019/sarpanch_candidates.parquet",
+    "release/2019/ward_results.parquet",
+    "release/2025/sarpanch_results.parquet",
+    "release/2025/sarpanch_candidates.parquet",
+    "release/2025/ward_results.parquet",
+    "release/2025/eenadu_results.parquet",
+    "release/2025/eenadu_mandal_counts.parquet",
+    "release/2025/eenadu_page_counts.parquet",
 ]
 # 2019 candidate-table district names that changed before the elected listing
 # was taken.
@@ -88,8 +88,8 @@ def result(name, appeals_to, status, detail, blocking=False, **numbers):
 
 
 def checks_2019():
-    seats = pd.read_parquet(DATA / "2019/sarpanch_results.parquet")
-    cands = pd.read_parquet(DATA / "2019/sarpanch_candidates.parquet")
+    seats = pd.read_parquet(RELEASE / "2019/sarpanch_results.parquet")
+    cands = pd.read_parquet(RELEASE / "2019/sarpanch_candidates.parquet")
     out = []
     n = len(seats)
     total = ref.TOTAL_2019["value"]
@@ -158,7 +158,7 @@ def checks_2019():
             agree=round(float(agree), 4),
         )
     )
-    wards = pd.read_parquet(DATA / "2019/ward_results.parquet")
+    wards = pd.read_parquet(RELEASE / "2019/ward_results.parquet")
     n = len(wards)
     out.append(
         result(
@@ -215,8 +215,8 @@ def sec_district_counts():
 
 def checks_2025():
     """The commission's own 2025 tables: two reports and published totals."""
-    seats = pd.read_parquet(DATA / "2025/sarpanch_results.parquet")
-    cands = pd.read_parquet(DATA / "2025/sarpanch_candidates.parquet")
+    seats = pd.read_parquet(RELEASE / "2025/sarpanch_results.parquet")
+    cands = pd.read_parquet(RELEASE / "2025/sarpanch_candidates.parquet")
     out = []
 
     problems = {name: contract.failures(name) for name in contract.TABLES}
@@ -226,7 +226,7 @@ def checks_2025():
             "2025_table_schema",
             "internal",
             "fail" if bad else "pass",
-            "Each 2025 table matches its Table Schema in data/schemas/ (Arrow "
+            "Each 2025 table matches its Table Schema in schemas/ (Arrow "
             f"types, required fields, codes, keys). Failing: {bad or 'none'}.",
             blocking=True,
         )
@@ -415,7 +415,7 @@ def checks_2025():
         )
     )
 
-    e = pd.read_parquet(DATA / "2025/eenadu_results.parquet")
+    e = pd.read_parquet(RELEASE / "2025/eenadu_results.parquet")
     ours = seats.groupby("district").size()
     theirs = e.groupby("district").size()
     gap = (ours - theirs.reindex(ours.index)).dropna().astype(int)
@@ -435,8 +435,8 @@ def checks_2025():
 
 
 def checks_eenadu():
-    seats = pd.read_parquet(DATA / "2025/eenadu_results.parquet")
-    pages = pd.read_parquet(DATA / "2025/eenadu_page_counts.parquet")
+    seats = pd.read_parquet(RELEASE / "2025/eenadu_results.parquet")
+    pages = pd.read_parquet(RELEASE / "2025/eenadu_page_counts.parquet")
     out = []
     n = len(seats)
     sec = sec_district_counts()
@@ -591,8 +591,8 @@ def link_preview():
     A preview for the 2019 -> 2025 link, not the link itself: names only, no
     mandal, no one-to-one assignment.
     """
-    s19 = pd.read_parquet(DATA / "2019/sarpanch_results.parquet")
-    s25 = pd.read_parquet(DATA / "2025/sarpanch_results.parquet")
+    s19 = pd.read_parquet(RELEASE / "2019/sarpanch_results.parquet")
+    s25 = pd.read_parquet(RELEASE / "2025/sarpanch_results.parquet")
     s19 = s19.assign(district=s19["district"].map(group))
     s25 = s25.assign(district=s25["district"].map(group))
     exact19 = set(zip(s19["district"], s19["gram_panchayat"].map(fold), strict=True))
@@ -648,28 +648,18 @@ def files_entry():
 
 
 def raw_entries():
-    log = ROOT / "data/raw/fetch_log.csv"
-    with log.open(encoding="utf-8") as fh:
-        fetched = list(csv.DictReader(fh))
-    # Files held rather than fetched: copied from in-rolls/local_elections,
-    # where they were committed without a fetch record.
-    logged = {row["path"] for row in fetched}
-    held = [
-        {"path": str(p.relative_to(ROOT)), "sha256": sha256(p)}
-        for folder in ("raw/2019", "raw/urban", "raw/docs")
-        for p in sorted((DATA / folder).rglob("*"))
-        if p.is_file() and str(p.relative_to(ROOT)) not in logged
-    ]
-    return fetched, held
+    """Every raw file's fetch-log row, fetched or copied (method=copy)."""
+    with (ROOT / "data/raw/fetch_log.csv").open(encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
 
 
 def check_sources_exist():
     """Every seat's source_path names a committed file, as written."""
     tables = [
-        "2019/sarpanch_results.parquet",
-        "2019/ward_results.parquet",
-        "2025/sarpanch_results.parquet",
-        "2025/ward_results.parquet",
+        "release/2019/sarpanch_results.parquet",
+        "release/2019/ward_results.parquet",
+        "release/2025/sarpanch_results.parquet",
+        "release/2025/ward_results.parquet",
     ]
     paths = set()
     for table in tables:
@@ -702,13 +692,9 @@ def verify():
     for entry in manifest["outputs"]:
         if sha256(DATA / entry["file"]) != entry["sha256"]:
             problems.append(f"hash changed: {entry['file']}")
-    fetched, _ = raw_entries()
-    for row in fetched:
+    for row in raw_entries():
         if raw_sha256(ROOT / row["path"]) != row["sha256"]:
             problems.append(f"raw file missing or changed since fetch: {row['path']}")
-    for row in manifest["raw_held"]:
-        if sha256(ROOT / row["path"]) != row["sha256"]:
-            problems.append(f"raw file changed: {row['path']}")
     checks = run_checks()
     blocking = [c["check"] for c in checks if c["blocking"] and c["status"] == "fail"]
     stale = [
@@ -728,13 +714,11 @@ def verify():
 
 
 def write():
-    fetched, held = raw_entries()
     checks = run_checks()
     manifest = {
         "format_version": 1,
         "outputs": files_entry(),
-        "raw_fetched": fetched,
-        "raw_held": held,
+        "raw": raw_entries(),
         "checks": checks,
     }
     MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\n")

@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "data"
+RELEASE = DATA / "release"
 
 # The commission's codes: caste category, then (G)eneral or (W)oman.
 # UR is unreserved, which the pooled schema calls NONE.

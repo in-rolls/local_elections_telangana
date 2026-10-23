@@ -10,10 +10,10 @@
 | `raw/2019/grampanchayatelectionsdata_2019_sarpanch.csv` | 35,121 candidate rows: votes per candidate, plus valid, rejected and tendered votes and NOTA per GP, with SEC district/mandal/GP codes | Telangana Open Data Portal, `https://data.telangana.gov.in/dataset/telangana-gram-panchayat-sarpanch-election-data-2019` (recorded in local_elections' 2022 readme; the portal does not answer from outside India). |
 
 Both files were copied unchanged from `local_elections/data/telangana/raw/`.
-`raw_held` in MANIFEST.json gives their hashes.
+Their fetch-log rows have `method=copy` and name the hub path in `copied_from`.
 
 Also from in-rolls/local_elections (held there until commit `a89a170`, now
-here; hashes in MANIFEST.json `raw_held`):
+here; their fetch-log rows have `method=copy` and `copied_from`):
 
 | File | What |
 |---|---|
@@ -77,7 +77,7 @@ in-rolls/local_elections:
 | `source_path`, `source_url`, `source_locator` | Committed raw file, its origin, and the position in it: `row N` (CSV record after the header) or `mandal block k, row r` (k-th mandal block on the page, r-th row of its table) |
 
 `2025/sarpanch_results.parquet` also has (types and constraints in
-[schemas/2025_sarpanch_results.json](schemas/2025_sarpanch_results.json),
+[schemas/2025_sarpanch_results.json](../schemas/2025_sarpanch_results.json),
 checked on every `make data`):
 
 | Column | Meaning |
@@ -90,7 +90,7 @@ checked on every `make data`):
 | `total_valid_votes`, `rejected_votes`, `tendered_votes`, `nota_votes` | From the A report's GP caption |
 | `a_path`, `a_locator` | Where the GP is in the A report; `source_*` point to the E report |
 
-`2025/sarpanch_candidates.parquet` ([schema](schemas/2025_sarpanch_candidates.json)):
+`2025/sarpanch_candidates.parquet` ([schema](../schemas/2025_sarpanch_candidates.json)):
 one row per candidate: `district`, `block`, `gram_panchayat`, codes, `serial`,
 `candidate`, `candidate_votes`, `elected`, provenance.
 
@@ -151,7 +151,7 @@ saved page. All 30 match, by eye. Per-district counts are in MANIFEST.json under
 | `2019_winner_is_top_vote_getter` | external | pass | Of 9,954 GPs found in both the SEC elected listing and the open-data vote table (untied, votes > 0), the listed winner is the top vote-getter in 100.0%. Mismatches include spelling differences between the two releases. |
 | `2019_ward_coverage_vs_notified` | external | warn | 49,823 ward members against 112,242 ward seats (44.4%); the listing covers part of the state. Source: Ward-member seats in the 2019 GP election as recorded in in-rolls/local_elections (data/telangana readme, 'vs published'). |
 | `2019_ward_key_and_women_share` | internal | warn | (district, mandal, GP, ward) repeats on 26 rows; 51.09% of wards reserved for women; 12,977 filled unanimously. |
-| `2025_table_schema` | internal | pass | Each 2025 table matches its Table Schema in data/schemas/ (Arrow types, required fields, codes, keys). Failing: none. |
+| `2025_table_schema` | internal | pass | Each 2025 table matches its Table Schema in schemas/ (Arrow types, required fields, codes, keys). Failing: none. |
 | `2025_mandal_reports_vs_district_reports` | internal | pass | GPs in the mandal reports against the district reports, per district and report: 0 of 62 differ (mandal total 25,442, district total 25,442). |
 | `2025_elected_report_vs_candidates_report` | internal | pass | Of 12,702 GPs in both mandal reports, the E report's winner is the A report's 'Elected' candidate in 99.99%. Only in E: 0; only in A: 33. |
 | `2025_reservation_same_in_both_reports` | internal | pass | Reservation code agrees between the E and A reports for 12,702 of 12,702 GPs. |
