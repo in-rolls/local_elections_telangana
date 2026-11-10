@@ -29,6 +29,17 @@ TABLES = {
     "2025_sarpanch_candidates": "release/2025/sarpanch_candidates.parquet",
     "2025_ward_results": "release/2025/ward_results.parquet",
 }
+GHMC_TABLES = {
+    "ghmc_candidates_2016": "release/urban/ghmc/candidates_2016.parquet",
+    "ghmc_candidate_profiles_2020": (
+        "release/urban/ghmc/candidate_profiles_2020.parquet"
+    ),
+    "ghmc_candidate_returns_2020": "release/urban/ghmc/candidate_returns_2020.parquet",
+    "ghmc_winners": "release/urban/ghmc/winners.parquet",
+}
+TABLES.update(GHMC_TABLES)
+
+
 ARROW = {
     "string": pa.string(),
     "bool": pa.bool_(),
@@ -79,6 +90,20 @@ def load(path):
 
 def failures(name):
     """[(column, check, failing rows, example)] for one table; empty if valid."""
+    if name in GHMC_TABLES:
+        expected = pa.schema(
+            [
+                pa.field(
+                    field["name"],
+                    ARROW[field["arrowType"]],
+                    nullable=not field.get("constraints", {}).get("required", False),
+                )
+                for field in descriptor(name)["fields"]
+            ]
+        )
+        actual = pq.read_schema(DATA / TABLES[name])
+        if not actual.equals(expected):
+            return [("schema", "exact_arrow_schema", 1, str(actual))]
     frame = load(DATA / TABLES[name])
     try:
         schema(name).validate(frame, lazy=True)

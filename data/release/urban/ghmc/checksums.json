@@ -1,0 +1,12 @@
+{
+  "README.md": "0e3d213af96c3daf816e71ac26de5949977ac1a01f7d2f5f211d95c2c2d6a3bd",
+  "candidate_profiles_2020.parquet": "5a2dfffaed0b6cec3a433fe012e763c996666213658fb55cb6733529bd63e98f",
+  "candidate_returns_2020.parquet": "175852c446f4904cc8416b0c2484637b8cb0dd2bafc528083e3c0145a6b74cdd",
+  "candidates_2016.parquet": "58cc75d949d40159a6b7b3e1b01691b1a79f53beb5fc0b31991036a287989bf2",
+  "dictionary.csv": "3c91c16880f5a2aed2fa9265c09ed2e27165fd1189acf7c342b3fca51d597971",
+  "name_cell_checks.csv": "eb79c8369ef6244cc40b67b996a433ac521a7a8b1ddf029ec4e7bb16958a50d2",
+  "profile.json": "76e01efa7f5915f38bdefba0d49636f30aa9c74b52668e8d16f3fc04fac288f2",
+  "renames.csv": "2759ac3f356dd25894772d58a50bb44110ccddbfd238c59dde1282c8272c7438",
+  "schema.json": "1b8640ec37651f6b1a95f8abcec5d3e05fd791d24aeab227e07a28c338e80fe9",
+  "winners.parquet": "88cc15c5cc56f9bd0dfbcd985674af680bbbf348a433ebe32c37eda80d713d27"
+}

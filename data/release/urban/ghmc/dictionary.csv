@@ -1,0 +1,110 @@
+table,column,type,nullable,description
+candidates_2016,year,int16,False,Election year.
+candidates_2016,body,string,False,Municipal corporation explicitly identified by all sources.
+candidates_2016,ward_no,string,False,"Ward identifier, printed or linked as described by ward_link_basis."
+candidates_2016,ward_name_raw,string,False,Printed ward name; candidate returns use the official winner-table name.
+candidates_2016,ward_source_path,string,False,Repository-relative source supporting the ward identifier.
+candidates_2016,ward_link_basis,string,False,Evidence used for the ward identifier.
+candidates_2016,ward_label_cell_raw,string,True,"Original return ward cell, including blank or truncated text; full source cells remain in raw_record."
+candidates_2016,candidate_no,string,False,Candidate serial in this source; not interchangeable across sources without validation.
+candidates_2016,candidate_name,string,False,Printed candidate name with whitespace normalized; punctuation retained.
+candidates_2016,candidate_woman_raw,string,True,Separately printed source sex;null if absent.
+candidates_2016,candidate_woman,int8,True,"1=female,0=male,null=unknown;never inferred from reservation/name."
+candidates_2016,candidate_age,int16,True,Age in years as printed in the November2020 profile.
+candidates_2016,candidate_education,string,True,Printed educational credential label;source -- retained.
+candidates_2016,candidate_occupation,string,True,Printed occupation label;source -- retained.
+candidates_2016,candidate_caste_raw,string,True,"Printed candidate social category, separate from seat quota."
+candidates_2016,candidate_caste,string,True,Candidate caste normalized from their own printed category.
+candidates_2016,elected,bool,False,Printed Winner/Elected status;null when source does not report election outcomes.
+candidates_2016,party,string,False,"Printed party label, not harmonized across sources."
+candidates_2016,votes,int32,False,Valid votes printed for this candidate or winner; null if source does not report votes.
+candidates_2016,reserved_raw,string,False,"Printed adopted seat reservation, identified by reserved_source_path."
+candidates_2016,reserved_caste,string,False,Normalized seat caste quota; NONE means no caste restriction.
+candidates_2016,reserved_woman,int8,True,"Recorded women reservation:1=yes,0=no,null=unknown. Independent of officeholder sex."
+candidates_2016,reserved_basis,string,False,Source-cell reading or separately recorded official winner-table reservation.
+candidates_2016,reserved_source_path,string,False,Repository-relative source used for adopted seat reservation.
+candidates_2016,source_path,string,False,Repository-relative original candidate/winner source.
+candidates_2016,source_page,int16,False,One-based physical PDF page.
+candidates_2016,source_row,int16,False,2016 text line;2020 return table row;profile printed serial;winner printed ward serial.
+candidates_2016,source_sha256,string,False,SHA256 of original source_path bytes.
+candidates_2016,raw_record,string,False,"JSON of complete original extracted line/cells, with source values unchanged."
+candidate_profiles_2020,year,int16,False,Election year.
+candidate_profiles_2020,body,string,False,Municipal corporation explicitly identified by all sources.
+candidate_profiles_2020,ward_no,string,False,"Ward identifier, printed or linked as described by ward_link_basis."
+candidate_profiles_2020,ward_name_raw,string,False,Printed ward name; candidate returns use the official winner-table name.
+candidate_profiles_2020,ward_source_path,string,False,Repository-relative source supporting the ward identifier.
+candidate_profiles_2020,ward_link_basis,string,False,Evidence used for the ward identifier.
+candidate_profiles_2020,ward_label_cell_raw,string,True,"Original return ward cell, including blank or truncated text; full source cells remain in raw_record."
+candidate_profiles_2020,candidate_no,string,False,Candidate serial in this source; not interchangeable across sources without validation.
+candidate_profiles_2020,candidate_name,string,False,Printed candidate name with whitespace normalized; punctuation retained.
+candidate_profiles_2020,candidate_woman_raw,string,True,Separately printed source sex;null if absent.
+candidate_profiles_2020,candidate_woman,int8,True,"1=female,0=male,null=unknown;never inferred from reservation/name."
+candidate_profiles_2020,candidate_age,int16,True,Age in years as printed in the November2020 profile.
+candidate_profiles_2020,candidate_education,string,True,Printed educational credential label;source -- retained.
+candidate_profiles_2020,candidate_occupation,string,True,Printed occupation label;source -- retained.
+candidate_profiles_2020,candidate_caste_raw,string,True,"Printed candidate social category, separate from seat quota."
+candidate_profiles_2020,candidate_caste,string,True,Candidate caste normalized from their own printed category.
+candidate_profiles_2020,elected,bool,True,Printed Winner/Elected status;null when source does not report election outcomes.
+candidate_profiles_2020,party,string,False,"Printed party label, not harmonized across sources."
+candidate_profiles_2020,votes,int32,True,Valid votes printed for this candidate or winner; null if source does not report votes.
+candidate_profiles_2020,reserved_raw,string,False,"Printed adopted seat reservation, identified by reserved_source_path."
+candidate_profiles_2020,reserved_caste,string,False,Normalized seat caste quota; NONE means no caste restriction.
+candidate_profiles_2020,reserved_woman,int8,True,"Recorded women reservation:1=yes,0=no,null=unknown. Independent of officeholder sex."
+candidate_profiles_2020,reserved_basis,string,False,Source-cell reading or separately recorded official winner-table reservation.
+candidate_profiles_2020,reserved_source_path,string,False,Repository-relative source used for adopted seat reservation.
+candidate_profiles_2020,source_path,string,False,Repository-relative original candidate/winner source.
+candidate_profiles_2020,source_page,int16,False,One-based physical PDF page.
+candidate_profiles_2020,source_row,int16,False,2016 text line;2020 return table row;profile printed serial;winner printed ward serial.
+candidate_profiles_2020,source_sha256,string,False,SHA256 of original source_path bytes.
+candidate_profiles_2020,raw_record,string,False,"JSON of complete original extracted line/cells, with source values unchanged."
+candidate_returns_2020,year,int16,False,Election year.
+candidate_returns_2020,body,string,False,Municipal corporation explicitly identified by all sources.
+candidate_returns_2020,ward_no,string,False,"Ward identifier, printed or linked as described by ward_link_basis."
+candidate_returns_2020,ward_name_raw,string,False,Printed ward name; candidate returns use the official winner-table name.
+candidate_returns_2020,ward_source_path,string,False,Repository-relative source supporting the ward identifier.
+candidate_returns_2020,ward_link_basis,string,False,Evidence used for the ward identifier.
+candidate_returns_2020,ward_label_cell_raw,string,True,"Original return ward cell, including blank or truncated text; full source cells remain in raw_record."
+candidate_returns_2020,candidate_no,string,False,Candidate serial in this source; not interchangeable across sources without validation.
+candidate_returns_2020,candidate_name,string,False,Printed candidate name with whitespace normalized; punctuation retained.
+candidate_returns_2020,candidate_woman_raw,string,True,Separately printed source sex;null if absent.
+candidate_returns_2020,candidate_woman,int8,True,"1=female,0=male,null=unknown;never inferred from reservation/name."
+candidate_returns_2020,candidate_age,int16,True,Age in years as printed in the November2020 profile.
+candidate_returns_2020,candidate_education,string,True,Printed educational credential label;source -- retained.
+candidate_returns_2020,candidate_occupation,string,True,Printed occupation label;source -- retained.
+candidate_returns_2020,candidate_caste_raw,string,True,"Printed candidate social category, separate from seat quota."
+candidate_returns_2020,candidate_caste,string,True,Candidate caste normalized from their own printed category.
+candidate_returns_2020,elected,bool,False,Printed Winner/Elected status;null when source does not report election outcomes.
+candidate_returns_2020,party,string,False,"Printed party label, not harmonized across sources."
+candidate_returns_2020,votes,int32,False,Valid votes printed for this candidate or winner; null if source does not report votes.
+candidate_returns_2020,reserved_raw,string,False,"Printed adopted seat reservation, identified by reserved_source_path."
+candidate_returns_2020,reserved_caste,string,False,Normalized seat caste quota; NONE means no caste restriction.
+candidate_returns_2020,reserved_woman,int8,True,"Recorded women reservation:1=yes,0=no,null=unknown. Independent of officeholder sex."
+candidate_returns_2020,reserved_basis,string,False,Source-cell reading or separately recorded official winner-table reservation.
+candidate_returns_2020,reserved_source_path,string,False,Repository-relative source used for adopted seat reservation.
+candidate_returns_2020,source_path,string,False,Repository-relative original candidate/winner source.
+candidate_returns_2020,source_page,int16,False,One-based physical PDF page.
+candidate_returns_2020,source_row,int16,False,2016 text line;2020 return table row;profile printed serial;winner printed ward serial.
+candidate_returns_2020,source_sha256,string,False,SHA256 of original source_path bytes.
+candidate_returns_2020,raw_record,string,False,"JSON of complete original extracted line/cells, with source values unchanged."
+winners,year,int16,False,Election year.
+winners,body,string,False,Municipal corporation explicitly identified by all sources.
+winners,ward_no,string,False,"Ward identifier, printed or linked as described by ward_link_basis."
+winners,ward_name_raw,string,False,Printed ward name; candidate returns use the official winner-table name.
+winners,ward_source_path,string,False,Repository-relative source supporting the ward identifier.
+winners,ward_link_basis,string,False,Evidence used for the ward identifier.
+winners,ward_label_cell_raw,string,True,"Original return ward cell, including blank or truncated text; full source cells remain in raw_record."
+winners,winner,string,False,"Name of the elected officeholder, whitespace normalized."
+winners,winner_woman_raw,string,True,Separately printed winner sex;null throughout2016.
+winners,winner_woman,int8,True,"1=female,0=male,null=unknown;never inferred from reservation/name."
+winners,party,string,False,"Printed party label, not harmonized across sources."
+winners,votes,int32,True,Valid votes printed for this candidate or winner; null if source does not report votes.
+winners,reserved_raw,string,False,"Printed adopted seat reservation, identified by reserved_source_path."
+winners,reserved_caste,string,False,Normalized seat caste quota; NONE means no caste restriction.
+winners,reserved_woman,int8,True,"Recorded women reservation:1=yes,0=no,null=unknown. Independent of officeholder sex."
+winners,reserved_basis,string,False,Source-cell reading or separately recorded official winner-table reservation.
+winners,reserved_source_path,string,False,Repository-relative source used for adopted seat reservation.
+winners,source_path,string,False,Repository-relative original candidate/winner source.
+winners,source_page,int16,False,One-based physical PDF page.
+winners,source_row,int16,False,2016 text line;2020 return table row;profile printed serial;winner printed ward serial.
+winners,source_sha256,string,False,SHA256 of original source_path bytes.
+winners,raw_record,string,False,"JSON of complete original extracted line/cells, with source values unchanged."

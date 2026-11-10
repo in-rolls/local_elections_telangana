@@ -39,6 +39,8 @@ OUTPUTS = [
     "release/2025/eenadu_mandal_counts.parquet",
     "release/2025/eenadu_page_counts.parquet",
 ]
+OUTPUTS.extend(contract.GHMC_TABLES.values())
+
 # 2019 candidate-table district names that changed before the elected listing
 # was taken.
 RENAMED_2019 = {
@@ -219,7 +221,11 @@ def checks_2025():
     cands = pd.read_parquet(RELEASE / "2025/sarpanch_candidates.parquet")
     out = []
 
-    problems = {name: contract.failures(name) for name in contract.TABLES}
+    problems = {
+        name: contract.failures(name)
+        for name in contract.TABLES
+        if name.startswith("2025_")
+    }
     bad = {k: v for k, v in problems.items() if v}
     out.append(
         result(
@@ -677,11 +683,104 @@ def check_sources_exist():
     )
 
 
+def checks_ghmc():
+    """Published urban contracts, counts, missingness, and provenance."""
+    problems = {name: contract.failures(name) for name in contract.GHMC_TABLES}
+    bad = {name: failures for name, failures in problems.items() if failures}
+    out = [
+        result(
+            "ghmc_table_schema",
+            "internal",
+            "fail" if bad else "pass",
+            f"Exact Arrow schema, values and primary keys: {bad or 'valid'}.",
+            blocking=True,
+        )
+    ]
+    if bad:
+        return out
+    issues = []
+    tables = {}
+    for name, relative in contract.GHMC_TABLES.items():
+        frame = pd.read_parquet(DATA / relative)
+        tables[name] = frame
+        desc = contract.descriptor(name)
+        if (
+            len(frame) != desc["expectedRows"]
+            or frame.ward_no.nunique() != desc["expectedWards"]
+        ):
+            issues.append(f"{name}: unexpected row/ward count")
+        if not frame.body.eq("Greater Hyderabad Municipal Corporation").all():
+            issues.append(f"{name}: incorrect body")
+        for row in (
+            frame[["source_path", "source_sha256"]]
+            .drop_duplicates()
+            .itertuples(index=False)
+        ):
+            if (
+                not (ROOT / row.source_path).exists()
+                or sha256(ROOT / row.source_path) != row.source_sha256
+            ):
+                issues.append(f"{name}: source changed or missing: {row.source_path}")
+        for column in ["ward_source_path", "reserved_source_path"]:
+            if any(not (ROOT / path).exists() for path in frame[column].unique()):
+                issues.append(f"{name}: missing {column}")
+    profiles = tables["ghmc_candidate_profiles_2020"]
+    first = tables["ghmc_candidates_2016"]
+    returns = tables["ghmc_candidate_returns_2020"]
+    winners = tables["ghmc_winners"]
+    if not profiles.elected.isna().all() or not profiles.votes.isna().all():
+        issues.append("Candidate profiles must not fabricate election outcomes")
+    if (
+        not first.candidate_woman.isna().all()
+        or not winners.loc[winners.year.eq(2016), "winner_woman"].isna().all()
+    ):
+        issues.append("2016 source does not record sex")
+    for frame, subject in [(profiles, "candidate"), (winners, "winner")]:
+        for row in frame.to_dict("records"):
+            raw = row[f"{subject}_woman_raw"]
+            value = row[f"{subject}_woman"]
+            expected = {"Female": 1, "Male": 0}.get(raw)
+            if (expected is None and not pd.isna(value)) or (
+                expected is not None and (pd.isna(value) or value != expected)
+            ):
+                issues.append(f"{subject} sex does not match its recorded source cell")
+                break
+    if profiles.candidate_woman.value_counts().to_dict() != {0: 582, 1: 540}:
+        issues.append("2020 candidate sex counts changed")
+    if winners.loc[winners.year.eq(2020), "winner_woman"].sum() != 81:
+        issues.append("2020 winner sex count changed")
+    if set(returns.ward_no) != {str(n) for n in range(1, 151)} - {"136"}:
+        issues.append("Unexpected candidate-return ward coverage")
+    if returns.elected.sum() != 149 or first.elected.sum() != 150:
+        issues.append("Unexpected number of printed winners")
+    output = DATA / "release/urban/ghmc"
+    checksums = json.loads((output / "checksums.json").read_text())
+    for filename, expected in checksums.items():
+        if not (output / filename).exists() or sha256(output / filename) != expected:
+            issues.append(f"GHMC supplemental checksum mismatch: {filename}")
+    out.append(
+        result(
+            "ghmc_source_and_coverage",
+            "internal",
+            "fail" if issues else "pass",
+            str(issues)
+            if issues
+            else (
+                "Source hashes, metadata, coverage, recorded sex and unknown outcomes "
+                "agree with the retained sources."
+            ),
+            blocking=True,
+        )
+    )
+    return out
+
+
 def run_checks():
     return (
         checks_2019()
         + checks_2025()
         + checks_eenadu()
+        + checks_ghmc()
         + [check_sources_exist(), link_preview()]
     )
 
@@ -689,6 +788,8 @@ def run_checks():
 def verify():
     manifest = json.loads(MANIFEST.read_text())
     problems = []
+    if {entry["file"] for entry in manifest["outputs"]} != set(OUTPUTS):
+        problems.append("Manifest output coverage differs from the release contract")
     for entry in manifest["outputs"]:
         if sha256(DATA / entry["file"]) != entry["sha256"]:
             problems.append(f"hash changed: {entry['file']}")
@@ -697,10 +798,12 @@ def verify():
             problems.append(f"raw file missing or changed since fetch: {row['path']}")
     checks = run_checks()
     blocking = [c["check"] for c in checks if c["blocking"] and c["status"] == "fail"]
+    recorded = {entry["check"]: entry["status"] for entry in manifest["checks"]}
+    actual = {entry["check"]: entry["status"] for entry in checks}
     stale = [
-        c["check"]
-        for c, m in zip(checks, manifest["checks"], strict=False)
-        if c["status"] != m["status"]
+        name
+        for name in recorded.keys() | actual.keys()
+        if recorded.get(name) != actual.get(name)
     ]
     for c in checks:
         print(f"  {c['status']:8} {c['check']}")

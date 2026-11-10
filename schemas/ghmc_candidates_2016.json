@@ -1,0 +1,326 @@
+{
+  "name": "ghmc_candidates_2016",
+  "title": "GHMC candidates 2016",
+  "description": "One row per candidate in the named source and election.",
+  "primaryKey": [
+    "year",
+    "body",
+    "ward_no",
+    "candidate_no"
+  ],
+  "expectedRows": 1333,
+  "expectedWards": 150,
+  "fields": [
+    {
+      "name": "year",
+      "type": "integer",
+      "arrowType": "int16",
+      "description": "Election year.",
+      "constraints": {
+        "required": true,
+        "enum": [
+          2016
+        ]
+      }
+    },
+    {
+      "name": "body",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Municipal corporation explicitly identified by all sources.",
+      "constraints": {
+        "required": true,
+        "enum": [
+          "Greater Hyderabad Municipal Corporation"
+        ]
+      }
+    },
+    {
+      "name": "ward_no",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Ward identifier, printed or linked as described by ward_link_basis.",
+      "constraints": {
+        "required": true,
+        "pattern": "^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$"
+      }
+    },
+    {
+      "name": "ward_name_raw",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed ward name; candidate returns use the official winner-table name.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "ward_source_path",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Repository-relative source supporting the ward identifier.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "ward_link_basis",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Evidence used for the ward identifier.",
+      "constraints": {
+        "required": true,
+        "enum": [
+          "printed_ward_identifier",
+          "unique_profile_ward_for_candidate_block"
+        ]
+      }
+    },
+    {
+      "name": "ward_label_cell_raw",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Original return ward cell, including blank or truncated text; full source cells remain in raw_record.",
+      "constraints": {
+        "required": false
+      }
+    },
+    {
+      "name": "candidate_no",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Candidate serial in this source; not interchangeable across sources without validation.",
+      "constraints": {
+        "required": true,
+        "pattern": "^[0-9]+$"
+      }
+    },
+    {
+      "name": "candidate_name",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed candidate name with whitespace normalized; punctuation retained.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "candidate_woman_raw",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Separately printed source sex;null if absent.",
+      "constraints": {
+        "required": false
+      }
+    },
+    {
+      "name": "candidate_woman",
+      "type": "integer",
+      "arrowType": "int8",
+      "description": "1=female,0=male,null=unknown;never inferred from reservation/name.",
+      "constraints": {
+        "required": false,
+        "enum": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "candidate_age",
+      "type": "integer",
+      "arrowType": "int16",
+      "description": "Age in years as printed in the November2020 profile.",
+      "constraints": {
+        "required": false,
+        "minimum": 18,
+        "maximum": 120
+      }
+    },
+    {
+      "name": "candidate_education",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed educational credential label;source -- retained.",
+      "constraints": {
+        "required": false
+      }
+    },
+    {
+      "name": "candidate_occupation",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed occupation label;source -- retained.",
+      "constraints": {
+        "required": false
+      }
+    },
+    {
+      "name": "candidate_caste_raw",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed candidate social category, separate from seat quota.",
+      "constraints": {
+        "required": false
+      }
+    },
+    {
+      "name": "candidate_caste",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Candidate caste normalized from their own printed category.",
+      "constraints": {
+        "required": false,
+        "enum": [
+          "NONE",
+          "BC",
+          "SC",
+          "ST"
+        ]
+      }
+    },
+    {
+      "name": "elected",
+      "type": "boolean",
+      "arrowType": "bool",
+      "description": "Printed Winner/Elected status;null when source does not report election outcomes.",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "party",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed party label, not harmonized across sources.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "votes",
+      "type": "integer",
+      "arrowType": "int32",
+      "description": "Valid votes printed for this candidate or winner; null if source does not report votes.",
+      "constraints": {
+        "required": true,
+        "minimum": 0
+      }
+    },
+    {
+      "name": "reserved_raw",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Printed adopted seat reservation, identified by reserved_source_path.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "reserved_caste",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Normalized seat caste quota; NONE means no caste restriction.",
+      "constraints": {
+        "required": true,
+        "enum": [
+          "NONE",
+          "BC",
+          "SC",
+          "ST"
+        ]
+      }
+    },
+    {
+      "name": "reserved_woman",
+      "type": "integer",
+      "arrowType": "int8",
+      "description": "Recorded women reservation:1=yes,0=no,null=unknown. Independent of officeholder sex.",
+      "constraints": {
+        "required": false,
+        "enum": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "reserved_basis",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Source-cell reading or separately recorded official winner-table reservation.",
+      "constraints": {
+        "required": true,
+        "enum": [
+          "source_cell",
+          "official_winner_table"
+        ]
+      }
+    },
+    {
+      "name": "reserved_source_path",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Repository-relative source used for adopted seat reservation.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "source_path",
+      "type": "string",
+      "arrowType": "string",
+      "description": "Repository-relative original candidate/winner source.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "source_page",
+      "type": "integer",
+      "arrowType": "int16",
+      "description": "One-based physical PDF page.",
+      "constraints": {
+        "required": true,
+        "minimum": 1
+      }
+    },
+    {
+      "name": "source_row",
+      "type": "integer",
+      "arrowType": "int16",
+      "description": "2016 text line;2020 return table row;profile printed serial;winner printed ward serial.",
+      "constraints": {
+        "required": true,
+        "minimum": 1
+      }
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "arrowType": "string",
+      "description": "SHA256 of original source_path bytes.",
+      "constraints": {
+        "required": true,
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    {
+      "name": "raw_record",
+      "type": "string",
+      "arrowType": "string",
+      "description": "JSON of complete original extracted line/cells, with source values unchanged.",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    }
+  ]
+}

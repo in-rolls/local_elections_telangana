@@ -1,0 +1,25 @@
+kind,old,new,reason
+path,src/local_elections_telangana/urban/ghmc.py,src/local_elections_telangana/parse/ghmc.py,Existing parser package; old module removed
+path,src/local_elections_telangana/urban/collect_ghmc.py,src/local_elections_telangana/collect/ghmc.py,Existing collector package; old module removed
+path,data/reference/urban/ghmc/README.md,data/release/urban/ghmc/README.md,One authoritative source report with outputs
+path,data/reference/urban/ghmc/dictionary.csv,data/release/urban/ghmc/dictionary.csv,Generated from table contracts
+column,ward,ward_no,Preserves source values; original cells remain in raw_record
+column,candidate_number,candidate_no,Preserves source values; original cells remain in raw_record
+column,candidate_name_raw,candidate_name (candidate tables) / winner (winner table),Preserves source values; original cells remain in raw_record
+column,party_raw,party,Preserves source values; original cells remain in raw_record
+column,is_winner,elected (candidate tables only),Preserves source values; original cells remain in raw_record
+column,sex_raw,candidate_woman_raw / winner_woman_raw,Preserves source values; original cells remain in raw_record
+column,is_woman,candidate_woman / winner_woman,Preserves source values; original cells remain in raw_record
+column,age,candidate_age,Preserves source values; original cells remain in raw_record
+column,education_raw,candidate_education,Preserves source values; original cells remain in raw_record
+column,occupation_raw,candidate_occupation,Preserves source values; original cells remain in raw_record
+column,candidate_category_raw,candidate_caste_raw,Preserves source values; original cells remain in raw_record
+column,reservation_raw,reserved_raw,Preserves source values; original cells remain in raw_record
+column,reservation_source_file,reserved_source_path,Preserves source values; original cells remain in raw_record
+column,ward_source_file,ward_source_path,Preserves source values; original cells remain in raw_record
+column,source_file,source_path,Preserves source values; original cells remain in raw_record
+type,ward and candidate_number Int16,ward_no and candidate_no string,Identifiers are labels
+type,reserved_woman and is_woman Boolean,reserved_woman and person *_woman nullable Int8,"0/1/null, no missing-to-zero conversion"
+value,reserved_caste General,reserved_caste NONE,Canonical unrestricted caste code
+value,candidate category text only,candidate_caste enum plus candidate_caste_raw,Normalize separately recorded candidate caste; preserve original label
+value,"29 blank 2016 candidate names, including4winners",Complete PDF name-cell text,Extraction correction; details in name_cell_checks.csv

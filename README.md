@@ -66,6 +66,12 @@ s25.groupby(["reserved_caste", "reserved_woman"]).size()
 2025 seats, by the commission's codes and by GP names, and says how well the
 two agree.
 
+## Urban supplement
+
+The separate [GHMC ward-election handoff](data/release/urban/ghmc/README.md)
+contains candidate and winner records for 2016 and 2020, with original PDFs,
+explicit source limitations, and offline parsing commands.
+
 ## Reproducing
 
 ```

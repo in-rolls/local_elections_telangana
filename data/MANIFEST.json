@@ -735,6 +735,470 @@
      "type": "large_string"
     }
    ]
+  },
+  {
+   "file": "release/urban/ghmc/candidates_2016.parquet",
+   "sha256": "58cc75d949d40159a6b7b3e1b01691b1a79f53beb5fc0b31991036a287989bf2",
+   "rows": 1333,
+   "schema": [
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "body",
+     "type": "string"
+    },
+    {
+     "name": "ward_no",
+     "type": "string"
+    },
+    {
+     "name": "ward_name_raw",
+     "type": "string"
+    },
+    {
+     "name": "ward_source_path",
+     "type": "string"
+    },
+    {
+     "name": "ward_link_basis",
+     "type": "string"
+    },
+    {
+     "name": "ward_label_cell_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_no",
+     "type": "string"
+    },
+    {
+     "name": "candidate_name",
+     "type": "string"
+    },
+    {
+     "name": "candidate_woman_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_woman",
+     "type": "int8"
+    },
+    {
+     "name": "candidate_age",
+     "type": "int16"
+    },
+    {
+     "name": "candidate_education",
+     "type": "string"
+    },
+    {
+     "name": "candidate_occupation",
+     "type": "string"
+    },
+    {
+     "name": "candidate_caste_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_caste",
+     "type": "string"
+    },
+    {
+     "name": "elected",
+     "type": "bool"
+    },
+    {
+     "name": "party",
+     "type": "string"
+    },
+    {
+     "name": "votes",
+     "type": "int32"
+    },
+    {
+     "name": "reserved_raw",
+     "type": "string"
+    },
+    {
+     "name": "reserved_caste",
+     "type": "string"
+    },
+    {
+     "name": "reserved_woman",
+     "type": "int8"
+    },
+    {
+     "name": "reserved_basis",
+     "type": "string"
+    },
+    {
+     "name": "reserved_source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "int16"
+    },
+    {
+     "name": "source_row",
+     "type": "int16"
+    },
+    {
+     "name": "source_sha256",
+     "type": "string"
+    },
+    {
+     "name": "raw_record",
+     "type": "string"
+    }
+   ]
+  },
+  {
+   "file": "release/urban/ghmc/candidate_profiles_2020.parquet",
+   "sha256": "5a2dfffaed0b6cec3a433fe012e763c996666213658fb55cb6733529bd63e98f",
+   "rows": 1122,
+   "schema": [
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "body",
+     "type": "string"
+    },
+    {
+     "name": "ward_no",
+     "type": "string"
+    },
+    {
+     "name": "ward_name_raw",
+     "type": "string"
+    },
+    {
+     "name": "ward_source_path",
+     "type": "string"
+    },
+    {
+     "name": "ward_link_basis",
+     "type": "string"
+    },
+    {
+     "name": "ward_label_cell_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_no",
+     "type": "string"
+    },
+    {
+     "name": "candidate_name",
+     "type": "string"
+    },
+    {
+     "name": "candidate_woman_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_woman",
+     "type": "int8"
+    },
+    {
+     "name": "candidate_age",
+     "type": "int16"
+    },
+    {
+     "name": "candidate_education",
+     "type": "string"
+    },
+    {
+     "name": "candidate_occupation",
+     "type": "string"
+    },
+    {
+     "name": "candidate_caste_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_caste",
+     "type": "string"
+    },
+    {
+     "name": "elected",
+     "type": "bool"
+    },
+    {
+     "name": "party",
+     "type": "string"
+    },
+    {
+     "name": "votes",
+     "type": "int32"
+    },
+    {
+     "name": "reserved_raw",
+     "type": "string"
+    },
+    {
+     "name": "reserved_caste",
+     "type": "string"
+    },
+    {
+     "name": "reserved_woman",
+     "type": "int8"
+    },
+    {
+     "name": "reserved_basis",
+     "type": "string"
+    },
+    {
+     "name": "reserved_source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "int16"
+    },
+    {
+     "name": "source_row",
+     "type": "int16"
+    },
+    {
+     "name": "source_sha256",
+     "type": "string"
+    },
+    {
+     "name": "raw_record",
+     "type": "string"
+    }
+   ]
+  },
+  {
+   "file": "release/urban/ghmc/candidate_returns_2020.parquet",
+   "sha256": "175852c446f4904cc8416b0c2484637b8cb0dd2bafc528083e3c0145a6b74cdd",
+   "rows": 1117,
+   "schema": [
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "body",
+     "type": "string"
+    },
+    {
+     "name": "ward_no",
+     "type": "string"
+    },
+    {
+     "name": "ward_name_raw",
+     "type": "string"
+    },
+    {
+     "name": "ward_source_path",
+     "type": "string"
+    },
+    {
+     "name": "ward_link_basis",
+     "type": "string"
+    },
+    {
+     "name": "ward_label_cell_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_no",
+     "type": "string"
+    },
+    {
+     "name": "candidate_name",
+     "type": "string"
+    },
+    {
+     "name": "candidate_woman_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_woman",
+     "type": "int8"
+    },
+    {
+     "name": "candidate_age",
+     "type": "int16"
+    },
+    {
+     "name": "candidate_education",
+     "type": "string"
+    },
+    {
+     "name": "candidate_occupation",
+     "type": "string"
+    },
+    {
+     "name": "candidate_caste_raw",
+     "type": "string"
+    },
+    {
+     "name": "candidate_caste",
+     "type": "string"
+    },
+    {
+     "name": "elected",
+     "type": "bool"
+    },
+    {
+     "name": "party",
+     "type": "string"
+    },
+    {
+     "name": "votes",
+     "type": "int32"
+    },
+    {
+     "name": "reserved_raw",
+     "type": "string"
+    },
+    {
+     "name": "reserved_caste",
+     "type": "string"
+    },
+    {
+     "name": "reserved_woman",
+     "type": "int8"
+    },
+    {
+     "name": "reserved_basis",
+     "type": "string"
+    },
+    {
+     "name": "reserved_source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "int16"
+    },
+    {
+     "name": "source_row",
+     "type": "int16"
+    },
+    {
+     "name": "source_sha256",
+     "type": "string"
+    },
+    {
+     "name": "raw_record",
+     "type": "string"
+    }
+   ]
+  },
+  {
+   "file": "release/urban/ghmc/winners.parquet",
+   "sha256": "88cc15c5cc56f9bd0dfbcd985674af680bbbf348a433ebe32c37eda80d713d27",
+   "rows": 300,
+   "schema": [
+    {
+     "name": "year",
+     "type": "int16"
+    },
+    {
+     "name": "body",
+     "type": "string"
+    },
+    {
+     "name": "ward_no",
+     "type": "string"
+    },
+    {
+     "name": "ward_name_raw",
+     "type": "string"
+    },
+    {
+     "name": "ward_source_path",
+     "type": "string"
+    },
+    {
+     "name": "ward_link_basis",
+     "type": "string"
+    },
+    {
+     "name": "ward_label_cell_raw",
+     "type": "string"
+    },
+    {
+     "name": "winner",
+     "type": "string"
+    },
+    {
+     "name": "winner_woman_raw",
+     "type": "string"
+    },
+    {
+     "name": "winner_woman",
+     "type": "int8"
+    },
+    {
+     "name": "party",
+     "type": "string"
+    },
+    {
+     "name": "votes",
+     "type": "int32"
+    },
+    {
+     "name": "reserved_raw",
+     "type": "string"
+    },
+    {
+     "name": "reserved_caste",
+     "type": "string"
+    },
+    {
+     "name": "reserved_woman",
+     "type": "int8"
+    },
+    {
+     "name": "reserved_basis",
+     "type": "string"
+    },
+    {
+     "name": "reserved_source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_path",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "int16"
+    },
+    {
+     "name": "source_row",
+     "type": "int16"
+    },
+    {
+     "name": "source_sha256",
+     "type": "string"
+    },
+    {
+     "name": "raw_record",
+     "type": "string"
+    }
+   ]
   }
  ],
  "raw": [
@@ -33209,6 +33673,50 @@
    "copied_from": "in-rolls/local_elections@5f31a5fe9eab:data/telangana/municipal_2021_bye_elections.csv",
    "source": "",
    "status": ""
+  },
+  {
+   "path": "data/raw/urban/ghmc/candidate_results_2016.pdf",
+   "url": "https://www.myghmc.com/assets/GHMCResult2016.pdf",
+   "sha256": "9196e059548aa104dc56a7fa03feed8d04a3078954c8d3bc84d609532f40b531",
+   "bytes": "1498459",
+   "fetched_at_utc": "2026-11-09T07:52:45.466487+00:00",
+   "method": "live",
+   "copied_from": "",
+   "source": "https://www.myghmc.com/assets/GHMCResult2016.pdf",
+   "status": "200"
+  },
+  {
+   "path": "data/raw/urban/ghmc/candidate_results_2020.pdf",
+   "url": "https://newsmeter.in/pdf_upload/pdf_upload-288883.pdf",
+   "sha256": "47c3a776ec7203f153b5847f850cd59cdce78ea751044189c092752bacfea73b",
+   "bytes": "832429",
+   "fetched_at_utc": "2026-11-09T07:52:47.518159+00:00",
+   "method": "live",
+   "copied_from": "",
+   "source": "https://newsmeter.in/pdf_upload/pdf_upload-288883.pdf",
+   "status": "200"
+  },
+  {
+   "path": "data/raw/urban/ghmc/candidate_profiles_2020.pdf",
+   "url": "https://tsec.gov.in/pdf/proforma-5GHMC.pdf",
+   "sha256": "eb73a900693683b74d5105141466664f0825d09f41de6b27c074f221bdb7725a",
+   "bytes": "872704",
+   "fetched_at_utc": "2026-11-09T08:00:28.877808+00:00",
+   "method": "wayback",
+   "copied_from": "",
+   "source": "https://web.archive.org/web/20201129111559id_/https://tsec.gov.in/pdf/proforma-5GHMC.pdf",
+   "status": "200"
+  },
+  {
+   "path": "data/raw/urban/ghmc/candidate_profiles_archive.json",
+   "url": "https://tsec.gov.in/pdf/proforma-5GHMC.pdf",
+   "sha256": "dd35024a76b4255d3be500c5fa4746926100d4ab605a9b34f17acb9ddc442243",
+   "bytes": "301",
+   "fetched_at_utc": "2026-11-09T08:00:28.878119+00:00",
+   "method": "wayback",
+   "copied_from": "",
+   "source": "wayback CDX exact URL query",
+   "status": "200"
   }
  ],
  "checks": [
@@ -33324,7 +33832,7 @@
      "block": "Yerravalli",
      "gram_panchayat": "Shaikpally",
      "winner": "Venkata Lakshmamma",
-     "elected_name": NaN
+     "elected_name": null
     }
    ]
   },
@@ -34062,7 +34570,7 @@
      "district": "Khammam",
      "block": "పెనుబల్లి",
      "gram_panchayat": "విఎంబంజర",
-     "winner": NaN,
+     "winner": null,
      "source_locator": "mandal block 2, row 30"
     },
     {
@@ -34100,6 +34608,20 @@
     "BJP": 0.0001,
     "OTH": 0.0002
    }
+  },
+  {
+   "check": "ghmc_table_schema",
+   "appeals_to": "internal",
+   "status": "pass",
+   "blocking": true,
+   "detail": "Exact Arrow schema, values and primary keys: valid."
+  },
+  {
+   "check": "ghmc_source_and_coverage",
+   "appeals_to": "internal",
+   "status": "pass",
+   "blocking": true,
+   "detail": "Source hashes, metadata, coverage, recorded sex and unknown outcomes agree with the retained sources."
   },
   {
    "check": "source_paths_exist",

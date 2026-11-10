@@ -1,0 +1,29 @@
+{
+  "candidates_2016": 1333,
+  "candidate_profiles_2020": 1122,
+  "candidate_sex_2020": {
+    "Male": 582,
+    "Female": 540
+  },
+  "winners_2020": 150,
+  "candidate_returns_2020": 1117,
+  "candidate_return_wards_2020": 149,
+  "elected_in_candidate_return_2020": 149,
+  "women_winners_2020": 81,
+  "women_reserved_2020": 75,
+  "reservation_disagreements_2016_2020": [],
+  "winner_party_2020": {
+    "TRS": 56,
+    "INC": 2,
+    "BJP": 48,
+    "AIMIM": 44
+  },
+  "input_sha256": {
+    "data/raw/urban/ghmc/candidate_profiles_2020.pdf": "eb73a900693683b74d5105141466664f0825d09f41de6b27c074f221bdb7725a",
+    "data/raw/urban/ghmc/candidate_results_2016.pdf": "9196e059548aa104dc56a7fa03feed8d04a3078954c8d3bc84d609532f40b531",
+    "data/raw/tsec_docs/files/StatisticalRep/MC/2024/elected_ward_members_of_ghmc,2020_2053.pdf": "29e614a40135b188c6ea0528900d97b58c6c0a18bcaa1b3f6db0508765928d00",
+    "data/raw/urban/ghmc/candidate_results_2020.pdf": "47c3a776ec7203f153b5847f850cd59cdce78ea751044189c092752bacfea73b"
+  },
+  "candidate_names_recovered_from_wrapped_cells_2016": 29,
+  "winner_names_recovered_from_wrapped_cells_2016": 4
+}

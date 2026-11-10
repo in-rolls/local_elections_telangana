@@ -25,6 +25,7 @@ data:
 	$(PY) -m local_elections_telangana.parse.y2025
 	$(PY) -m local_elections_telangana.parse.y2025_sec
 	$(PY) -m local_elections_telangana.parse.y2025_wards
+	$(PY) -m local_elections_telangana.parse.ghmc
 	$(PY) -m local_elections_telangana.build.contract
 	$(PY) -m local_elections_telangana.linkage.gp_links
 	$(MAKE) manifest
@@ -43,3 +44,11 @@ verify:
 	$(PY) -m local_elections_telangana.build.release verify
 
 check: lint verify
+
+.PHONY: ghmc collect-ghmc
+
+ghmc:
+	$(PY) -m local_elections_telangana.parse.ghmc
+
+collect-ghmc:
+	$(PY) -m local_elections_telangana.collect.ghmc
