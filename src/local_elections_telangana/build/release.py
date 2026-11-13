@@ -543,7 +543,7 @@ def checks_eenadu():
     return out
 
 
-# District groups that stay comparable across the 2019 and 2021 reorganisations.
+# District groups that stay comparable across the 2019 and 2021 reorganizations.
 GROUP = {
     "Bhadradri": "Bhadradri Kothagudem",
     "Komaram Bheem": "Komaram Bheem Asifabad",
