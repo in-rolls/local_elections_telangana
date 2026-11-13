@@ -13,7 +13,7 @@ Two routes that share no code:
   the names also agree (qualifiers equal, similarity >= CODE_NAME_FLOOR), so
   a code reused for a different GP cannot link.
 - By name. preclink inside district groups that absorb the 2019 and 2021
-  reorganizations, without mandals or codes: name similarity with qualifier
+  reorganisations, without mandals or codes: name similarity with qualifier
   vetoes, preclink's margin filter (a 2019 GP whose best and second-best
   2025 candidates score within MARGIN is dropped), then the Hungarian
   one-to-one assignment.
