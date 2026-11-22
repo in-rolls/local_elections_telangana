@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Telangana gram panchayat sarpanch elections, 2019 and 2025, with sources and checks"
 readme = "README.md"
 requires-python = ">=3.12"
-authors = [{ name = "Gaurav Sood", email = "contact@gsood.com" }]
+authors = [{ name = "Gaurav Sood" }]
 license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["Telangana", "elections", "panchayats", "sarpanch", "reservation", "data"]
